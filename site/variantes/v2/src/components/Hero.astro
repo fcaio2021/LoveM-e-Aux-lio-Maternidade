@@ -1,0 +1,104 @@
+---
+import { linkWhatsApp, valores } from '../config';
+---
+
+<!-- v2 · espelhado: foto à ESQUERDA, texto à direita. O degradê dissolve a
+     borda direita da foto no branco atrás do texto. -->
+<section class="hero">
+  <div class="hero__imagem" aria-hidden="true">
+    <img src="/foto-gravida.jpg" alt="" width="2160" height="1440" fetchpriority="high" />
+  </div>
+
+  <div class="envelope hero__envelope">
+    <div class="hero__conteudo">
+      <p class="sobretitulo">Auxílio Maternidade</p>
+      <h1 class="hero__titulo">
+        <span class="hero__linha">Mamãe, descubra se você</span>
+        <span class="hero__linha">tem direito a receber de</span>
+        <span class="hero__linha">
+          <span class="destaca hero__valor">{valores.minimo}</span> a
+          <span class="destaca hero__valor">{valores.maximo}</span>
+        </span>
+      </h1>
+      <p class="hero__sub">
+        Cuidamos de toda burocracia, do pedido e do acompanhamento até a
+        aprovação no INSS. Análise grátis e 100% segura.
+      </p>
+      <div class="hero__acoes">
+        <a class="botao botao--whats" href={linkWhatsApp('hero')}>Quero minha análise gratuita</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    min-height: clamp(540px, 50vw, 680px);
+    padding-block: clamp(48px, 6vw, 80px);
+    background: var(--fundo);
+  }
+  .hero__imagem {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 60%;
+    z-index: 0;
+  }
+  .hero__imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 90% 55%; /* mãos em coração longe da borda que se dissolve */
+  }
+  .hero__imagem::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to left,
+      var(--fundo) 0%,
+      color-mix(in srgb, var(--fundo) 88%, transparent) 18%,
+      color-mix(in srgb, var(--fundo) 35%, transparent) 40%,
+      transparent 68%
+    );
+  }
+
+  .hero__envelope {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .hero__conteudo { width: min(100%, 36rem); }
+  .hero__valor { white-space: nowrap; }
+  .hero__sub {
+    margin-top: 22px;
+    font-size: clamp(17px, 2vw, 19px);
+    color: var(--texto-apoio);
+  }
+  .hero__acoes { margin-top: 32px; }
+
+  @media (min-width: 901px) {
+    .hero__titulo { font-size: clamp(32px, 3.3vw, 46px); }
+    .hero__linha { display: block; white-space: nowrap; }
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      align-items: stretch;
+      min-height: 0;
+      padding-top: 0;
+      gap: clamp(28px, 5vw, 40px);
+    }
+    .hero__imagem { position: relative; inset: auto; width: 100%; aspect-ratio: 3 / 2; }
+    .hero__imagem img { object-position: center 55%; }
+    .hero__imagem::after { background: linear-gradient(to bottom, transparent 72%, var(--fundo) 100%); }
+    .hero__envelope { justify-content: flex-start; }
+    .hero__conteudo { width: 100%; }
+  }
+  @media (max-width: 420px) { .hero__acoes .botao { width: 100%; } }
+</style>

@@ -1,0 +1,148 @@
+---
+// v2 · espelhado: foto à ESQUERDA num painel suave, passos à direita.
+const passos = [
+  { titulo: 'Análise rápida e 100% grátis', texto: 'Responda a poucas perguntas e descubra se tem direito em minutos, mesmo sem ter contribuído antes para o INSS. Quanto antes verificar, melhor.' },
+  { titulo: 'Burocracia zero para você', texto: 'Nossa equipe analisa seu caso com clareza, reúne toda a papelada e faz o pedido no INSS. Verifique logo para garantir o prazo ideal da gestação.' },
+  { titulo: 'Suporte e acompanhamento no WhatsApp', texto: 'Te avisamos sobre cada etapa direto no seu celular. E se o INSS negar de primeira, nós recorremos por você sem cobrar nada.' },
+];
+---
+
+<section class="secao como" id="como-funciona">
+  <div class="envelope como__grade">
+    <figure class="como__figura">
+      <img src="/mae-ombro.jpg" alt="Mãe segurando o bebê junto ao ombro" width="1400" height="933" loading="lazy" />
+    </figure>
+
+    <div class="como__texto">
+      <p class="sobretitulo">Simples assim</p>
+      <h2 class="como__titulo">Como funciona?</h2>
+      <p class="como__sub">
+        Um processo <strong>simples e rápido</strong>. Toda burocracia fica por nossa conta.
+      </p>
+
+      <ol class="passos">
+        {passos.map((passo, i) => (
+          <li class="passo">
+            <div class="passo__marca" aria-hidden="true">
+              {i === 0 && (
+                <svg viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="10" y="9" width="26" height="33" rx="4" />
+                  <rect class="f" x="17" y="5.5" width="12" height="7" rx="2.5" />
+                  <path d="M16 20h14M16 26.5h9" />
+                  <circle class="f" cx="34" cy="35" r="8" />
+                  <path d="M30.5 35l2.5 2.5 4.5-5" />
+                </svg>
+              )}
+              {i === 1 && (
+                <svg viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 12V9a3 3 0 0 1 3-3h14l6 6v20a3 3 0 0 1-3 3h-3" />
+                  <rect class="f" x="9" y="13" width="23" height="29" rx="3" />
+                  <path d="M14 22h13M14 28h13M14 34h7" />
+                  <circle class="f" cx="36" cy="37" r="7.5" />
+                  <path d="M33 40l6-6M34 34h5v5" />
+                </svg>
+              )}
+              {i === 2 && (
+                <svg viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="8" y="6" width="20" height="36" rx="4" />
+                  <path d="M15 37h6" />
+                  <path class="f" d="M25 13h13a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-6l-5 4v-4h-2a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" />
+                  <path class="coracao" d="M31.5 24.8c-2.9-1.9-4.3-3.4-4.3-5a2.1 2.1 0 0 1 4.3-.7 2.1 2.1 0 0 1 4.3.7c0 1.6-1.4 3.1-4.3 5z" />
+                </svg>
+              )}
+              <span class="passo__numero">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <div>
+              <h3 class="passo__titulo">{passo.titulo}</h3>
+              <p class="passo__texto">{passo.texto}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .como__grade {
+    display: grid;
+    grid-template-columns: .92fr 1.08fr;
+    gap: clamp(36px, 5vw, 72px);
+    align-items: center;
+  }
+
+  .como__figura {
+    margin: 0;
+    padding: clamp(16px, 2vw, 24px);
+    background: var(--tinta);
+    border-radius: 28px;
+  }
+  .como__figura img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 55% center;
+    border-radius: 20px;
+  }
+
+  .como__titulo { font-size: clamp(34px, 5vw, 52px); line-height: 1.05; }
+  .como__sub {
+    margin-top: 16px;
+    max-width: 46ch;
+    font-size: clamp(17px, 2vw, 19px);
+    font-weight: 500;
+    color: var(--destaque);
+    text-wrap: balance;
+  }
+  .como__sub strong { color: inherit; font-weight: 700; }
+
+  .passos {
+    list-style: none;
+    margin: clamp(30px, 4vw, 44px) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 3vw, 32px);
+  }
+  .passo { display: grid; grid-template-columns: 68px 1fr; gap: 22px; align-items: start; }
+
+  .passo__marca {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: var(--fundo-card);
+    border: 1px solid var(--linha);
+    box-shadow: var(--sombra-card);
+  }
+  .passo__marca svg { width: 42px; height: 42px; stroke: var(--destaque); stroke-width: 1.9; }
+  .passo__marca .f { fill: var(--fundo-card); }
+  .passo__marca .coracao { fill: var(--destaque); stroke: none; }
+  .passo__numero {
+    position: absolute;
+    top: -9px;
+    left: -9px;
+    min-width: 30px;
+    height: 26px;
+    padding: 0 6px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    background: var(--destaque);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .passo__titulo { margin-top: 12px; font-size: clamp(20px, 2.3vw, 24px); line-height: 1.2; }
+  .passo__texto { margin-top: 6px; max-width: 52ch; font-size: 16.5px; line-height: 1.6; color: var(--texto-apoio); }
+
+  @media (max-width: 880px) {
+    .como__grade { grid-template-columns: 1fr; }
+    .como__figura { max-width: 460px; }
+    .como__figura img { aspect-ratio: 4 / 3.4; }
+  }
+</style>

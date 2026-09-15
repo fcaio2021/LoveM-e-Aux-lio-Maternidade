@@ -113,3 +113,74 @@ Quando o usuário pedir skill nova:
 4. Se a skill precisar de arquivos de apoio (templates, exemplos),
    criar dentro da pasta da skill
 5. Seguir o fluxo da skill-creator nativa do Claude Code
+
+---
+
+# LoveMãe Auxílio Maternidade — regras do negócio
+
+> Seção adicionada pelo `/instalar` (perfil: **Empresa**). Adapte à vontade.
+
+## O que é esse workspace
+
+Operação da LoveMãe Auxílio Maternidade — assessoria de apoio administrativo que ajuda
+mães a solicitar e receber o auxílio-maternidade do INSS. A fase atual é de construção
+da marca e da presença digital, então o sistema gira em torno de **marketing e
+conteúdo**.
+
+**Estrutura de pastas:**
+- `_memoria/` — quem é a empresa, como falamos, foco atual
+- `identidade/` — marca aplicada em tudo que o sistema gera
+- `marketing/` — site, conteúdo de Instagram, campanhas, mídia paga
+- `dados/` — arquivos a analisar
+- `saidas/` — documentos e peças pontuais
+- `templates/` — moldes de skills, perfis e ferramentas
+- `scripts/` — utilitários do sistema
+
+*(Criar `comercial/`, `financeiro/` ou `rh/` só quando essas frentes entrarem no
+escopo — hoje o foco é digital.)*
+
+## Sobre a empresa
+
+LoveMãe Auxílio Maternidade é uma assessoria de apoio administrativo previdenciário.
+Atuamos ajudando mães (CLT, domésticas, avulsas, MEI/autônomas, seguradas especiais
+rurais e desempregadas em período de graça) a acessar o auxílio-maternidade.
+Somos organizados em dois times: **atendimento** e **operação**.
+
+## Setores e responsáveis
+
+- **Atendimento:** contato e relacionamento com as mães, triagem, análise de direito
+- **Operação:** montagem, entrada e acompanhamento do benefício junto ao INSS
+- **Marketing/Digital:** site de conversão + Instagram (frente em construção — prioridade)
+
+## O que mais fazemos aqui
+
+- Conteúdo para Instagram: carrosséis, posts, stories e roteiros de reels
+- Site focado em conversão (estrutura, copy, CTA, prova social)
+- Materiais educativos sobre direitos e o processo do auxílio-maternidade
+
+## Tom de voz
+
+Acolhedor e direto com a mãe ("você", "mamãe"), frases curtas, sem juridiquês.
+Detalhe completo em `_memoria/preferencias.md`.
+
+Evitar: tom de guru, promessa exagerada, frieza institucional ("prezada cliente"),
+juridiquês sem tradução.
+
+## Regras do sistema
+
+- Peças de conteúdo e site ficam em `marketing/` (ex: `marketing/instagram/`,
+  `marketing/site/`)
+- Antes de qualquer peça visual, ler `identidade/design-guide.md` — se ainda estiver
+  em branco, avisar que a identidade precisa ser definida primeiro
+- Documentos pontuais em `saidas/`
+
+## Ferramentas conectadas
+
+- [ ] Notion
+- [ ] Gmail
+- [ ] Google Calendar
+- [ ] Google Ads
+- [ ] Meta Ads
+- [ ] Slack
+
+*(Marcar conforme for instalando os MCPs)*

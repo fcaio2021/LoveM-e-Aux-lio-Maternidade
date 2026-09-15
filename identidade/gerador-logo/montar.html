@@ -1,0 +1,88 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap">
+<style>
+  html, body { margin: 0; background: transparent; }
+  .logo { display: inline-flex; flex-direction: column; align-items: center; padding: 28px; }
+  .logo svg { display: block; overflow: visible; }
+  .coracao { display: block; }
+</style></head><body>
+<script>
+  // Monta o logo LoveMãe: coração (PNG recolorido) + nome + subtítulo em SVG.
+  // Quicksand 700 com contorno arredondado da mesma cor: dá o peso do "Mamãe"
+  // original (que é mais grosso que a Quicksand pura).
+  const NS = 'http://www.w3.org/2000/svg';
+  const medir = document.createElement('canvas').getContext('2d');
+
+  function texto(conteudo, o) {
+    const svg = document.createElementNS(NS, 'svg');
+    const t = document.createElementNS(NS, 'text');
+    // Partes em cores diferentes (ex.: "Love" azul + "Mãe" rosa)
+    if (o.partes) {
+      for (const [pedaco, cor] of o.partes) {
+        const s = document.createElementNS(NS, 'tspan');
+        s.textContent = pedaco;
+        s.setAttribute('fill', cor);
+        if (o.traco) s.setAttribute('stroke', cor);
+        t.append(s);
+      }
+    } else {
+      t.textContent = conteudo;
+    }
+    t.setAttribute('x', 0); t.setAttribute('y', 0);
+    t.setAttribute('font-family', 'Quicksand');
+    t.setAttribute('font-weight', 700);
+    t.setAttribute('font-size', o.tamanho);
+    t.setAttribute('fill', o.cor);
+    if (o.traco) {
+      t.setAttribute('stroke', o.cor); t.setAttribute('stroke-width', o.traco);
+      t.setAttribute('stroke-linejoin', 'round'); t.setAttribute('paint-order', 'stroke');
+    }
+    if (o.espacamento) t.setAttribute('letter-spacing', o.espacamento);
+    if (o.comprimento) { t.setAttribute('textLength', o.comprimento); t.setAttribute('lengthAdjust', 'spacing'); }
+    svg.append(t);
+    return svg;
+  }
+
+  // Caixa justa: largura pelo getBBox (inclui o espaçamento), altura pelos
+  // limites reais das letras (o getBBox soma espaço de acentos/descendentes)
+  function ajustar(svg, texto, tamanho, folga) {
+    const b = svg.firstChild.getBBox();
+    medir.font = `700 ${tamanho}px Quicksand`;
+    const m = medir.measureText(texto);
+    const topo = -m.actualBoundingBoxAscent - folga, altura = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent + 2 * folga;
+    svg.setAttribute('viewBox', `${b.x - folga} ${topo} ${b.width + 2 * folga} ${altura}`);
+    svg.setAttribute('width', b.width + 2 * folga);
+    svg.setAttribute('height', altura);
+    return { largura: b.width, altura };
+  }
+
+  window.montar = async (op) => {
+    await document.fonts.load('700 100px Quicksand');
+    const T = 220, TRACO = 11;
+    const div = document.createElement('div');
+    div.className = 'logo'; div.id = 'logo-' + op.id;
+    document.body.append(div);
+
+    const img = new Image();
+    img.className = 'coracao';
+    img.src = op.coracao;
+    await new Promise((r) => { img.onload = r; });
+
+    const partes = op.dividir ? [['Love', op.azul], ['Mãe', op.rosa]] : null;
+    const nome = texto('LoveMãe', { tamanho: T, cor: op.azul, traco: TRACO, espacamento: -2, partes });
+    div.append(img, nome);
+    const n = ajustar(nome, 'LoveMãe', T, TRACO / 2 + 1);
+
+    const sub = texto('auxílio maternidade', { tamanho: T * 0.36, cor: op.corSub || op.rosa, comprimento: n.largura - 6 });
+    div.append(sub);
+    ajustar(sub, 'auxílio maternidade', T * 0.36, 2);
+
+    // Proporções do logo original: coração ≈ 2,9× a altura das maiúsculas
+    img.style.height = `${T * 0.7 * 2.9}px`;
+    img.style.marginBottom = `${T * 0.07}px`;
+    sub.style.marginTop = `${T * 0.07}px`;
+    return true;
+  };
+</script>
+</body></html>

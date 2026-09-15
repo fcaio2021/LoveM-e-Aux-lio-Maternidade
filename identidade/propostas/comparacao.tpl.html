@@ -1,0 +1,336 @@
+<title>Logo Mamãe em Quatro Cores</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #FDF8F8;
+    --surface: #FFFFFF;
+    --ink: #191419;
+    --muted: #6E626C;
+    --accent: #D6336C;
+    --navy: #16243F;
+    --hairline: rgba(25, 20, 25, .11);
+    --ok: #177E40;
+    --nao: #C22B4F;
+    --display: "Bricolage Grotesque", Georgia, serif;
+    --body: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #161016;
+      --surface: #1F171E;
+      --ink: #F6EEF2;
+      --muted: #A99BA5;
+      --accent: #F0729C;
+      --navy: #93AACE;
+      --hairline: rgba(246, 238, 242, .14);
+      --ok: #5FCB8A;
+      --nao: #FF8FA8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #161016;
+    --surface: #1F171E;
+    --ink: #F6EEF2;
+    --muted: #A99BA5;
+    --accent: #F0729C;
+    --navy: #93AACE;
+    --hairline: rgba(246, 238, 242, .14);
+    --ok: #5FCB8A;
+    --nao: #FF8FA8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font: 400 15px/1.6 var(--body);
+    margin: 0;
+    padding-block: 60px 80px;
+    padding-inline: 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 940px; margin: 0 auto; }
+
+  .kicker {
+    font: 600 11px/1 var(--body);
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font: 800 clamp(30px, 6vw, 46px)/1.05 var(--display);
+    letter-spacing: -.025em;
+    text-wrap: balance;
+    margin: 0 0 16px;
+  }
+  .lede {
+    color: var(--muted);
+    max-width: 60ch;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .versoes { display: flex; flex-direction: column; gap: 46px; margin-top: 56px; }
+
+  .versao { display: flex; flex-direction: column; gap: 16px; }
+  .versao > header { display: flex; flex-direction: column; gap: 9px; }
+  .titulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; }
+  .titulo h2 {
+    font: 700 22px/1.2 var(--display);
+    letter-spacing: -.018em;
+    margin: 0;
+  }
+  .marcador {
+    font: 600 11px/1 var(--body);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .nota { color: var(--muted); margin: 0; max-width: 64ch; font-size: 14.5px; }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: 7px; }
+  .sw {
+    display: inline-flex; align-items: center; gap: 7px;
+    font: 500 12px/1 var(--body);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .02em;
+    color: var(--muted);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 5px 12px 5px 5px;
+  }
+  .dot {
+    width: 16px; height: 16px; border-radius: 50%; flex: none;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12);
+  }
+
+  /* As duas cenas usam cores fixas de proposito: representam superficies reais
+     da marca (papel branco e slide escuro), nao o tema de quem esta lendo. */
+  .cenas { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .cena {
+    border-radius: 16px;
+    padding: 40px 26px;
+    display: grid;
+    place-items: center;
+    min-height: 250px;
+    position: relative;
+    margin: 0;
+  }
+  .cena.papel { background: #FFFFFF; box-shadow: inset 0 0 0 1px var(--hairline); }
+  .cena.slide { background: #16243F; }
+  .cena img { width: 100%; max-width: 250px; height: auto; display: block; }
+  .cena figcaption {
+    position: absolute; top: 12px; left: 14px;
+    font: 600 10px/1 var(--body);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .papel figcaption { color: #B3ABB1; }
+  .slide figcaption { color: rgba(255, 255, 255, .52); }
+
+  .tabela-bloco { margin-top: 72px; border-top: 1px solid var(--hairline); padding-top: 34px; }
+  .tabela-bloco h2 { font: 700 22px/1.2 var(--display); letter-spacing: -.018em; margin: 0 0 8px; }
+  .tabela-bloco > p { color: var(--muted); max-width: 64ch; margin: 0 0 22px; font-size: 14.5px; }
+  .rolagem { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 470px; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid var(--hairline); }
+  th {
+    font: 600 10.5px/1 var(--body);
+    text-transform: uppercase; letter-spacing: .14em;
+    color: var(--muted); padding-bottom: 11px;
+  }
+  td.razao { font-variant-numeric: tabular-nums; }
+  .amostra { display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; }
+  .amostra .dot { width: 14px; height: 14px; }
+  code { font: 500 12.5px/1 ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); }
+  .veredito { font-weight: 600; font-size: 12.5px; white-space: nowrap; }
+  .passa { color: var(--ok); }
+  .falha { color: var(--nao); }
+
+  .aviso {
+    margin-top: 26px;
+    border-left: 3px solid var(--accent);
+    padding: 2px 0 2px 16px;
+    color: var(--ink);
+    font-size: 14.5px;
+    max-width: 64ch;
+  }
+  .aviso strong { font-weight: 600; }
+
+  @media (max-width: 620px) {
+    .cenas { grid-template-columns: 1fr; }
+    .cena { min-height: 200px; padding: 30px 20px; }
+  }
+</style>
+
+<div class="wrap">
+  <p class="kicker">Mamãe Auxílio Maternidade</p>
+  <h1>Logo em quatro cores</h1>
+  <p class="lede">
+    Mesmo arquivo, mesmas formas — só a cor muda, para a comparação ser só de cor.
+    Cada versão aparece sobre papel branco e sobre o azul-marinho da marca, porque é
+    em fundo escuro que o slide de chamada dos carrosséis é montado. O fundo branco
+    original foi removido nas quatro.
+  </p>
+
+  <div class="versoes">
+
+    <section class="versao">
+      <header>
+        <div class="titulo">
+          <span class="marcador">V0</span>
+          <h2>Original</h2>
+        </div>
+        <div class="swatches">
+          <span class="sw"><span class="dot" style="background:#5698D6"></span>#5698D6</span>
+          <span class="sw"><span class="dot" style="background:#F99CC0"></span>#F99CC0</span>
+        </div>
+      </header>
+      <p class="nota">
+        A referência, como você mandou. Tons pastel e leves — bonito no papel,
+        mas nenhuma das duas cores tem contraste para virar texto no site.
+      </p>
+      <div class="cenas">
+        <figure class="cena papel"><figcaption>papel</figcaption><img src="{{V0}}" alt="Logo original sobre fundo branco"></figure>
+        <figure class="cena slide"><figcaption>slide</figcaption><img src="{{V0}}" alt="Logo original sobre fundo azul-marinho"></figure>
+      </div>
+    </section>
+
+    <section class="versao">
+      <header>
+        <div class="titulo">
+          <span class="marcador">V1</span>
+          <h2>Direção A pura</h2>
+        </div>
+        <div class="swatches">
+          <span class="sw"><span class="dot" style="background:#16243F"></span>#16243F</span>
+          <span class="sw"><span class="dot" style="background:#D6336C"></span>#D6336C</span>
+        </div>
+      </header>
+      <p class="nota">
+        Máxima autoridade. O azul-marinho é a cor mais legível de todas, mas nos
+        traços finos do coração ele pesa — a marca ganha seriedade e perde um pouco
+        do acolhimento. Sobre o slide escuro, o lado marinho quase some.
+      </p>
+      <div class="cenas">
+        <figure class="cena papel"><figcaption>papel</figcaption><img src="{{V1}}" alt="Versão direção A pura sobre fundo branco"></figure>
+        <figure class="cena slide"><figcaption>slide</figcaption><img src="{{V1}}" alt="Versão direção A pura sobre fundo azul-marinho"></figure>
+      </div>
+    </section>
+
+    <section class="versao">
+      <header>
+        <div class="titulo">
+          <span class="marcador">V2</span>
+          <h2>Direção A suavizada</h2>
+        </div>
+        <div class="swatches">
+          <span class="sw"><span class="dot" style="background:#2E4A7D"></span>#2E4A7D</span>
+          <span class="sw"><span class="dot" style="background:#E05C8D"></span>#E05C8D</span>
+        </div>
+      </header>
+      <p class="nota">
+        O meio-termo. Mais presença que o original, e o coração continua leve.
+        Os tons profundos da direção A não desaparecem — passam a mandar no sistema
+        em volta: títulos, botões e fundos. O logo acolhe, a paleta carrega a autoridade.
+      </p>
+      <div class="cenas">
+        <figure class="cena papel"><figcaption>papel</figcaption><img src="{{V2}}" alt="Versão suavizada sobre fundo branco"></figure>
+        <figure class="cena slide"><figcaption>slide</figcaption><img src="{{V2}}" alt="Versão suavizada sobre fundo azul-marinho"></figure>
+      </div>
+    </section>
+
+    <section class="versao">
+      <header>
+        <div class="titulo">
+          <span class="marcador">V3</span>
+          <h2>Rosa dominante</h2>
+        </div>
+        <div class="swatches">
+          <span class="sw"><span class="dot" style="background:#D6336C"></span>#D6336C coração</span>
+          <span class="sw"><span class="dot" style="background:#16243F"></span>#16243F nome</span>
+        </div>
+      </header>
+      <p class="nota">
+        Coração inteiro em rosa, nome em marinho. Uma cor de destaque só — é a versão
+        que mais se reconhece de longe e em tamanho pequeno. O custo é a leitura de
+        duas figuras: em duas cores dá para ver mãe e bebê; em uma só, vira um desenho.
+      </p>
+      <div class="cenas">
+        <figure class="cena papel"><figcaption>papel</figcaption><img src="{{V3}}" alt="Versão rosa dominante sobre fundo branco"></figure>
+        <figure class="cena slide"><figcaption>slide</figcaption><img src="{{V3}}" alt="Versão rosa dominante sobre fundo azul-marinho"></figure>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="tabela-bloco">
+    <h2>O que o contraste obriga</h2>
+    <p>
+      Mães leem isso no celular, muitas vezes com uma mão só e a tela no sol.
+      A régua aqui é a WCAG AA: texto normal precisa de 4,5:1 contra o fundo,
+      título grande precisa de 3:1. Medido sobre o off-white <code>#FDF8F8</code>.
+    </p>
+    <div class="rolagem">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Cor</th>
+            <th scope="col">Papel na marca</th>
+            <th scope="col">Contraste</th>
+            <th scope="col">Serve como texto?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="amostra"><span class="dot" style="background:#16243F"></span><code>#16243F</code></span></td>
+            <td>Azul-marinho institucional</td>
+            <td class="razao">14,69:1</td>
+            <td><span class="veredito passa">sim, qualquer tamanho</span></td>
+          </tr>
+          <tr>
+            <td><span class="amostra"><span class="dot" style="background:#2E4A7D"></span><code>#2E4A7D</code></span></td>
+            <td>Azul suavizado, da V2</td>
+            <td class="razao">8,34:1</td>
+            <td><span class="veredito passa">sim, qualquer tamanho</span></td>
+          </tr>
+          <tr>
+            <td><span class="amostra"><span class="dot" style="background:#D6336C"></span><code>#D6336C</code></span></td>
+            <td>Rosa de destaque</td>
+            <td class="razao">4,39:1</td>
+            <td><span class="veredito falha">só em título</span></td>
+          </tr>
+          <tr>
+            <td><span class="amostra"><span class="dot" style="background:#E05C8D"></span><code>#E05C8D</code></span></td>
+            <td>Rosa suavizado, da V2</td>
+            <td class="razao">3,28:1</td>
+            <td><span class="veredito falha">só em título</span></td>
+          </tr>
+          <tr>
+            <td><span class="amostra"><span class="dot" style="background:#5698D6"></span><code>#5698D6</code></span></td>
+            <td>Azul original</td>
+            <td class="razao">2,91:1</td>
+            <td><span class="veredito falha">nem em título</span></td>
+          </tr>
+          <tr>
+            <td><span class="amostra"><span class="dot" style="background:#F99CC0"></span><code>#F99CC0</code></span></td>
+            <td>Rosa original</td>
+            <td class="razao">1,89:1</td>
+            <td><span class="veredito falha">nem em título</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="aviso">
+      <strong>O verde do WhatsApp não passa.</strong> Texto branco sobre
+      <code>#1FA855</code> dá 3,09:1, abaixo do mínimo. Num site cujo trabalho é
+      converter, o botão de contato é justamente o que não pode falhar. Fechando o
+      verde para <code>#177E40</code> sobe para 5,13:1 — e ele continua lendo como
+      verde de WhatsApp.
+    </p>
+  </section>
+</div>

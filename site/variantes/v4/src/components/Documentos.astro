@@ -1,0 +1,76 @@
+---
+import { linkWhatsApp } from '../config';
+
+const documentos = [
+  'RG e CPF',
+  'Certidão de nascimento do bebê (ou o laudo médico, se ainda estiver grávida)',
+  'Carteira de trabalho ou comprovantes de contribuição ao INSS',
+  'Comprovante de residência',
+  'Dados da conta bancária em seu nome',
+];
+---
+
+<section class="secao" id="documentos">
+  <div class="envelope documentos">
+    <div class="documentos__texto">
+      <p class="kicker">Documentos</p>
+      <h2>O que separar antes de começar</h2>
+      <div class="regua"></div>
+      <p class="apoio">
+        Nada aqui é difícil de conseguir, e você não precisa ter tudo em mãos
+        para falar com a gente. Se faltar alguma coisa, a gente te orienta sobre
+        como conseguir.
+      </p>
+      <a class="botao botao--whats" href={linkWhatsApp('documentos')}>
+        Falar com o atendimento
+      </a>
+    </div>
+
+    <ul class="documentos__lista cartao">
+      {documentos.map((doc) => <li>{doc}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .documentos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(26px, 4vw, 56px);
+    align-items: center;
+  }
+
+  .documentos__texto .apoio { margin-bottom: 30px; max-width: 44ch; }
+
+  .documentos__lista {
+    list-style: none;
+    margin: 0;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .documentos__lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-block: 16px;
+    font-size: 16.5px;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--linha);
+  }
+  .documentos__lista li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .documentos__lista li:first-child { padding-top: 0; }
+  .documentos__lista li::before {
+    content: '';
+    flex: none;
+    width: 9px; height: 9px;
+    margin-top: 9px;
+    border-radius: 50%;
+    background: var(--destaque);
+  }
+
+  @media (max-width: 760px) {
+    .documentos { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+import { Picture } from 'astro:assets';
+import { empresa, linkWhatsApp } from '../config';
+import logoBranco from '../assets/logo-branco.png';
+---
+
+<header class="cabecalho">
+  <div class="envelope cabecalho__interno">
+    <a href="/" class="cabecalho__marca" aria-label={`${empresa.nome} — início`}>
+      <!-- Logo gerado no tamanho em que aparece (o original tem 1200 px e
+           pesava 192 KB pra ser mostrado com 60 px) -->
+      <Picture
+        src={logoBranco}
+        alt={empresa.nome}
+        widths={[130, 192, 256]}
+        sizes="(max-width: 760px) 64px, 84px"
+        formats={['avif', 'webp']}
+        loading="eager"
+      />
+    </a>
+    <a class="botao botao--whats cabecalho__acao" href={linkWhatsApp('topo do site')}>
+      Análise gratuita
+    </a>
+  </div>
+</header>
+
+<style>
+  /* Cabeçalho fixo em rosa, mais baixo. Sobre o rosa: logo branco (o
+     colorido perderia a metade rosa) e botão branco com texto rosa (o verde
+     some sobre este rosa, 1,09:1). */
+  .cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--cta);
+    box-shadow: 0 2px 10px rgba(26, 37, 48, .12);
+  }
+  .cabecalho__interno {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 8px;
+  }
+  /* Logo LoveMãe (13/09/2026): mais largo que o antigo (o nome tem 7
+     letras), então sobe um pouco pra o nome continuar legível.
+     84px de largura ≈ 65px de altura. */
+  .cabecalho__marca img { width: 84px; height: auto; }
+  .cabecalho__acao {
+    font-size: 15px;
+    min-height: 40px;
+    padding: 9px 20px;
+    background: #fff;
+    color: var(--cta);
+  }
+  .cabecalho__acao:hover { filter: none; }
+  /* Contorno de foco branco: o rosa padrão sumiria sobre este fundo */
+  .cabecalho :focus-visible { outline-color: #fff; }
+
+  /* Celular: só o logo, centralizado, e a barra mais fina. O botão sai
+     porque a barra fixa de baixo faz o papel dele — dois botões fixos
+     ocupariam a tela à toa. */
+  @media (max-width: 760px) {
+    .cabecalho__interno { justify-content: center; padding-block: 6px; }
+    .cabecalho__marca img { width: 64px; }
+    .cabecalho__acao { display: none; }
+  }
+</style>

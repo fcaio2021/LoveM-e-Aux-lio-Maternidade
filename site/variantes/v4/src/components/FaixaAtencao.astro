@@ -1,0 +1,143 @@
+---
+import { linkWhatsApp, provaSocial } from '../config';
+import IconeWhats from './IconeWhats.astro';
+---
+
+<!-- v4 · em blocos: tudo dentro de uma caixa de fundo suave, foto à esquerda -->
+<section class="destaque" aria-labelledby="destaque-titulo">
+  <div class="faixa">
+    <div class="envelope faixa__interno">
+      <p class="faixa__titulo">
+        Atenção, mãe ou gestante <span class="faixa__nota">(filhos até 5 anos)</span>
+      </p>
+      <p class="faixa__texto">
+        Te ajudamos a receber até <strong>R$&nbsp;15.900,00</strong> de auxílio maternidade.
+      </p>
+    </div>
+  </div>
+
+  <div class="secao">
+    <div class="envelope">
+      <div class="destaque__caixa">
+        <figure class="destaque__figura">
+          <img
+            class="destaque__foto"
+            src="/gravida-vestido.jpg"
+            alt="Gestante de vestido, ao ar livre, com a mão na barriga"
+            width="1400" height="2100"
+            loading="lazy"
+          />
+          <div class="cartao-valor" aria-hidden="true">
+            <span class="cartao-valor__rotulo">Auxílio-maternidade</span>
+            <span class="cartao-valor__numero">até R$&nbsp;15.900,00</span>
+          </div>
+        </figure>
+
+        <div class="destaque__texto">
+          <p class="destaque__pergunta">Você não sabe se tem direito ao auxílio maternidade?</p>
+          <h2 id="destaque-titulo" class="destaque__titulo">Você pode ter direito</h2>
+          <p class="destaque__alerta">Não perca seu benefício por falta de informação</p>
+          <p class="destaque__intro">
+            Já ajudamos mamães a receberem seu auxílio maternidade com análise
+            gratuita e valores que variam de <span class="sem-quebra">R$ 6.900,00</span>
+            a <span class="sem-quebra">R$ 15.900,00</span>.
+          </p>
+
+          <ul class="numeros">
+            {provaSocial.map((item) => (
+              <li class="numero">
+                <span class="numero__valor">{item.numero}</span>
+                <span class="numero__rotulo">{item.rotulo}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a class="botao botao--whats destaque__botao" href={linkWhatsApp('destaque')}>
+            <IconeWhats /> Descobrir se tenho direito
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faixa { background: var(--destaque); color: #fff; padding-block: clamp(26px, 3.6vw, 38px); }
+  .faixa__interno { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+  .faixa__titulo {
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-titulo);
+    letter-spacing: var(--kerning-titulo);
+    font-size: clamp(23px, 3.2vw, 32px);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .faixa__nota { display: inline-block; font-size: .62em; font-weight: 600; color: rgba(255, 255, 255, .84); letter-spacing: 0; }
+  .faixa__texto { font-size: clamp(16px, 2vw, 19px); color: rgba(255, 255, 255, .94); }
+  .faixa__texto strong { color: #fff; font-weight: 700; white-space: nowrap; }
+
+  .destaque__caixa {
+    display: grid;
+    grid-template-columns: .85fr 1.15fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+    background: var(--tinta);
+    border-radius: 28px;
+    padding: clamp(18px, 3vw, 36px);
+  }
+
+  .destaque__figura { position: relative; margin: 0; }
+  .destaque__foto {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 30%;
+    border-radius: 20px;
+  }
+  .cartao-valor {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 18px;
+    background: var(--fundo-card);
+    border-radius: 14px;
+    box-shadow: 0 10px 26px rgba(26, 37, 48, .16);
+    line-height: 1.2;
+  }
+  .cartao-valor__rotulo { font-size: 13px; font-weight: 600; color: var(--texto-apoio); }
+  .cartao-valor__numero { margin-top: 4px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 20px; color: var(--texto); }
+
+  .destaque__pergunta { margin-bottom: 12px; font-family: var(--fonte-titulo); font-weight: 700; font-size: clamp(16px, 1.9vw, 19px); color: var(--destaque); }
+  .destaque__titulo { font-size: clamp(30px, 4.2vw, 44px); }
+  .destaque__alerta { margin-top: 18px; font-weight: 700; font-size: 17px; color: var(--destaque); }
+  .destaque__intro { margin-top: 10px; max-width: 50ch; color: var(--texto-apoio); font-size: 17px; line-height: 1.55; }
+  .sem-quebra { white-space: nowrap; }
+
+  /* Números em mini-cartões brancos sobre a caixa suave */
+  .numeros {
+    list-style: none;
+    margin: 26px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .numero { display: flex; flex-direction: column; gap: 6px; background: var(--fundo-card); border-radius: 14px; padding: 14px 14px 16px; }
+  .numero__valor { font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(24px, 3vw, 34px); line-height: 1; color: var(--destaque); white-space: nowrap; }
+  .numero__rotulo { font-size: 13.5px; line-height: 1.35; color: var(--texto-apoio); }
+
+  .destaque__botao { margin-top: 28px; }
+
+  @media (max-width: 880px) {
+    .destaque__caixa { grid-template-columns: 1fr; }
+    .destaque__foto { aspect-ratio: 4 / 4.2; }
+  }
+  @media (max-width: 420px) {
+    .numeros { gap: 8px; }
+    .numero { padding: 12px 10px 14px; }
+    .numero__rotulo { font-size: 12.5px; }
+    .destaque__botao { width: 100%; }
+  }
+</style>

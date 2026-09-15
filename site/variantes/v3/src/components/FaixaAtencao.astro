@@ -1,0 +1,136 @@
+---
+import { linkWhatsApp, provaSocial } from '../config';
+import IconeWhats from './IconeWhats.astro';
+---
+
+<!-- v3 · centralizado: foto larga em faixa no topo, texto e números centralizados abaixo -->
+<section class="destaque" aria-labelledby="destaque-titulo">
+  <div class="faixa">
+    <div class="envelope faixa__interno">
+      <p class="faixa__titulo">
+        Atenção, mãe ou gestante <span class="faixa__nota">(filhos até 5 anos)</span>
+      </p>
+      <p class="faixa__texto">
+        Te ajudamos a receber até <strong>R$&nbsp;15.900,00</strong> de auxílio maternidade.
+      </p>
+    </div>
+  </div>
+
+  <div class="secao">
+    <div class="envelope destaque__interno">
+      <figure class="destaque__banner">
+        <img src="/bebe-cama.jpg" alt="Bebê deitado na cama ao lado da mãe" width="1400" height="933" loading="lazy" />
+        <div class="cartao-valor" aria-hidden="true">
+          <span class="cartao-valor__rotulo">Auxílio-maternidade</span>
+          <span class="cartao-valor__numero">até R$&nbsp;15.900,00</span>
+        </div>
+      </figure>
+
+      <div class="destaque__texto">
+        <p class="destaque__pergunta">Você não sabe se tem direito ao auxílio maternidade?</p>
+        <h2 id="destaque-titulo" class="destaque__titulo">Você pode ter direito</h2>
+        <p class="destaque__alerta">Não perca seu benefício por falta de informação</p>
+        <p class="destaque__intro">
+          Já ajudamos mamães a receberem seu auxílio maternidade com análise
+          gratuita e valores que variam de <span class="sem-quebra">R$ 6.900,00</span>
+          a <span class="sem-quebra">R$ 15.900,00</span>.
+        </p>
+
+        <ul class="numeros">
+          {provaSocial.map((item) => (
+            <li class="numero">
+              <span class="numero__valor">{item.numero}</span>
+              <span class="numero__rotulo">{item.rotulo}</span>
+            </li>
+          ))}
+        </ul>
+
+        <a class="botao botao--whats" href={linkWhatsApp('destaque')}>
+          <IconeWhats /> Descobrir se tenho direito
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faixa { background: var(--destaque); color: #fff; padding-block: clamp(26px, 3.6vw, 38px); }
+  .faixa__interno { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+  .faixa__titulo {
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-titulo);
+    letter-spacing: var(--kerning-titulo);
+    font-size: clamp(23px, 3.2vw, 32px);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .faixa__nota { display: inline-block; font-size: .62em; font-weight: 600; color: rgba(255, 255, 255, .84); letter-spacing: 0; }
+  .faixa__texto { font-size: clamp(16px, 2vw, 19px); color: rgba(255, 255, 255, .94); }
+  .faixa__texto strong { color: #fff; font-weight: 700; white-space: nowrap; }
+
+  .destaque__interno { display: flex; flex-direction: column; align-items: center; }
+
+  .destaque__banner { position: relative; margin: 0; width: 100%; }
+  .destaque__banner img {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    object-position: center 45%;
+    border-radius: var(--raio-imagem);
+  }
+  /* Cartão do valor centralizado, montado na borda de baixo da foto */
+  .cartao-valor {
+    position: absolute;
+    left: 50%;
+    bottom: -30px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 28px;
+    background: var(--fundo-card);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(26, 37, 48, .16);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .cartao-valor__rotulo { font-size: 13.5px; font-weight: 600; color: var(--texto-apoio); }
+  .cartao-valor__numero { margin-top: 4px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 22px; color: var(--texto); }
+
+  .destaque__texto {
+    margin-top: clamp(56px, 7vw, 72px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 48rem;
+  }
+  .destaque__pergunta { margin-bottom: 12px; font-family: var(--fonte-titulo); font-weight: 700; font-size: clamp(16px, 1.9vw, 19px); color: var(--destaque); }
+  .destaque__titulo { font-size: clamp(30px, 4.2vw, 44px); }
+  .destaque__alerta { margin-top: 18px; font-weight: 700; font-size: 17px; color: var(--destaque); }
+  .destaque__intro { margin-top: 10px; max-width: 52ch; color: var(--texto-apoio); font-size: 17px; line-height: 1.55; text-wrap: balance; }
+  .sem-quebra { white-space: nowrap; }
+
+  /* Números lado a lado, separados por linhas finas */
+  .numeros {
+    list-style: none;
+    margin: 32px 0 34px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+  .numero { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 4px 14px; }
+  .numero + .numero { border-left: 1px solid var(--linha); }
+  .numero__valor { font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(30px, 4.4vw, 46px); line-height: 1; color: var(--destaque); white-space: nowrap; }
+  .numero__rotulo { font-size: 15px; line-height: 1.35; color: var(--texto-apoio); }
+
+  @media (max-width: 700px) {
+    .destaque__banner img { aspect-ratio: 16 / 10; }
+  }
+  @media (max-width: 420px) {
+    .numero { padding: 4px 6px; }
+    .numero__rotulo { font-size: 13px; }
+    .destaque__texto .botao { width: 100%; }
+  }
+</style>

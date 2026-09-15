@@ -1,0 +1,119 @@
+---
+// Transparência sobre o processo: o que está e o que não está no combinado.
+// Os números de prova social (config.ts → provaSocial) ficam na seção de
+// destaque logo abaixo do hero; esta complementa com os limites do serviço.
+// Depoimentos reais, quando houver, entram como seção nova depois desta.
+
+const fazemos = [
+  'Analisamos se você tem direito, antes de qualquer cobrança',
+  'Organizamos e conferimos toda a documentação',
+  'Damos entrada no pedido junto ao INSS',
+  'Acompanhamos o processo até o dinheiro cair',
+  'Explicamos cada etapa em português, sem juridiquês',
+];
+
+const naoFazemos = [
+  'Não pedimos a sua senha do Gov.br',
+  'Não somos o INSS nem temos ligação com o governo',
+  'Não prometemos aprovação — quem decide é o INSS',
+  'Não cobramos nada para fazer a análise',
+];
+---
+
+<section class="secao" id="como-trabalhamos">
+  <div class="envelope">
+    <p class="kicker">Sem letra miúda</p>
+    <h2>O que a gente faz — e o que a gente não faz</h2>
+    <div class="regua"></div>
+    <p class="apoio medida">
+      Esse é um assunto em que muita gente promete demais. Preferimos deixar
+      claro desde o começo o que está e o que não está no combinado.
+    </p>
+
+    <div class="colunas">
+      <div class="cartao coluna">
+        <h3 class="coluna__titulo">O que fazemos</h3>
+        <ul class="lista lista--sim">
+          {fazemos.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class="cartao coluna">
+        <h3 class="coluna__titulo">O que não fazemos</h3>
+        <ul class="lista lista--nao">
+          {naoFazemos.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <blockquote class="promessa">
+      <p>
+        Se, depois de olhar o seu caso, a gente vir que não há direito,
+        <strong>a gente te fala.</strong> É mais rápido pra você e mais honesto
+        pra todo mundo.
+      </p>
+    </blockquote>
+  </div>
+</section>
+
+<style>
+  .colunas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 40px;
+  }
+
+  .coluna__titulo { margin-bottom: 18px; }
+
+  .lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 16.5px;
+  }
+  .lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    line-height: 1.5;
+  }
+  .lista li::before {
+    flex: none;
+    width: 24px; height: 24px;
+    margin-top: 2px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .lista--sim li::before {
+    content: '✓';
+    background: color-mix(in srgb, var(--cta-whatsapp) 14%, transparent);
+    color: var(--cta-whatsapp);
+  }
+  .lista--nao li::before {
+    content: '×';
+    background: color-mix(in srgb, var(--destaque) 12%, transparent);
+    color: var(--destaque);
+    font-size: 17px;
+  }
+
+  .promessa {
+    margin: 34px 0 0;
+    border-left: 4px solid var(--destaque);
+    padding: 6px 0 6px 22px;
+    max-width: 58ch;
+    font-size: clamp(18px, 2.2vw, 21px);
+    line-height: 1.55;
+  }
+  .promessa strong { color: var(--destaque); font-weight: 700; }
+
+  @media (max-width: 760px) {
+    .colunas { grid-template-columns: 1fr; }
+  }
+</style>

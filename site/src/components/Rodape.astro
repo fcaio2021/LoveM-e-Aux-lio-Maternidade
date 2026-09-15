@@ -1,0 +1,121 @@
+---
+import { Picture } from 'astro:assets';
+import { empresa } from '../config';
+import logoCor from '../assets/logo.png';
+const ano = new Date().getFullYear();
+---
+
+<footer class="rodape">
+  <div class="envelope rodape__interno">
+    <a href="/" class="rodape__logo" aria-label={`${empresa.nome} — início`}>
+      <Picture
+        src={logoCor}
+        alt={empresa.nome}
+        widths={[240, 330, 450]}
+        sizes="(max-width: 700px) 110px, 150px"
+        formats={['avif', 'webp']}
+      />
+    </a>
+
+    <!-- Ao lado do logo, só esses dois (pedido de 13/09/2026) -->
+    <nav class="rodape__links" aria-label="Links do rodapé">
+      <a href="/privacidade">Política de privacidade</a>
+      {empresa.instagramUrl && (
+        <a href={empresa.instagramUrl} target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" />
+          </svg>
+          Instagram
+        </a>
+      )}
+    </nav>
+    <!-- A frase de descrição embaixo do logo saiu a pedido (13/09/2026) -->
+  </div>
+
+  <div class="envelope rodape__base">
+    <p class="aviso apoio">
+      A {empresa.nome} é uma empresa privada de apoio administrativo e
+      <strong>não tem vínculo com o INSS nem com qualquer órgão do governo</strong>.
+      A concessão do benefício e os prazos são decisão exclusiva do INSS.
+      As informações deste site são explicativas e não substituem a análise do
+      seu caso concreto.
+    </p>
+    <p class="apoio rodape__assinatura">
+      © {ano} {empresa.nome}{empresa.cnpj ? ` · CNPJ ${empresa.cnpj}` : ''}
+    </p>
+  </div>
+</footer>
+
+<style>
+  /* Rodapé branco com o logo colorido (pedido de 13/09/2026 — antes era
+     azul-marinho com o logo branco). A linha de cima separa do conteúdo nas
+     páginas em que ele vem depois de fundo branco (Política de Privacidade). */
+  .rodape {
+    background: var(--fundo);
+    color: var(--texto);
+    border-top: 1px solid var(--linha);
+    padding-block: 48px 30px;
+  }
+
+  /* Logo com os dois links ao lado */
+  .rodape__interno {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "logo links";
+    align-items: center;
+    gap: 20px 64px; /* respiro entre o logo e os links (era 36px) */
+    padding-bottom: 28px;
+  }
+  .rodape__logo { grid-area: logo; display: block; }
+  .rodape__logo img { width: 150px; height: auto; }
+
+  .rodape__links {
+    grid-area: links;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* 44px de altura: o mínimo confortável pra um dedo */
+  .rodape__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--texto);
+    text-decoration: none;
+  }
+  .rodape__links a:hover {
+    color: var(--destaque);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .rodape__links svg { flex: none; }
+
+  .rodape__base {
+    border-top: 1px solid var(--linha);
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .aviso { font-size: 13.5px; line-height: 1.6; max-width: 88ch; }
+  .aviso strong { color: var(--texto); font-weight: 700; }
+
+  .rodape__assinatura { font-size: 13.5px; }
+
+  /* Celular: logo e links continuam lado a lado, só mais compactos */
+  @media (max-width: 700px) {
+    .rodape { padding-block: 36px 24px; }
+    /* No celular o respiro cresce com a tela, até o limite em que
+       "Política de privacidade" ainda cabe numa linha (32px no Android pequeno) */
+    .rodape__interno { gap: 16px clamp(28px, 9vw, 44px); padding-bottom: 22px; }
+    .rodape__logo img { width: 110px; }
+    .rodape__links a { font-size: 15.5px; }
+    .aviso, .rodape__assinatura { font-size: 14px; }
+  }
+</style>

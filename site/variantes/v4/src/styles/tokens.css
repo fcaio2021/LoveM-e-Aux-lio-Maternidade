@@ -1,0 +1,75 @@
+/* LoveMãe Auxílio Maternidade — tokens da identidade visual
+ *
+ * Cópia executável de identidade/design-guide.md. O site (Astro) e os HTMLs de
+ * carrossel puxam daqui pra paleta não divergir entre as peças.
+ * Mudou aqui, muda no guia — e vice-versa.
+ *
+ * As cores pastel do logo NÃO são cores de texto. Ver --logo-* abaixo.
+ */
+
+:root {
+  /* --- Cores do logo: só logo e ilustração, nunca texto ------------------- */
+  --logo-azul: #80BBEF;   /* 1,97:1 no fundo claro — não legível como texto */
+  --logo-rosa: #FAA9C7;   /* 1,75:1 no fundo claro — não legível como texto */
+
+  /* --- Superfícies -------------------------------------------------------- */
+  --fundo: #FDFAFB;       /* off-white com um sopro de rosa */
+  --fundo-card: #FFFFFF;
+  --fundo-creme: #FAF4EC; /* papel — area de texto dos carrosseis */
+  --fundo-escuro: #102232;
+
+  /* --- Texto -------------------------------------------------------------- */
+  --texto: #1A2530;       /* 14,98:1 */
+  --texto-apoio: #5C6B7A; /*  5,27:1 */
+  --texto-sobre-escuro: #FFFFFF;
+
+  /* --- Marca em uso ------------------------------------------------------- */
+  --destaque: #C81B5C;        /* 5,37:1 no claro — some no escuro, ver abaixo */
+  --destaque-no-escuro: #FAA9C7; /* 8,92:1 sobre --fundo-escuro */
+  --institucional: #1D5386;   /* 7,69:1 — títulos de autoridade, dados, valores */
+
+  /* --- Ação --------------------------------------------------------------- */
+  --cta: #C81B5C;         /* branco sobre ele: 5,57:1 */
+  --cta-whatsapp: #177E40; /* branco sobre ele: 5,13:1. NÃO usar #1FA855 (3,09:1) */
+
+  /* --- Linhas e sombra ---------------------------------------------------- */
+  --linha: rgba(26, 37, 48, .10);
+  --linha-no-escuro: rgba(255, 255, 255, .14);
+  --sombra-card: 0 2px 8px rgba(26, 37, 48, .06);
+
+  /* --- Forma -------------------------------------------------------------- */
+  --raio-card: 16px;
+  --raio-imagem: 20px;
+  --raio-botao: 999px;
+  --altura-botao: 52px;
+  --padding-botao: 16px 32px;
+  --regua-altura: 4px;
+  --regua-largura: 64px;
+
+  /* --- Tipografia --------------------------------------------------------- */
+  --fonte-titulo: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --fonte-corpo: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+  --fonte-script: "Parisienne", "Segoe Script", cursive; /* max 4 palavras, >=44px */
+  --peso-titulo: 800;
+  --peso-corpo: 400;
+  --peso-forte: 600;
+  --kerning-titulo: -0.02em;   /* arredondada não quer o -0.04em da Inter */
+  --kerning-kicker: 0.22em;
+}
+
+/* Fontes (Google Fonts é o único host permitido dentro de Artifact):
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600;700&family=Parisienne&display=swap">
+*/
+
+/* --- Bloco em fundo escuro ------------------------------------------------
+   Aplicar .no-escuro no container: a paleta inverte, porque o rosa de destaque
+   não sobrevive sobre o azul profundo. */
+.no-escuro {
+  --fundo: var(--fundo-escuro);
+  --fundo-card: rgba(255, 255, 255, .06);
+  --texto: var(--texto-sobre-escuro);
+  --texto-apoio: rgba(255, 255, 255, .72);
+  --destaque: var(--destaque-no-escuro);
+  --linha: var(--linha-no-escuro);
+  --sombra-card: none;
+}

@@ -1,0 +1,77 @@
+---
+import { linkWhatsApp, valores } from '../config';
+---
+
+<!-- v4 · em blocos: texto à esquerda, foto inteira à direita num bloco
+     arredondado com uma placa de cor suave deslocada atrás. -->
+<section class="hero">
+  <div class="envelope hero__grade">
+    <div class="hero__texto">
+      <p class="sobretitulo">Auxílio Maternidade</p>
+      <h1 class="hero__titulo">
+        <span class="hero__linha">Mamãe, descubra se você</span>
+        <span class="hero__linha">tem direito a receber de</span>
+        <span class="hero__linha">
+          <span class="destaca hero__valor">{valores.minimo}</span> a
+          <span class="destaca hero__valor">{valores.maximo}</span>
+        </span>
+      </h1>
+      <p class="hero__sub">
+        Cuidamos de toda burocracia, do pedido e do acompanhamento até a
+        aprovação no INSS. Análise grátis e 100% segura.
+      </p>
+      <div class="hero__acoes">
+        <a class="botao botao--whats" href={linkWhatsApp('hero')}>Quero minha análise gratuita</a>
+      </div>
+    </div>
+
+    <figure class="hero__figura">
+      <div class="hero__placa" aria-hidden="true"></div>
+      <img
+        src="/hero-gravida-2.jpg"
+        alt="Gestante sentada no tapete do quarto do bebê, com as mãos na barriga"
+        width="1325" height="1187"
+        fetchpriority="high"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero { padding-block: clamp(40px, 5vw, 72px); background: var(--fundo); }
+  .hero__grade {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+  .hero__valor { white-space: nowrap; }
+  .hero__sub { margin-top: 22px; max-width: 44ch; font-size: clamp(17px, 2vw, 19px); color: var(--texto-apoio); }
+  .hero__acoes { margin-top: 32px; }
+
+  .hero__figura { position: relative; margin: 0; padding: 0 22px 22px 0; }
+  .hero__placa {
+    position: absolute;
+    inset: 40px 0 0 40px;
+    background: var(--tinta);
+    border-radius: 32px;
+  }
+  /* Caixa na proporção exata da foto: aparece inteira, sem recorte */
+  .hero__figura img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1325 / 1187;
+    object-fit: cover;
+    border-radius: 28px;
+  }
+
+  @media (min-width: 901px) {
+    .hero__titulo { font-size: clamp(30px, 3.1vw, 42px); }
+    .hero__linha { display: block; white-space: nowrap; }
+  }
+  @media (max-width: 900px) {
+    .hero__grade { grid-template-columns: 1fr; }
+    .hero__figura { order: -1; max-width: 520px; }
+  }
+  @media (max-width: 420px) { .hero__acoes .botao { width: 100%; } }
+</style>

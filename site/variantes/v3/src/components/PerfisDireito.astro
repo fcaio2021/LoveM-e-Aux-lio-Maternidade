@@ -1,0 +1,84 @@
+---
+import { linkWhatsApp } from '../config';
+
+// v3 · cartões na horizontal (foto à esquerda, texto à direita), 2 por linha.
+const perfis = [
+  { titulo: 'Trabalhadoras com carteira assinada (CLT)', texto: 'Mamães que estavam trabalhando de carteira assinada durante a gravidez e não receberam o benefício.', foto: '/perfil-clt.jpg', alt: 'Mulher segurando a carteira de trabalho' },
+  { titulo: 'Mães MEI e autônomas', texto: 'Mamães que trabalham por conta própria ou como MEI e contribuem com o INSS.', foto: '/perfil-autonoma.jpg', alt: 'Mulher trabalhando por conta própria no seu negócio' },
+  { titulo: 'Trabalhadoras rurais e pescadoras', texto: 'Mamães que trabalham no campo ou na pesca.', foto: '/perfil-rural.jpg', alt: 'Mulher trabalhando na lavoura' },
+  { titulo: 'Desempregadas ou demitidas', texto: 'Mamães que pararam de trabalhar, mas continuam protegidas pelo INSS por um tempo, mesmo sem contribuir.', foto: '/perfil-desempregada.jpg', alt: 'Mãe em casa com o bebê', destaque: true },
+];
+---
+
+<section class="secao perfis" id="quem-tem-direito">
+  <div class="envelope">
+    <header class="perfis__cabeca">
+      <p class="sobretitulo">Sobre o direito</p>
+      <h2 class="perfis__titulo">Quem tem direito ao auxílio-maternidade?</h2>
+      <p class="perfis__sub">
+        Gestantes e mães com filhos de até 5 anos que se encaixam em um destes perfis:
+      </p>
+    </header>
+
+    <ul class="perfis__grade">
+      {perfis.map((p) => (
+        <li class={`perfil${p.destaque ? ' perfil--destaque' : ''}`}>
+          <img class="perfil__foto" src={p.foto} alt={p.alt} width="800" height="600" loading="lazy" />
+          <div class="perfil__corpo">
+            <h3 class="perfil__titulo">{p.titulo}</h3>
+            <p class="perfil__texto">{p.texto}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="perfis__rodape">
+      <a class="botao botao--whats" href={linkWhatsApp('quem tem direito')}>Começar teste gratuito</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .perfis__cabeca { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .perfis__titulo { font-size: clamp(30px, 4.4vw, 46px); max-width: 18ch; }
+  .perfis__sub { margin-top: 16px; max-width: 50ch; font-size: clamp(16.5px, 2vw, 18.5px); font-weight: 500; color: var(--destaque); text-wrap: balance; }
+
+  .perfis__grade {
+    list-style: none;
+    margin: clamp(36px, 5vw, 52px) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .perfil {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    gap: 20px;
+    align-items: center;
+    background: var(--fundo-card);
+    border: 1px solid color-mix(in srgb, var(--destaque) 30%, transparent);
+    border-radius: 18px;
+    padding: 12px;
+  }
+  .perfil__foto { width: 100%; height: 100%; min-height: 150px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; }
+  .perfil__corpo { padding-right: 8px; }
+  .perfil__titulo { font-size: clamp(18px, 1.9vw, 21px); line-height: 1.25; }
+  .perfil__texto { margin-top: 8px; font-size: 15.5px; line-height: 1.55; color: var(--texto-apoio); }
+
+  .perfil--destaque { background: var(--destaque); border-color: var(--destaque); }
+  .perfil--destaque .perfil__titulo { color: #fff; }
+  .perfil--destaque .perfil__texto { color: rgba(255, 255, 255, .92); }
+
+  .perfis__rodape { margin-top: clamp(32px, 4vw, 44px); display: flex; justify-content: center; }
+
+  @media (max-width: 860px) {
+    .perfis__grade { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 420px) {
+    .perfil { grid-template-columns: 1fr; gap: 14px; }
+    .perfil__foto { aspect-ratio: 4 / 3; min-height: 0; }
+    .perfil__corpo { padding: 0 6px 10px; }
+    .perfis__rodape .botao { width: 100%; }
+  }
+</style>

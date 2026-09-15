@@ -1,0 +1,74 @@
+---
+import { linkWhatsApp, valores } from '../config';
+---
+
+<!-- v3 · centralizado: foto de fundo inteira, com véu azul-escuro, e o texto
+     no centro. Em fundo de foto o título precisa ser branco (preto não lê). -->
+<section class="hero">
+  <img class="hero__fundo" src="/gravida-berco.jpg" alt="" width="1800" height="1200" fetchpriority="high" />
+  <div class="envelope hero__conteudo">
+    <p class="sobretitulo hero__sobre">Auxílio Maternidade</p>
+    <h1 class="hero__titulo">
+      <span class="hero__linha">Mamãe, descubra se você</span>
+      <span class="hero__linha">tem direito a receber de</span>
+      <span class="hero__linha">
+        <span class="hero__valor">{valores.minimo}</span> a
+        <span class="hero__valor">{valores.maximo}</span>
+      </span>
+    </h1>
+    <p class="hero__sub">
+      Cuidamos de toda burocracia, do pedido e do acompanhamento até a
+      aprovação no INSS. Análise grátis e 100% segura.
+    </p>
+    <a class="botao botao--whats hero__botao" href={linkWhatsApp('hero')}>Quero minha análise gratuita</a>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    min-height: clamp(540px, 46vw, 700px);
+    padding-block: clamp(64px, 8vw, 110px);
+    color: #fff;
+    text-align: center;
+    background: var(--fundo-escuro);
+  }
+  .hero__fundo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+  /* Véu azul-escuro: mesmo sobre a parte mais clara da foto (janela), o
+     texto branco fica acima de 5:1 de contraste. */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(15, 36, 54, .66) 0%, rgba(15, 36, 54, .74) 60%, rgba(15, 36, 54, .84) 100%);
+  }
+  .hero__conteudo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero__sobre { color: var(--destaque-no-escuro); }
+  .hero__titulo { color: #fff; }
+  .hero__valor { color: var(--destaque-no-escuro); white-space: nowrap; }
+  .hero__sub { margin-top: 20px; max-width: 46ch; font-size: clamp(17px, 2vw, 19px); color: rgba(255, 255, 255, .92); }
+  .hero__botao { margin-top: 32px; box-shadow: 0 8px 22px rgba(0, 0, 0, .25); }
+
+  @media (min-width: 901px) {
+    .hero__titulo { font-size: clamp(36px, 3.9vw, 56px); }
+    .hero__linha { display: block; white-space: nowrap; }
+  }
+  @media (max-width: 420px) { .hero__botao { width: 100%; } }
+</style>

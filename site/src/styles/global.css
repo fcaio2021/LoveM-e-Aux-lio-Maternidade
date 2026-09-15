@@ -1,0 +1,201 @@
+/* Estilos globais do site. A paleta e a tipografia vêm de tokens.css, que é
+   cópia de identidade/tokens.css — rode ./sincronizar-identidade.sh depois de
+   mexer na identidade. */
+
+@import './tokens.css';
+
+/* Tipografia do SITE: uma fonte só, a Onest, em títulos e textos
+   (pedido de 12/09/2026, referência visual: PicPay). Fica aqui, e não em
+   tokens.css, porque tokens.css é cópia de identidade/ e seria sobrescrito
+   pelo ./sincronizar-identidade.sh — e a identidade (carrosséis) não mudou. */
+:root {
+  --fonte-titulo: "Onest", "Segoe UI", system-ui, sans-serif;
+  --fonte-corpo: "Onest", "Segoe UI", system-ui, sans-serif;
+  --fonte-script: var(--fonte-titulo);
+  --kerning-titulo: -0.028em;
+
+  /* Fundos do SITE todos brancos (pedido de 12/09/2026) — inclusive as
+     seções que usavam o creme (.secao--creme) e o off-white rosado. */
+  --fundo: #FFFFFF;
+  --fundo-creme: #FFFFFF;
+
+  /* Rosa do SITE = rosa do logo LoveMãe (decisão de 14/09/2026; antes #C81B5C,
+     que segue nas peças de identidade). Branco sobre ele e ele sobre branco
+     dão 3,8:1: ótimo em título e área grande, abaixo do mínimo recomendado
+     (4,5:1) em texto pequeno. Se precisar, um tom mais fechado da mesma cor
+     pra texto pequeno é o #E0006A (4,8:1). */
+  --destaque: #FF0076;
+  --cta: #FF0076;
+  /* Verdes testados nos botões em 14/09/2026 e descartados: limão #5FCE3D
+     (o da Mãe Brasil) e o do WhatsApp #25D366 — branco sobre os dois dá
+     ~2:1. Ficou o verde original #177E40 (5,13:1), definido em tokens.css. */
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte-corpo);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--fonte-titulo);
+  font-weight: var(--peso-titulo);
+  letter-spacing: var(--kerning-titulo);
+  line-height: 1.12;
+  text-wrap: balance;
+  margin: 0;
+}
+h1 { font-size: clamp(34px, 5.4vw, 56px); }
+h2 { font-size: clamp(28px, 4vw, 40px); }
+h3 { font-size: clamp(20px, 2.4vw, 23px); line-height: 1.25; }
+
+p { margin: 0; }
+img { max-width: 100%; height: auto; display: block; }
+/* As fotos otimizadas vêm dentro de <picture>. Sem caixa própria, a <img>
+   se comporta como filha direta do bloco e o CSS dos componentes vale igual. */
+picture { display: contents; }
+/* ...e as <source> (as versões avif/webp) não podem virar itens invisíveis
+   de flex/grid — contariam como espaço entre os itens. Esconder não muda a
+   escolha da imagem pelo navegador. */
+picture > source { display: none; }
+
+a { color: var(--destaque); }
+
+:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Estruturas reaproveitadas ---------- */
+
+.envelope {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 22px;
+}
+
+.secao { padding-block: clamp(60px, 9vw, 104px); }
+.secao--creme { background: var(--fundo-creme); }
+.secao--escuro {
+  background: var(--fundo-escuro);
+  color: var(--texto-sobre-escuro);
+}
+/* No escuro a paleta inverte: o rosa profundo some sobre o azul. */
+.secao--escuro {
+  --destaque: var(--destaque-no-escuro);
+  --texto-apoio: rgba(255, 255, 255, .74);
+  --linha: var(--linha-no-escuro);
+}
+
+/* Linha de apoio acima dos títulos. Mesma fonte do resto do site, sem caixa
+   alta nem espaçamento largo: o site usa um padrão tipográfico só.
+   `.kicker` e `.sobretitulo` são a mesma coisa (nomes históricos). */
+.kicker,
+.sobretitulo {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(16px, 1.9vw, 19px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--destaque);
+  margin-bottom: 10px;
+}
+
+/* A letra cursiva (Parisienne) saiu do site em 12/09/2026: um padrão só. */
+
+.regua {
+  width: var(--regua-largura);
+  height: var(--regua-altura);
+  background: var(--destaque);
+  border-radius: 2px;
+  margin-block: 20px 26px;
+}
+
+.apoio { color: var(--texto-apoio); }
+.destaca { color: var(--destaque); }
+
+.medida { max-width: 62ch; }
+
+/* ---------- Botões ---------- */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: var(--altura-botao);
+  padding: var(--padding-botao);
+  border-radius: var(--raio-botao);
+  font-family: var(--fonte-corpo);
+  font-weight: var(--peso-forte);
+  font-size: 18px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: transform .15s ease, filter .15s ease;
+}
+.botao:hover { transform: translateY(-2px); filter: brightness(1.07); }
+.botao:active { transform: translateY(0); }
+
+.botao svg { flex: none; }
+
+.botao--whats { background: var(--cta-whatsapp); color: #fff; }
+.botao--marca { background: var(--cta); color: #fff; }
+.botao--linha {
+  background: transparent;
+  color: var(--institucional);
+  border-color: currentColor;
+}
+.secao--escuro .botao--linha { color: #fff; }
+
+/* ---------- Cartões ---------- */
+
+.cartao {
+  background: var(--fundo-card);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-card);
+  padding: 28px;
+}
+.secao--escuro .cartao {
+  background: rgba(255, 255, 255, .06);
+  border-color: var(--linha-no-escuro);
+}
+
+.grade {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+}
+
+/* ---------- Celular ---------- */
+/* O público vem 100% pelo celular (13/09/2026): menos respiro entre as
+   seções e botões que nunca quebram em duas linhas. */
+@media (max-width: 560px) {
+  .secao { padding-block: 44px; }
+}
+@media (max-width: 420px) {
+  .botao {
+    font-size: clamp(15px, 4.7vw, 17px);
+    padding-inline: 18px;
+    gap: 10px;
+    white-space: nowrap;
+  }
+}

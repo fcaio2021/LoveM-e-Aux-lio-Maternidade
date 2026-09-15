@@ -1,0 +1,92 @@
+---
+import { linkWhatsApp } from '../config';
+
+// Os seis perfis atendidos, conforme _memoria/empresa.md.
+const perfis = [
+  {
+    titulo: 'Carteira assinada (CLT)',
+    texto: 'O pedido costuma sair pela empresa, mas nem sempre é feito do jeito certo — ou é esquecido. Vale conferir.',
+  },
+  {
+    titulo: 'Empregada doméstica',
+    texto: 'Trabalhando em casa de família com registro, o direito existe e o pedido é feito direto no INSS.',
+  },
+  {
+    titulo: 'MEI e autônoma',
+    texto: 'Quem contribui como contribuinte individual ou MEI também recebe, respeitando o tempo mínimo de contribuição.',
+  },
+  {
+    titulo: 'Trabalhadora rural',
+    texto: 'Segurada especial tem direito ao benefício, e a comprovação da atividade no campo é parte do processo.',
+  },
+  {
+    titulo: 'Desempregada',
+    texto: 'Esse é o caso que mais passa batido. Depois de sair do emprego você continua segurada por um tempo — o período de graça.',
+    destaque: true,
+  },
+  {
+    titulo: 'Trabalhadora avulsa',
+    texto: 'Quem trabalha por intermédio de sindicato ou órgão gestor de mão de obra também está coberta.',
+  },
+];
+---
+
+<section class="secao secao--creme" id="quem-tem-direito">
+  <div class="envelope">
+    <p class="kicker">Quem tem direito</p>
+    <h2>Provavelmente você — e talvez nem saiba</h2>
+    <div class="regua"></div>
+    <p class="apoio medida">
+      O auxílio-maternidade não é só para quem tem carteira assinada. Veja se o
+      seu caso aparece aqui:
+    </p>
+
+    <div class="grade perfis">
+      {perfis.map((p) => (
+        <article class={`cartao perfil${p.destaque ? ' perfil--destaque' : ''}`}>
+          <h3>{p.titulo}</h3>
+          <p class="apoio">{p.texto}</p>
+          {p.destaque && <span class="perfil__etiqueta">O mais esquecido</span>}
+        </article>
+      ))}
+    </div>
+
+    <p class="perfis__nota apoio">
+      Não se encontrou na lista? Pergunte mesmo assim — cada caso tem detalhe
+      próprio, e a conferida é gratuita.
+    </p>
+
+    <a class="botao botao--whats" href={linkWhatsApp('quem tem direito')}>
+      Conferir o meu caso
+    </a>
+  </div>
+</section>
+
+<style>
+  .perfis { margin-top: 40px; }
+
+  .perfil { position: relative; }
+  .perfil h3 { margin-bottom: 10px; }
+  .perfil p { font-size: 16px; }
+
+  /* O caso da desempregada é o que mais gera descoberta — ganha o realce.
+     Só ele: se todos os cartões tivessem destaque, nenhum teria. */
+  .perfil--destaque {
+    border-color: var(--destaque);
+    box-shadow: var(--sombra-card);
+  }
+  .perfil__etiqueta {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 5px 13px;
+    border-radius: var(--raio-botao);
+    background: var(--destaque);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .perfis__nota { margin-block: 34px 26px; max-width: 58ch; font-size: 16px; }
+</style>

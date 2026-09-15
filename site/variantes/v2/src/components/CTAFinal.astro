@@ -1,0 +1,44 @@
+---
+import { linkWhatsApp, valores } from '../config';
+import IconeWhats from './IconeWhats.astro';
+---
+
+<!-- v2 · CTA dividido: texto à esquerda, botão à direita -->
+<section class="secao cta" id="falar">
+  <div class="envelope cta__interno">
+    <div class="cta__texto">
+      <h2>Descubra hoje se você tem direito</h2>
+      <p class="cta__sub">A análise é gratuita, leva poucos minutos.</p>
+      <p class="cta__sub">
+        Se houver direito, buscamos sempre conseguir o valor máximo de auxílio — de
+        <span class="cta__valor">{valores.minimo}</span> a
+        <span class="cta__valor">{valores.maximo}</span>, conforme o seu caso.
+      </p>
+    </div>
+    <a class="botao botao--whats cta__botao" href={linkWhatsApp('cta final')}>
+      <IconeWhats /> Falar no WhatsApp agora
+    </a>
+  </div>
+</section>
+
+<style>
+  .cta { background: var(--cta); color: #fff; }
+  .cta.secao { padding-block: clamp(48px, 6vw, 72px); }
+  .cta__interno {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 48px;
+  }
+  .cta__texto { max-width: 40rem; }
+  .cta__sub { margin-top: 12px; font-size: clamp(16.5px, 2vw, 18.5px); color: rgba(255, 255, 255, .95); }
+  .cta__sub + .cta__sub { margin-top: 6px; }
+  .cta__valor { white-space: nowrap; }
+  /* Verde sobre a cor da variante: a sombra separa o botão do fundo */
+  .cta__botao { flex: none; font-size: 19px; box-shadow: 0 8px 22px rgba(0, 0, 0, .22); }
+
+  @media (max-width: 820px) {
+    .cta__interno { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 420px) { .cta__botao { width: 100%; } }
+</style>

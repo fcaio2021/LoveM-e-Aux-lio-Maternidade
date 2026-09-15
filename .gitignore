@@ -24,3 +24,16 @@ node_modules/
 # Drop zone do usuário (só o README vai versionado)
 dados/*
 !dados/README.md
+
+# Build do site (gerado, nao versionar)
+site/dist/
+site/.astro/
+site/preview-*.png
+site/hero-*.png
+site/faq-*.png
+site/faixa-*.png
+site/dir-*.png
+
+# Variantes A/B (build)
+site/dist-v*/
+site/dist-rosa/

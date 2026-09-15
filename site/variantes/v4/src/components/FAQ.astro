@@ -1,0 +1,83 @@
+---
+import { valores } from '../config';
+
+// v4 · perguntas dentro de um painel de fundo suave, cabeçalho centralizado.
+// Mesmas 5 perguntas da v1 (respostas pendentes de validação da operação).
+const perguntas = [
+  { p: 'Estou desempregada. Ainda posso receber?', r: 'Pode, sim — é um dos casos que mais passa despercebido. Depois de parar de contribuir, você continua segurada pelo INSS por um período, chamado período de graça. Em regra são 12 meses, podendo chegar a 24 ou 36 meses conforme o seu histórico de contribuições e a comprovação de desemprego. Se o parto aconteceu dentro desse prazo, há chance de direito.' },
+  { p: 'Eu preciso ter trabalhado CLT para receber o auxílio-maternidade?', r: 'Não. Além de quem trabalha de carteira assinada, também podem ter direito empregadas domésticas, trabalhadoras avulsas, autônomas e MEIs que contribuem com o INSS, trabalhadoras rurais e pescadoras, e mulheres desempregadas que ainda estão no período de graça.' },
+  { p: 'Meu filho já nasceu. Ainda posso solicitar?', r: 'Pode, sim. O pedido pode ser feito depois do nascimento, dentro do prazo de até 5 anos — por isso a gente atende mães com filhos de até 5 anos. Mas não deixe para depois: quanto mais tempo passa, mais difícil fica reunir os documentos.' },
+  { p: 'Qual é o valor que posso receber do auxílio-maternidade?', r: `Depende do seu tipo de contribuição e do seu salário. Quem tem carteira assinada costuma receber o valor do salário integral; quem contribui por conta própria recebe conforme a média das contribuições, respeitando o mínimo e o teto do INSS. Somando o período todo, os valores costumam ficar entre ${valores.minimo} e ${valores.maximo}. Só a análise do seu caso permite dizer o valor real.` },
+  { p: 'Preciso ter contribuído com o INSS?', r: 'Depende do seu perfil. Desde uma decisão do STF de 2024, o INSS não pode mais exigir um tempo mínimo de contribuição (a chamada carência) para o salário-maternidade. O que é preciso é ter a qualidade de segurada: estar contribuindo, estar no período de graça depois de parar, ou — no caso das trabalhadoras rurais e pescadoras — comprovar a atividade, mesmo sem ter contribuído. Na análise gratuita, a gente confere a sua situação.' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: perguntas.map(({ p, r }) => ({ '@type': 'Question', name: p, acceptedAnswer: { '@type': 'Answer', text: r } })),
+};
+---
+
+<section class="secao" id="duvidas">
+  <div class="envelope">
+    <header class="faq-cabeca">
+      <p class="kicker">Dúvidas frequentes</p>
+      <h2>As perguntas que mais chegam pra gente</h2>
+    </header>
+
+    <div class="faq">
+      {perguntas.map(({ p, r }, i) => (
+        <details class="faq__item" name="faq" open={i === 0}>
+          <summary class="faq__pergunta">
+            <span>{p}</span>
+            <span class="faq__sinal" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__resposta">{r}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+</section>
+
+<style>
+  .faq-cabeca { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .faq-cabeca h2 { max-width: 20ch; }
+
+  .faq {
+    margin: clamp(32px, 4vw, 44px) auto 0;
+    max-width: 860px;
+    background: var(--tinta);
+    border-radius: 24px;
+    padding: 8px clamp(18px, 3vw, 36px);
+  }
+  .faq__item + .faq__item { border-top: 1px solid rgba(26, 37, 48, .12); }
+  .faq__pergunta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 22px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: clamp(17px, 2.1vw, 20px);
+    line-height: 1.35;
+  }
+  .faq__pergunta::-webkit-details-marker { display: none; }
+  .faq__sinal { flex: none; position: relative; width: 20px; height: 20px; }
+  .faq__sinal::before,
+  .faq__sinal::after {
+    content: '';
+    position: absolute;
+    background: var(--destaque);
+    border-radius: 2px;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .faq__sinal::before { inset: 8.5px 0; height: 3px; }
+  .faq__sinal::after { inset: 0 8.5px; width: 3px; }
+  .faq__item[open] .faq__sinal::after { transform: scaleY(0); opacity: 0; }
+  .faq__resposta { padding-bottom: 22px; font-size: 16.5px; color: var(--texto-apoio); }
+</style>

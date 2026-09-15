@@ -1,0 +1,166 @@
+---
+import { Picture } from 'astro:assets';
+import { linkWhatsApp, valores } from '../config';
+import fotoHero from '../assets/fotos/hero-gravida-3.jpg';
+---
+
+<section class="hero">
+  <!-- A foto sangra até a borda direita e se funde no fundo da página por um
+       degradê. Sem isso o cinza do estúdio bateria de frente com o off-white. -->
+  <div class="hero__imagem" aria-hidden="true">
+    <!-- Foto atual: "referência hero 3" (quarto rosa, sem os pés), exibida
+         INTEIRA no computador — a caixa tem a mesma proporção da imagem
+         (1325×1045). Otimizada no build (src/assets/fotos), em vários
+         tamanhos: o celular baixa só o que precisa.
+         Anteriores guardadas em public/: hero-gravida.jpg (referência hero 1)
+         e foto-gravida.jpg (barriga com as mãos em coração). -->
+    <Picture
+      src={fotoHero}
+      alt=""
+      widths={[480, 720, 960, 1325]}
+      sizes="(max-width: 900px) 100vw, 64vw"
+      formats={['avif', 'webp']}
+      fallbackFormat="jpg"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+
+  <div class="envelope hero__conteudo">
+    <p class="sobretitulo">Auxílio Maternidade</p>
+    <h1 class="hero__titulo">
+      <span class="hero__linha">Mamãe, descubra se você</span>
+      <span class="hero__linha">tem direito a receber de</span>
+      <span class="hero__linha">
+        <span class="destaca hero__valor">{valores.minimo}</span> a
+        <span class="destaca hero__valor">{valores.maximo}</span>
+      </span>
+    </h1>
+    <p class="hero__sub">
+      Cuidamos de toda burocracia, do pedido e do acompanhamento até a
+      aprovação no INSS. Análise grátis e 100% segura.
+    </p>
+
+    <div class="hero__acoes">
+      <a class="botao botao--whats" href={linkWhatsApp('hero')}>
+        Quero minha análise gratuita
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    /* A altura acompanha a foto: 64% da largura da tela na proporção dela */
+    min-height: calc(64vw * 1045 / 1325);
+    padding-block: clamp(48px, 6vw, 80px);
+    background: var(--fundo);
+  }
+
+  /* Foto inteira, sem recorte: a caixa tem a proporção da imagem e fica
+     ancorada embaixo à direita. Se o texto for mais alto que a foto, sobra
+     branco em cima — e o degradê do topo dissolve a borda da foto nele. */
+  .hero__imagem {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 64%;
+    aspect-ratio: 1325 / 1045;
+    z-index: 0;
+  }
+  .hero__imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; /* caixa na mesma proporção: nada é cortado */
+  }
+  /* Degradê que dissolve a borda esquerda da foto no fundo da página.
+     Vai além da metade porque o texto precisa de base limpa até o fim. */
+  .hero__imagem::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      var(--fundo) 0%,
+      color-mix(in srgb, var(--fundo) 88%, transparent) 18%,
+      color-mix(in srgb, var(--fundo) 35%, transparent) 40%,
+      transparent 68%
+    ),
+    linear-gradient(to bottom, var(--fundo) 0%, transparent 7%);
+  }
+
+  .hero__conteudo {
+    position: relative;
+    z-index: 1;
+  }
+  .hero__conteudo > * { max-width: 33rem; }
+
+  .hero__valor { white-space: nowrap; }
+
+  /* Título em 3 linhas fixas no desktop (pedido de 12/09/2026). Cada linha é
+     travada e o tamanho acompanha a largura da tela, então são sempre 3.
+     No celular não cabe em 3 sem ficar pequeno demais: quebra natural. */
+  @media (min-width: 901px) {
+    .hero__conteudo > .hero__titulo {
+      max-width: none;
+      font-size: clamp(34px, 3.45vw, 48px);
+    }
+    .hero__linha { display: block; white-space: nowrap; }
+  }
+
+  .hero__sub {
+    margin-top: 22px;
+    font-size: clamp(17px, 2vw, 19px);
+    color: var(--texto-apoio);
+  }
+
+  .hero__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+
+  /* Abaixo de 900px o texto não tem mais onde respirar ao lado da foto:
+     ela vira faixa no topo, ainda sangrando, e o texto fica embaixo. */
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      align-items: stretch;
+      min-height: 0;
+      padding-top: 0;
+      gap: clamp(28px, 5vw, 40px);
+    }
+    .hero__imagem {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: 100%;
+    }
+    /* No celular a foto também aparece inteira (a caixa mantém a proporção
+       da imagem); só a borda de baixo se dissolve no branco. */
+    .hero__imagem::after {
+      background: linear-gradient(to bottom, transparent 80%, var(--fundo) 100%);
+    }
+    .hero__conteudo > * { max-width: none; }
+  }
+
+  /* Celular (13/09/2026): foto mais baixa e título um pouco menor, pra
+     título, valor e texto caberem na primeira tela até no Android pequeno. */
+  @media (max-width: 760px) {
+    .hero { gap: 18px; padding-bottom: 32px; }
+    .hero__imagem { aspect-ratio: 36 / 25; }
+    .hero__imagem img { object-position: center 38%; } /* rosto e barriga no quadro */
+    .hero__titulo { font-size: clamp(28px, 8.4vw, 34px); }
+    .hero__sub { margin-top: 14px; font-size: 16.5px; line-height: 1.55; }
+    /* A barra fixa de baixo já é o botão desta tela: repetir o mesmo botão
+       verde logo acima dela ficaria duplicado. */
+    .hero__acoes { display: none; }
+  }
+</style>

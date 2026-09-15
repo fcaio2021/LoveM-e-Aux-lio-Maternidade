@@ -1,0 +1,115 @@
+---
+import { valores } from '../config';
+
+// FAQ trabalha em duas frentes: derruba objeção de quem está lendo e alimenta
+// SEO/GEO — é o formato que o Google e as IAs mais citam em resposta direta.
+// O JSON-LD no fim da seção é o que habilita o rich result de perguntas.
+//
+// Lista reduzida a 5 perguntas em 12/09/2026. As respostas sobre CLT, filho já
+// nascido e contribuição foram escritas com margem e PRECISAM de validação do
+// time de operação antes de publicar — em especial a de contribuição, que
+// depende da decisão do STF de 2024 sobre carência do salário-maternidade.
+const perguntas = [
+  {
+    p: 'Estou desempregada. Ainda posso receber?',
+    r: 'Pode, sim — é um dos casos que mais passa despercebido. Depois de parar de contribuir, você continua segurada pelo INSS por um período, chamado período de graça. Em regra são 12 meses, podendo chegar a 24 ou 36 meses conforme o seu histórico de contribuições e a comprovação de desemprego. Se o parto aconteceu dentro desse prazo, há chance de direito.',
+  },
+  {
+    p: 'Eu preciso ter trabalhado CLT para receber o auxílio-maternidade?',
+    r: 'Não. Além de quem trabalha de carteira assinada, também podem ter direito empregadas domésticas, trabalhadoras avulsas, autônomas e MEIs que contribuem com o INSS, trabalhadoras rurais e pescadoras, e mulheres desempregadas que ainda estão no período de graça.',
+  },
+  {
+    p: 'Meu filho já nasceu. Ainda posso solicitar?',
+    r: 'Pode, sim. O pedido pode ser feito depois do nascimento, dentro do prazo de até 5 anos — por isso a gente atende mães com filhos de até 5 anos. Mas não deixe para depois: quanto mais tempo passa, mais difícil fica reunir os documentos.',
+  },
+  {
+    p: 'Qual é o valor que posso receber do auxílio-maternidade?',
+    r: `Depende do seu tipo de contribuição e do seu salário. Quem tem carteira assinada costuma receber o valor do salário integral; quem contribui por conta própria recebe conforme a média das contribuições, respeitando o mínimo e o teto do INSS. Somando o período todo, os valores costumam ficar entre ${valores.minimo} e ${valores.maximo}. Só a análise do seu caso permite dizer o valor real.`,
+  },
+  {
+    p: 'Preciso ter contribuído com o INSS?',
+    r: 'Depende do seu perfil. Desde uma decisão do STF de 2024, o INSS não pode mais exigir um tempo mínimo de contribuição (a chamada carência) para o salário-maternidade. O que é preciso é ter a qualidade de segurada: estar contribuindo, estar no período de graça depois de parar, ou — no caso das trabalhadoras rurais e pescadoras — comprovar a atividade, mesmo sem ter contribuído. Na análise gratuita, a gente confere a sua situação.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: perguntas.map(({ p, r }) => ({
+    '@type': 'Question',
+    name: p,
+    acceptedAnswer: { '@type': 'Answer', text: r },
+  })),
+};
+---
+
+<section class="secao secao--creme" id="duvidas">
+  <div class="envelope">
+    <p class="kicker">Dúvidas frequentes</p>
+    <h2>As perguntas que mais chegam pra gente</h2>
+    <div class="regua"></div>
+
+    <div class="faq">
+      {perguntas.map(({ p, r }, i) => (
+        <details class="faq__item" name="faq" open={i === 0}>
+          <summary class="faq__pergunta">
+            <span>{p}</span>
+            <span class="faq__sinal" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__resposta apoio">{r}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+</section>
+
+<style>
+  .faq {
+    margin-top: 38px;
+    max-width: 820px;
+    border-top: 1px solid var(--linha);
+  }
+
+  .faq__item { border-bottom: 1px solid var(--linha); }
+
+  .faq__pergunta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 22px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: clamp(17px, 2.1vw, 20px);
+    line-height: 1.35;
+  }
+  .faq__pergunta::-webkit-details-marker { display: none; }
+
+  /* Sinal de + que vira − quando aberto. Dois traços, sem ícone externo. */
+  .faq__sinal {
+    flex: none;
+    position: relative;
+    width: 20px; height: 20px;
+  }
+  .faq__sinal::before,
+  .faq__sinal::after {
+    content: '';
+    position: absolute;
+    background: var(--destaque);
+    border-radius: 2px;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .faq__sinal::before { inset: 8.5px 0; height: 3px; }
+  .faq__sinal::after  { inset: 0 8.5px; width: 3px; }
+  .faq__item[open] .faq__sinal::after { transform: scaleY(0); opacity: 0; }
+
+  .faq__resposta {
+    padding-bottom: 24px;
+    max-width: 66ch;
+    font-size: 16.5px;
+  }
+</style>

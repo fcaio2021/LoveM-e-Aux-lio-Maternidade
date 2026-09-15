@@ -1,0 +1,147 @@
+<meta charset="utf-8">
+<title>Teste do guia — capa e CTA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../../tokens.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #555; }
+
+  .slide {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    overflow: hidden;
+    padding: 84px 80px;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--fonte-corpo);
+    background: var(--fundo);
+    color: var(--texto);
+    margin-bottom: 24px;
+  }
+
+  .topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topo img { width: 150px; height: auto; display: block; }
+  .contador {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    color: var(--texto-apoio);
+  }
+
+  .miolo { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+  .kicker {
+    font-family: var(--fonte-corpo);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--kerning-kicker);
+    color: var(--destaque);
+  }
+  .regua {
+    width: var(--regua-largura);
+    height: var(--regua-altura);
+    background: var(--destaque);
+    border-radius: 2px;
+    margin: 26px 0 34px;
+  }
+  h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 92px;
+    font-weight: var(--peso-titulo);
+    line-height: 1.02;
+    letter-spacing: var(--kerning-titulo);
+  }
+  h1 em { font-style: normal; color: var(--destaque); }
+  .sub {
+    font-size: 26px;
+    line-height: 1.5;
+    color: var(--texto-apoio);
+    margin-top: 32px;
+    max-width: 20ch;
+  }
+
+  .rodape {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--linha);
+    padding-top: 26px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--texto-apoio);
+  }
+  .arraste { color: var(--destaque); }
+
+  /* ---- Slide de CTA: paleta invertida, conforme a regra do guia ---- */
+  .slide.cta { align-items: center; text-align: center; justify-content: center; }
+  .slide.cta .logo-cta { width: 300px; height: auto; margin-bottom: 56px; }
+  .slide.cta h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 76px;
+    font-weight: var(--peso-titulo);
+    line-height: 1.06;
+    letter-spacing: var(--kerning-titulo);
+    max-width: 16ch;
+  }
+  .slide.cta p {
+    font-size: 26px;
+    line-height: 1.5;
+    color: var(--texto-apoio);
+    margin-top: 28px;
+    max-width: 22ch;
+  }
+  .botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--altura-botao);
+    padding: 22px 46px;
+    border-radius: var(--raio-botao);
+    background: var(--cta-whatsapp);
+    color: #FFFFFF;
+    font-family: var(--fonte-corpo);
+    font-size: 26px;
+    font-weight: var(--peso-forte);
+    margin-top: 52px;
+  }
+  .handle {
+    margin-top: 44px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: var(--destaque);
+  }
+</style>
+
+<!-- SLIDE 1 — CAPA (fundo claro) -->
+<div class="slide">
+  <div class="topo">
+    <img src="../../logo.png" alt="LoveMãe Auxílio Maternidade">
+    <span class="contador">01 / 07</span>
+  </div>
+  <div class="miolo">
+    <span class="kicker">Auxílio-maternidade</span>
+    <div class="regua"></div>
+    <h1>Quem tem <em>direito</em> ao auxílio?</h1>
+    <p class="sub">Provavelmente você — e talvez nem saiba.</p>
+  </div>
+  <div class="rodape">
+    <span>@lovemaeauxiliomaternidade</span>
+    <span class="arraste">Arraste pro lado →</span>
+  </div>
+</div>
+
+<!-- SLIDE FINAL — CTA (fundo escuro, paleta invertida) -->
+<div class="slide cta no-escuro">
+  <img class="logo-cta" src="../../logo-branco.png" alt="LoveMãe Auxílio Maternidade">
+  <h2>Descubra hoje se você tem direito</h2>
+  <p>A análise é gratuita e a gente cuida de todo o resto.</p>
+  <span class="botao">Falar no WhatsApp</span>
+  <span class="handle">@lovemaeauxiliomaternidade</span>
+</div>

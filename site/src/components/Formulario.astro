@@ -1,0 +1,685 @@
+---
+import { empresa, variante, mensagemPadrao, envioLeads } from '../config';
+
+// Formulário de análise (13/09/2026). Todo botão do site que aponta pro
+// WhatsApp abre esta janela em vez de sair da página; o link do WhatsApp
+// continua no HTML como plano B se o JavaScript não carregar.
+//
+// Envio (14/09/2026): pra planilha do Google + e-mail da equipe, via Google
+// Apps Script (site/integracoes/planilha-leads/; link em config.ts →
+// envioLeads.url). Em dois momentos — "contato-inicial" logo após a etapa 1
+// (não perde quem desiste no meio) e "analise-completa" no fim —, com o mesmo
+// código (id), pra planilha ficar com uma linha por mãe. Substituiu o Netlify
+// Forms, que tem limite mensal no plano grátis.
+//
+// Fluxo aprovado: 1 dados · 2 situação · (idade do bebê) · 3 forma de trabalho ·
+// 4 contribuição nos 3 anos anteriores (só se não contribuía) · 5 histórico do
+// pedido (só se o bebê já nasceu) · 6 outros benefícios · tela final.
+
+const trabalho = [
+  { chave: 'clt', rotulo: 'De carteira assinada' },
+  { chave: 'domestica', rotulo: 'Empregada doméstica ou diarista registrada' },
+  { chave: 'mei', rotulo: 'Com MEI aberto' },
+  { chave: 'carne', rotulo: 'Pagando o carnê do INSS por conta própria' },
+  { chave: 'rural', rotulo: 'Na roça, lavoura, sítio ou pesca' },
+  { chave: 'informal', rotulo: 'Por conta própria, sem pagar INSS (vendas, bicos)' },
+  { chave: 'nenhuma', rotulo: 'Nenhuma dessas, estava sem trabalhar', exclusiva: true },
+];
+
+// Telas de escolha única: [nome da tela, campo, [valor, rótulo]]
+const simNao = [['sim', 'Sim'], ['nao', 'Não'], ['naolembro', 'Não lembro']];
+
+// De onde ela veio (13/09/2026): anúncio, campanha e criativo (UTMs), o código
+// do clique do Facebook/Google, o site que mandou ela pra cá e quando chegou.
+// Vai junto em cada envio — é a base do CRM pra saber qual anúncio traz cliente.
+const camposOrigem = [
+  'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+  'fbclid', 'gclid', 'referencia', 'pagina_entrada', 'data_entrada',
+];
+
+---
+
+<dialog
+  id="formulario"
+  class="formulario"
+  aria-label="Análise gratuita do auxílio-maternidade"
+  data-whats={empresa.whatsapp}
+  data-variante={variante}
+  data-mensagem={mensagemPadrao}
+  data-campos-origem={camposOrigem.join(',')}
+  data-envio={envioLeads.url}
+>
+  <div class="form__topo">
+    <button type="button" class="form__voltar" data-acao="voltar" hidden>← Voltar</button>
+    <div class="form__barra" aria-hidden="true"><span class="form__barra-cheia"></span></div>
+    <button type="button" class="form__fechar" data-acao="fechar" aria-label="Fechar formulário">×</button>
+  </div>
+
+  <div class="form__corpo">
+    <!-- ETAPA 1 · dados -->
+    <section class="tela" data-tela="dados">
+      <p class="tela__etapa">Análise gratuita</p>
+      <h2 class="tela__pergunta" tabindex="-1">Vamos começar a sua análise</h2>
+
+      <div class="campo">
+        <label for="f-nome">Qual é o seu nome completo?</label>
+        <input id="f-nome" type="text" autocomplete="name" enterkeyhint="next" placeholder="Digite seu nome completo" />
+        <p class="campo__erro" id="e-nome" hidden></p>
+      </div>
+      <div class="campo">
+        <label for="f-whatsapp">Qual é o seu WhatsApp?</label>
+        <input id="f-whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" enterkeyhint="go" placeholder="(11) 91234-5678" maxlength="15" />
+        <p class="campo__erro" id="e-whatsapp" hidden></p>
+      </div>
+
+
+      <!-- Isca pra robôs: pessoas não veem nem preenchem -->
+      <input type="text" id="f-isca" class="form__isca" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <button type="button" class="botao botao--whats form__continuar" data-acao="dados">Continuar</button>
+      <!-- Sem caixinha (pedido de 13/09/2026): aviso passivo, que não atrapalha
+           e registra que a mãe foi informada antes de enviar. -->
+      <p class="form__aviso">
+        Ao continuar, você concorda com a <a href="/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
+        e autoriza o contato pelo WhatsApp.
+      </p>
+      <p class="form__seguro">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
+        Seus dados estão seguros. Análise 100% gratuita.
+      </p>
+    </section>
+
+    <!-- ETAPA 2 · situação -->
+    <section class="tela" data-tela="situacao" hidden>
+      <p class="tela__etapa">Análise gratuita</p>
+      <h2 class="tela__pergunta" tabindex="-1">Qual a sua situação no momento?</h2>
+      <p class="tela__ajuda">Essa informação é necessária para verificar seu direito.</p>
+      <div class="opcoes">
+        <button type="button" class="opcao" data-campo="situacao" data-valor="gravida">Estou grávida</button>
+        <button type="button" class="opcao" data-campo="situacao" data-valor="nasceu">Meu bebê já nasceu</button>
+      </div>
+    </section>
+
+    <!-- ETAPA 2b · idade do bebê (só se já nasceu) -->
+    <section class="tela" data-tela="idade" hidden>
+      <p class="tela__etapa">Sobre o seu bebê</p>
+      <h2 class="tela__pergunta" tabindex="-1">A idade do seu bebê já passou de 4 anos e 11 meses?</h2>
+      <div class="opcoes">
+        <button type="button" class="opcao" data-campo="idade" data-valor="nao">Não, ainda não passou</button>
+        <button type="button" class="opcao" data-campo="idade" data-valor="sim">Sim, já passou</button>
+      </div>
+    </section>
+
+    <!-- ETAPA 3 · forma de trabalho (várias escolhas) -->
+    <section class="tela" data-tela="trabalho" hidden>
+      <p class="tela__etapa">Trabalho</p>
+      <h2 class="tela__pergunta" tabindex="-1">
+        <span class="so-gravida">Hoje, você trabalha ou paga INSS de alguma dessas formas?</span>
+        <span class="so-nasceu">Quando o bebê nasceu, você trabalhava ou pagava INSS de alguma dessas formas?</span>
+      </h2>
+      <p class="tela__ajuda">Pode marcar mais de uma.</p>
+      <div class="opcoes">
+        {trabalho.map((t) => (
+          <label class="marcavel">
+            <input type="checkbox" name="trabalho" value={t.chave} data-rotulo={t.rotulo} data-exclusiva={t.exclusiva ? 'sim' : undefined} />
+            <span>{t.rotulo}</span>
+          </label>
+        ))}
+      </div>
+      <p class="campo__erro" id="e-trabalho" hidden></p>
+      <button type="button" class="botao botao--whats form__continuar" data-acao="trabalho">Continuar</button>
+    </section>
+
+    <!-- ETAPA 4 · contribuição nos 3 anos anteriores (só se não contribuía) -->
+    <section class="tela" data-tela="contribuiu" hidden>
+      <p class="tela__etapa">Trabalho</p>
+      <h2 class="tela__pergunta" tabindex="-1">
+        Nos 3 anos antes <span class="so-nasceu">do bebê nascer</span><span class="so-gravida">de hoje</span>,
+        você trabalhou de carteira assinada ou pagou INSS, mesmo que por pouco tempo?
+      </h2>
+      <div class="opcoes">
+        {simNao.map(([v, r]) => <button type="button" class="opcao" data-campo="contribuiu" data-valor={v}>{r}</button>)}
+      </div>
+    </section>
+
+    <section class="tela" data-tela="tempo" hidden>
+      <p class="tela__etapa">Trabalho</p>
+      <h2 class="tela__pergunta" tabindex="-1">
+        Quanto tempo antes <span class="so-nasceu">do nascimento</span><span class="so-gravida">de hoje</span>
+        foi a última vez que você trabalhou registrada ou pagou INSS?
+      </h2>
+      <div class="opcoes">
+        <button type="button" class="opcao" data-campo="tempo" data-valor="menos1">Menos de 1 ano</button>
+        <button type="button" class="opcao" data-campo="tempo" data-valor="1a2">Entre 1 e 2 anos</button>
+        <button type="button" class="opcao" data-campo="tempo" data-valor="2a3">Entre 2 e 3 anos</button>
+        <button type="button" class="opcao" data-campo="tempo" data-valor="mais3">Mais de 3 anos</button>
+      </div>
+    </section>
+
+    <section class="tela" data-tela="seguro" hidden>
+      <p class="tela__etapa">Trabalho</p>
+      <h2 class="tela__pergunta" tabindex="-1">Quando saiu desse trabalho, você recebeu seguro-desemprego?</h2>
+      <div class="opcoes">
+        {simNao.map(([v, r]) => <button type="button" class="opcao" data-campo="seguro" data-valor={v}>{r}</button>)}
+      </div>
+    </section>
+
+    <!-- ETAPA 5 · histórico do pedido (só se o bebê já nasceu) -->
+    <section class="tela" data-tela="recebeu" hidden>
+      <p class="tela__etapa">Benefício</p>
+      <h2 class="tela__pergunta" tabindex="-1">Você já recebeu o salário-maternidade por esse bebê?</h2>
+      <div class="opcoes">
+        <button type="button" class="opcao" data-campo="recebeu" data-valor="nao">Não, ainda não recebi</button>
+        <button type="button" class="opcao" data-campo="recebeu" data-valor="sim">Sim, já recebi</button>
+        <button type="button" class="opcao" data-campo="recebeu" data-valor="menos">Recebi, mas veio menos do que eu esperava</button>
+        <button type="button" class="opcao" data-campo="recebeu" data-valor="naosei">Não sei dizer</button>
+      </div>
+    </section>
+
+    <section class="tela" data-tela="pedido" hidden>
+      <p class="tela__etapa">Benefício</p>
+      <h2 class="tela__pergunta" tabindex="-1">Você chegou a pedir o auxílio no INSS?</h2>
+      <div class="opcoes">
+        <button type="button" class="opcao" data-campo="pedido" data-valor="nao">Não pedi</button>
+        <button type="button" class="opcao" data-campo="pedido" data-valor="negado">Pedi e foi negado</button>
+        <button type="button" class="opcao" data-campo="pedido" data-valor="analise">Pedi e ainda está em análise</button>
+      </div>
+    </section>
+
+    <!-- ETAPA 6 · outros benefícios -->
+    <section class="tela" data-tela="beneficios" hidden>
+      <p class="tela__etapa">Benefício</p>
+      <h2 class="tela__pergunta" tabindex="-1">Hoje você recebe algum desses benefícios do INSS?</h2>
+      <div class="opcoes">
+        <button type="button" class="opcao" data-campo="beneficios" data-valor="nenhum">Não recebo nenhum</button>
+        <button type="button" class="opcao" data-campo="beneficios" data-valor="doenca">Auxílio-doença ou aposentadoria por invalidez</button>
+        <button type="button" class="opcao" data-campo="beneficios" data-valor="aposentadoria">Aposentadoria por idade ou por tempo de contribuição</button>
+        <button type="button" class="opcao" data-campo="beneficios" data-valor="bpc">BPC — o benefício de um salário mínimo</button>
+      </div>
+    </section>
+
+    <!-- FINAIS: nenhuma saída sem caminho — todas oferecem o WhatsApp -->
+    <section class="tela final" data-tela="fim" hidden>
+      <span class="final__icone" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </span>
+      <h2 class="tela__pergunta" tabindex="-1">Pronto, <span data-nome></span>!</h2>
+      <p class="tela__ajuda">
+        Recebemos suas respostas. Nossa equipe vai analisar o seu caso e te chamar no
+        WhatsApp. Se preferir, já pode falar com a gente agora:
+      </p>
+      <a class="botao botao--whats form__continuar" data-link-final href="#">Falar agora no WhatsApp</a>
+      <button type="button" class="form__texto-botao" data-acao="fechar">Fechar</button>
+    </section>
+
+    <section class="tela final" data-tela="fora-prazo" hidden>
+      <span class="final__icone final__icone--info" aria-hidden="true">i</span>
+      <h2 class="tela__pergunta" tabindex="-1">Obrigada por responder, <span data-nome></span></h2>
+      <p class="tela__ajuda">
+        O INSS costuma aceitar o pedido até o bebê completar 5 anos. Pelo que você
+        respondeu, esse prazo pode já ter passado — mas cada caso tem seus detalhes.
+        Se você tiver outro filho com menos de 5 anos, ou quiser tirar a dúvida, fale com a gente.
+      </p>
+      <a class="botao botao--whats form__continuar" data-link-final href="#">Falar no WhatsApp</a>
+      <button type="button" class="form__texto-botao" data-acao="fechar">Fechar</button>
+    </section>
+
+    <section class="tela final" data-tela="ja-recebeu" hidden>
+      <span class="final__icone final__icone--info" aria-hidden="true">i</span>
+      <h2 class="tela__pergunta" tabindex="-1">Obrigada por responder, <span data-nome></span></h2>
+      <p class="tela__ajuda">
+        Se o benefício foi pago certinho, não há o que pedir de novo por esse bebê.
+        Se você tiver outro filho com menos de 5 anos, ou achar que algo ficou errado
+        no valor, fale com a gente.
+      </p>
+      <a class="botao botao--whats form__continuar" data-link-final href="#">Falar no WhatsApp</a>
+      <button type="button" class="form__texto-botao" data-acao="fechar">Fechar</button>
+    </section>
+  </div>
+</dialog>
+
+<script>
+  const dlg = document.getElementById('formulario') as HTMLDialogElement | null;
+  if (dlg) iniciar(dlg);
+
+  function iniciar(dlg: HTMLDialogElement) {
+    const $ = <T extends Element = HTMLElement>(s: string) => dlg.querySelector<T>(s)!;
+    const telas = [...dlg.querySelectorAll<HTMLElement>('.tela')];
+    const barra = $('.form__barra-cheia');
+    const btVoltar = $<HTMLButtonElement>('[data-acao="voltar"]');
+    const corpo = $('.form__corpo');
+    const fNome = $<HTMLInputElement>('#f-nome');
+    const fZap = $<HTMLInputElement>('#f-whatsapp');
+    const fIsca = $<HTMLInputElement>('#f-isca');
+    const marcas = [...dlg.querySelectorAll<HTMLInputElement>('input[name="trabalho"]')];
+
+    const progresso: Record<string, number> = {
+      dados: 10, situacao: 22, idade: 32, trabalho: 45, contribuiu: 56, tempo: 64,
+      seguro: 72, recebeu: 80, pedido: 88, beneficios: 94, fim: 100, 'fora-prazo': 100, 'ja-recebeu': 100,
+    };
+    const desfechos: Record<string, string> = {
+      fim: 'Análise completa', 'fora-prazo': 'Bebê passou de 4 anos e 11 meses', 'ja-recebeu': 'Já recebeu por esse bebê',
+    };
+    const finais = new Set(Object.keys(desfechos));
+
+    let chave: Record<string, string> = {};   // valores pra lógica
+    let rotulo: Record<string, string> = {};  // textos legíveis (painel e WhatsApp)
+    let historico: string[] = [];
+    let atual = 'dados';
+    let origem = 'site';
+    let enviouInicial = false;
+    let idLead = ''; // liga os dois envios da mesma mãe (uma linha na planilha)
+    // randomUUID só existe em https/localhost; no celular pela rede local cai no plano B
+    const novoId = () => (crypto.randomUUID
+      ? crypto.randomUUID()
+      : Date.now().toString(36) + Math.random().toString(36).slice(2));
+
+    const nasceu = () => chave.situacao === 'nasceu';
+    const contribui = () =>
+      (chave.trabalho || '').split(',').some((c) => ['clt', 'domestica', 'mei', 'carne', 'rural'].includes(c));
+    const depoisDoTrabalho = () => (nasceu() ? 'recebeu' : 'beneficios');
+
+    function proxima(de: string): string {
+      switch (de) {
+        case 'situacao': return nasceu() ? 'idade' : 'trabalho';
+        case 'idade': return chave.idade === 'sim' ? 'fora-prazo' : 'trabalho';
+        case 'trabalho': return contribui() ? depoisDoTrabalho() : 'contribuiu';
+        case 'contribuiu': return chave.contribuiu === 'sim' ? 'tempo' : depoisDoTrabalho();
+        case 'tempo': return 'seguro';
+        case 'seguro': return depoisDoTrabalho();
+        case 'recebeu': return chave.recebeu === 'sim' ? 'ja-recebeu' : chave.recebeu === 'menos' ? 'beneficios' : 'pedido';
+        case 'pedido': return 'beneficios';
+        case 'beneficios': return 'fim';
+        default: return 'dados';
+      }
+    }
+
+    function mostrar(nome: string) {
+      atual = nome;
+      telas.forEach((t) => { t.hidden = t.dataset.tela !== nome; });
+      barra.style.width = `${progresso[nome] ?? 0}%`;
+      btVoltar.hidden = historico.length === 0 || finais.has(nome);
+      corpo.scrollTo(0, 0);
+      dlg.querySelector<HTMLElement>(`.tela[data-tela="${nome}"] .tela__pergunta`)?.focus();
+    }
+
+    function ir(nome: string) {
+      historico.push(atual);
+      if (finais.has(nome)) concluir(nome);
+      mostrar(nome);
+    }
+
+    const primeiroNome = () => (rotulo.nome || '').split(' ')[0];
+
+    // ---------- De onde ela veio (anúncio, link, busca) ----------
+    // Lido na chegada e guardado por 30 dias no navegador: se ela vier do
+    // anúncio, sair e voltar depois direto, o contato ainda credita o anúncio.
+    // Se chegar por outro link marcado, esse passa a valer (último clique).
+    const visita = lerVisita();
+
+    function lerVisita(): Record<string, string> {
+      const CHAVE = 'mam-origem';
+      const TRINTA_DIAS = 30 * 24 * 60 * 60 * 1000;
+      const doLink = (dlg.dataset.camposOrigem || '').split(',')
+        .filter((c) => !['referencia', 'pagina_entrada', 'data_entrada'].includes(c));
+      const q = new URLSearchParams(location.search);
+      const marcados: Record<string, string> = {};
+      doLink.forEach((c) => { const v = q.get(c); if (v) marcados[c] = v.slice(0, 200); });
+
+      let salvo: Record<string, string> = {};
+      try { salvo = JSON.parse(localStorage.getItem(CHAVE) || '{}'); } catch { /* navegador sem armazenamento */ }
+      if (salvo.data_entrada && Date.now() - Date.parse(salvo.data_entrada) > TRINTA_DIAS) salvo = {};
+
+      if (Object.keys(marcados).length || !salvo.data_entrada) {
+        salvo = {
+          ...marcados,
+          referencia: document.referrer.slice(0, 200) || 'direto',
+          pagina_entrada: location.pathname,
+          data_entrada: new Date().toISOString(),
+        };
+        try { localStorage.setItem(CHAVE, JSON.stringify(salvo)); } catch { /* segue sem guardar */ }
+      }
+      return salvo;
+    }
+
+    const dadosBase = () => ({
+      id: idLead,
+      nome: rotulo.nome, whatsapp: rotulo.whatsapp,
+      consentimento: 'aviso de privacidade exibido ao continuar',
+      variante: dlg.dataset.variante || '', origem,
+      ...visita,
+    });
+
+    // Envio pro Google Apps Script (planilha + e-mail). "no-cors": o Google não
+    // deixa ler a resposta, então a confirmação é a linha na planilha.
+    // "keepalive": o envio termina mesmo se ela sair da página logo depois
+    // (ex.: abrir o WhatsApp). O link é lido na hora do envio, do data-envio.
+    function enviar(form: string, dados: Record<string, string>) {
+      if (fIsca.value) return; // robô preencheu a isca
+      const url = dlg.dataset.envio;
+      if (!url) {
+        console.warn(`[formulário] "${form}" não salvo: falta o link do envio (config.ts → envioLeads.url).`);
+        return;
+      }
+      fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'form-name': form, ...dados }).toString(),
+      }).catch((e) => console.warn(`[formulário] falha ao enviar "${form}":`, e));
+    }
+
+    function linkFinal() {
+      const linhas = [dlg.dataset.mensagem || '', '', 'Respondi a análise no site:'];
+      const itens: [string, string | undefined][] = [
+        ['Nome', rotulo.nome], ['Situação', rotulo.situacao], ['Bebê passou de 4a11m', rotulo.idade],
+        ['Trabalho', rotulo.trabalho], ['Contribuiu nos 3 anos antes', rotulo.contribuiu],
+        ['Última contribuição', rotulo.tempo], ['Seguro-desemprego', rotulo.seguro],
+        ['Já recebeu', rotulo.recebeu], ['Pedido no INSS', rotulo.pedido], ['Outros benefícios', rotulo.beneficios],
+      ];
+      itens.forEach(([k, v]) => { if (v) linhas.push(`• ${k}: ${v}`); });
+      linhas.push('', `(${dlg.dataset.variante} · formulário · ${origem})`);
+      return `https://wa.me/${dlg.dataset.whats}?text=${encodeURIComponent(linhas.join('\n'))}`;
+    }
+
+    function concluir(tela: string) {
+      rotulo.desfecho = desfechos[tela];
+      const envio: Record<string, string> = { ...dadosBase() };
+      ['situacao', 'idade', 'trabalho', 'contribuiu', 'tempo', 'seguro', 'recebeu', 'pedido', 'beneficios', 'desfecho']
+        .forEach((c) => { if (rotulo[c]) envio[c] = rotulo[c]; });
+      enviar('analise-completa', envio);
+      const link = linkFinal();
+      dlg.querySelectorAll<HTMLAnchorElement>('[data-link-final]').forEach((a) => { a.href = link; a.target = '_blank'; a.rel = 'noopener'; });
+      dlg.querySelectorAll('[data-nome]').forEach((el) => { el.textContent = primeiroNome(); });
+    }
+
+    // ---------- Etapa 1: validação ----------
+    function erro(id: string, msg: string, campo?: HTMLInputElement) {
+      const el = $(`#e-${id}`);
+      el.textContent = msg;
+      el.hidden = !msg;
+      campo?.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      return !msg;
+    }
+
+    function validarDados() {
+      const nome = fNome.value.trim().replace(/\s+/g, ' ');
+      const zap = fZap.value.replace(/\D/g, '');
+      const oks = [
+        erro('nome', nome.split(' ').filter((p) => p.length >= 2).length >= 2 ? '' : 'Digite seu nome e sobrenome.', fNome),
+        erro('whatsapp', (zap.length === 10 || zap.length === 11) && Number(zap.slice(0, 2)) >= 11 ? '' : 'Digite seu WhatsApp com DDD.', fZap),
+      ];
+      if (oks.includes(false)) {
+        dlg.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+        return;
+      }
+      rotulo.nome = nome;
+      rotulo.whatsapp = fZap.value;
+      if (!enviouInicial) { idLead = novoId(); enviar('contato-inicial', dadosBase()); enviouInicial = true; }
+      ir('situacao');
+    }
+
+    // Máscaras
+    fZap.addEventListener('input', () => {
+      const d = fZap.value.replace(/\D/g, '').slice(0, 11);
+      if (d.length <= 2) fZap.value = d;
+      else if (d.length <= 6) fZap.value = `(${d.slice(0, 2)}) ${d.slice(2)}`;
+      else if (d.length <= 10) fZap.value = `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+      else fZap.value = `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+    });
+
+    // Teclado do celular: "Próximo" no nome pula pro WhatsApp; "Ir" no
+    // WhatsApp já continua, sem precisar fechar o teclado e achar o botão.
+    fNome.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); fZap.focus(); } });
+    fZap.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); validarDados(); } });
+
+    // ---------- Etapa 3: várias escolhas ----------
+    marcas.forEach((cb) => cb.addEventListener('change', () => {
+      if (!cb.checked) return;
+      const exclusiva = cb.dataset.exclusiva === 'sim';
+      marcas.forEach((o) => { if (o !== cb && (exclusiva || o.dataset.exclusiva === 'sim')) o.checked = false; });
+      erro('trabalho', '');
+    }));
+
+    function confirmarTrabalho() {
+      const escolhidas = marcas.filter((m) => m.checked);
+      if (!escolhidas.length) { erro('trabalho', 'Marque pelo menos uma opção.'); return; }
+      chave.trabalho = escolhidas.map((m) => m.value).join(',');
+      rotulo.trabalho = escolhidas.map((m) => m.dataset.rotulo).join('; ');
+      ir(proxima('trabalho'));
+    }
+
+    // ---------- Cliques dentro da janela ----------
+    dlg.addEventListener('click', (e) => {
+      const alvo = e.target as HTMLElement;
+      if (alvo === dlg) { dlg.close(); return; } // clique fora do cartão
+
+      const opcao = alvo.closest<HTMLButtonElement>('.opcao[data-campo]');
+      if (opcao) {
+        const campo = opcao.dataset.campo!;
+        chave[campo] = opcao.dataset.valor!;
+        rotulo[campo] = opcao.textContent!.trim();
+        if (campo === 'situacao') dlg.dataset.situacao = chave.situacao;
+        opcao.parentElement!.querySelectorAll('.opcao').forEach((o) => o.setAttribute('aria-pressed', String(o === opcao)));
+        ir(proxima(atual));
+        return;
+      }
+
+      const acao = alvo.closest<HTMLElement>('[data-acao]')?.dataset.acao;
+      if (acao === 'fechar') dlg.close();
+      else if (acao === 'voltar') { const t = historico.pop(); if (t) mostrar(t); }
+      else if (acao === 'dados') validarDados();
+      else if (acao === 'trabalho') confirmarTrabalho();
+    });
+
+    function recomecar() {
+      chave = {}; rotulo = {}; historico = []; atual = 'dados'; enviouInicial = false; idLead = '';
+      delete dlg.dataset.situacao;
+      [fNome, fZap].forEach((f) => { f.value = ''; f.removeAttribute('aria-invalid'); });
+      marcas.forEach((m) => { m.checked = false; });
+      dlg.querySelectorAll('.opcao').forEach((o) => o.removeAttribute('aria-pressed'));
+      dlg.querySelectorAll<HTMLElement>('.campo__erro').forEach((e) => { e.hidden = true; });
+    }
+
+    // ---------- Abrir: todo link de WhatsApp da página abre a janela ----------
+    function abrir(de: string) {
+      origem = de;
+      if (finais.has(atual)) recomecar();
+      if (!dlg.open) dlg.showModal();
+      mostrar(atual);
+    }
+
+    document.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href*="wa.me"]');
+      if (!a || dlg.contains(a)) return;
+      e.preventDefault();
+      const m = decodeURIComponent(a.href).match(/\(v\d+\s·\s([^)]+)\)/);
+      abrir(m ? m[1] : 'site');
+    });
+  }
+</script>
+
+<style>
+  .formulario [hidden] { display: none !important; }
+
+  .formulario {
+    padding: 0;
+    border: 0;
+    width: min(520px, calc(100vw - 24px));
+    max-height: min(92dvh, 780px);
+    border-radius: 22px;
+    background: var(--fundo);
+    color: var(--texto);
+    box-shadow: 0 30px 80px rgba(16, 34, 50, .35);
+    overflow: hidden;
+  }
+  .formulario[open] { display: flex; flex-direction: column; }
+  .formulario::backdrop { background: rgba(16, 34, 50, .55); }
+
+  /* Tempo verbal: some o texto que não vale pra situação escolhida */
+  .formulario[data-situacao="gravida"] .so-nasceu,
+  .formulario[data-situacao="nasceu"] .so-gravida { display: none; }
+  .formulario:not([data-situacao]) .so-gravida { display: none; }
+
+  .form__topo { display: flex; align-items: center; gap: 12px; padding: 14px 16px 8px; }
+  .form__barra {
+    flex: 1;
+    height: 6px;
+    border-radius: 99px;
+    background: color-mix(in srgb, var(--destaque) 14%, transparent);
+    overflow: hidden;
+  }
+  .form__barra-cheia {
+    display: block;
+    height: 100%;
+    width: 10%;
+    background: var(--destaque);
+    border-radius: inherit;
+    transition: width .3s ease;
+  }
+  .form__voltar {
+    flex: none;
+    background: none;
+    border: 0;
+    padding: 6px 4px;
+    font: 600 14px var(--fonte-corpo);
+    color: var(--texto-apoio);
+    cursor: pointer;
+  }
+  .form__fechar {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 0;
+    background: color-mix(in srgb, var(--destaque) 10%, transparent);
+    color: var(--destaque);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .form__corpo { overflow-y: auto; padding: 8px 24px 26px; }
+
+  .tela { display: flex; flex-direction: column; gap: 14px; }
+  .tela__etapa {
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--destaque);
+  }
+  .tela__pergunta {
+    margin-top: -6px;
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: clamp(21px, 4.6vw, 25px);
+    line-height: 1.22;
+    letter-spacing: -.02em;
+    outline: none;
+  }
+  .tela__ajuda { color: var(--texto-apoio); font-size: 15.5px; line-height: 1.55; }
+
+  /* Campos */
+  .campo { display: flex; flex-direction: column; gap: 6px; }
+  .campo label { font-weight: 700; font-size: 15px; }
+  .campo input {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--linha);
+    border-radius: 12px;
+    background: var(--fundo-card);
+    font: 500 16px var(--fonte-corpo); /* 16px evita o zoom automático no iPhone */
+    color: var(--texto);
+  }
+  .campo input:focus { outline: none; border-color: var(--destaque); box-shadow: 0 0 0 3px color-mix(in srgb, var(--destaque) 18%, transparent); }
+  .campo input[aria-invalid="true"] { border-color: #B42318; }
+  .campo__erro { color: #B42318; font-size: 14px; font-weight: 600; }
+
+  .form__aviso { font-size: 13px; line-height: 1.45; color: var(--texto-apoio); text-align: center; text-wrap: balance; }
+  .form__aviso a { color: var(--destaque); font-weight: 600; }
+
+  .form__isca { position: absolute; left: -9999px; width: 1px; height: 1px; }
+  .form__continuar { width: 100%; margin-top: 4px; }
+  .form__seguro { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; color: var(--texto-apoio); }
+
+  /* Opções de escolha única: um toque já avança */
+  .opcoes { display: flex; flex-direction: column; gap: 10px; }
+  .opcao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 18px;
+    text-align: left;
+    border: 1.5px solid var(--linha);
+    border-radius: 14px;
+    background: var(--fundo-card);
+    font: 600 16px/1.35 var(--fonte-corpo);
+    color: var(--texto);
+    cursor: pointer;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .opcao::after { content: '›'; flex: none; font-size: 24px; line-height: 1; color: var(--destaque); }
+  .opcao:hover,
+  .opcao[aria-pressed="true"] { border-color: var(--destaque); background: color-mix(in srgb, var(--destaque) 6%, var(--fundo-card)); }
+
+  /* Opções de várias escolhas */
+  .marcavel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--linha);
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 15.5px;
+    line-height: 1.35;
+    cursor: pointer;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .marcavel input { flex: none; width: 20px; height: 20px; accent-color: var(--destaque); }
+  .marcavel:has(input:checked) { border-color: var(--destaque); background: color-mix(in srgb, var(--destaque) 6%, var(--fundo-card)); }
+
+  /* Telas finais */
+  .final { align-items: center; text-align: center; padding-top: 10px; }
+  .final .tela__pergunta { margin-top: 0; }
+  .final__icone {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--cta-whatsapp) 14%, transparent);
+    color: var(--cta-whatsapp);
+  }
+  .final__icone--info {
+    background: color-mix(in srgb, var(--destaque) 12%, transparent);
+    color: var(--destaque);
+    font: 800 28px var(--fonte-titulo);
+  }
+  .form__texto-botao {
+    background: none;
+    border: 0;
+    padding: 6px;
+    font: 600 15px var(--fonte-corpo);
+    color: var(--texto-apoio);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  /* Celular: a janela ocupa a tela toda */
+  @media (max-width: 560px) {
+    .formulario {
+      width: 100vw;
+      max-width: 100vw;
+      height: 100dvh;
+      max-height: 100dvh;
+      margin: 0;
+      border-radius: 0;
+    }
+    .form__corpo { padding: 8px 18px 24px; }
+  }
+</style>

@@ -1,0 +1,292 @@
+---
+import { Picture } from 'astro:assets';
+import { linkWhatsApp } from '../config';
+import fotoClt from '../assets/fotos/perfil-clt.jpg';
+import fotoAutonoma from '../assets/fotos/perfil-autonoma.jpg';
+import fotoRural from '../assets/fotos/perfil-rural.jpg';
+import fotoDesempregada from '../assets/fotos/perfil-desempregada.jpg';
+
+// "Quem tem direito" em cartões por perfil, no modelo da referência Mãe Brasil.
+//
+// Conteúdo consolidado (12/09/2026): dos 7 tópicos levantados, só 4 são perfis
+// de trabalho — viraram cartões. "Filhos até 5 anos" vale pra todos os perfis
+// (vai no subtítulo). A nota sobre "adoção / perda gestacional" foi retirada a
+// pedido em 13/09/2026. "MEI" e "autônomas" eram duplicados e viraram um só.
+//
+// O subtítulo da referência ("Mamães que já contribuíram com o INSS como:") NÃO
+// foi copiado: está errado pra dois perfis — a trabalhadora rural não precisa
+// ter contribuído, e a desempregada pode não estar contribuindo agora.
+//
+// Cartões interativos (13/09/2026) — não há mais um cartão rosa fixo:
+// no celular, o cartão que passa pelo meio da tela fica rosa, um de cada vez;
+// se ela tocar num cartão, ele fica rosa e continua assim, com "É o meu caso →"
+// (abre o formulário e registra o perfil no contato). No computador, rosa ao
+// passar o mouse.
+const perfis = [
+  {
+    titulo: 'Trabalhadoras com carteira assinada (CLT)',
+    texto: 'Mamães que estavam trabalhando de carteira assinada durante a gravidez e não receberam o benefício.',
+    foto: fotoClt,
+    alt: 'Mulher segurando a carteira de trabalho',
+    curto: 'CLT',
+  },
+  {
+    titulo: 'Mães MEI e autônomas',
+    texto: 'Mamães que trabalham por conta própria ou como MEI e contribuem com o INSS.',
+    foto: fotoAutonoma,
+    alt: 'Mulher trabalhando por conta própria no seu negócio',
+    curto: 'MEI ou autônoma',
+  },
+  {
+    titulo: 'Trabalhadoras rurais e pescadoras',
+    texto: 'Mamães que trabalham no campo ou na pesca.',
+    foto: fotoRural,
+    alt: 'Mulher trabalhando na lavoura',
+    curto: 'rural ou pescadora',
+  },
+  {
+    titulo: 'Desempregadas ou demitidas',
+    texto: 'Mamães que pararam de trabalhar, mas continuam protegidas pelo INSS por um tempo, mesmo sem contribuir.',
+    foto: fotoDesempregada,
+    alt: 'Mãe em casa com o bebê',
+    curto: 'desempregada',
+  },
+];
+---
+
+<section class="secao perfis" id="quem-tem-direito">
+  <div class="envelope">
+    <header class="perfis__cabeca">
+      <p class="sobretitulo">Sobre o direito</p>
+      <h2 class="perfis__titulo">Quem tem direito ao auxílio-maternidade?</h2>
+      <p class="perfis__sub">
+        Gestantes e mães com filhos de até 5 anos que se encaixam em um destes perfis:
+      </p>
+    </header>
+
+    <ul class="perfis__grade">
+      {perfis.map((p) => (
+        <li class="perfil">
+          <Picture
+            class="perfil__foto"
+            src={p.foto}
+            alt={p.alt}
+            widths={[200, 400, 800]}
+            sizes="(max-width: 580px) 92px, (max-width: 1040px) 45vw, 260px"
+            formats={['avif', 'webp']}
+            fallbackFormat="jpg"
+          />
+          <div class="perfil__corpo">
+            <h3 class="perfil__titulo">{p.titulo}</h3>
+            <p class="perfil__texto">{p.texto}</p>
+            <!-- Abre o formulário; "(v1 · perfil CLT)" no link registra o perfil no contato -->
+            <a class="perfil__acao" href={linkWhatsApp(`perfil ${p.curto}`)}>
+              É o meu caso <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="perfis__rodape">
+      <a class="botao botao--whats" href={linkWhatsApp('quem tem direito')}>
+        Começar teste gratuito
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Celular: o cartão mais perto do meio da tela fica rosa, um de cada vez,
+  // conforme ela rola. Tocar num cartão deixa ele rosa e "trava" a escolha —
+  // a rolagem para de mudar o destaque. No computador o rosa vem do mouse
+  // (CSS :hover); o clique também trava a escolha.
+  const cartoes = [...document.querySelectorAll<HTMLElement>('.perfil')];
+  const grade = document.querySelector<HTMLElement>('.perfis__grade');
+  const semMouse = matchMedia('(hover: none)');
+  let escolheu = false;
+  let agendado = false;
+
+  const ativar = (alvo: HTMLElement) =>
+    cartoes.forEach((c) => c.classList.toggle('perfil--ativo', c === alvo));
+
+  cartoes.forEach((c) => c.addEventListener('click', () => { escolheu = true; ativar(c); }));
+
+  function destacarPeloMeio() {
+    agendado = false;
+    if (escolheu || !semMouse.matches || !grade) return;
+    const r = grade.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    // "Meio" um pouco acima do centro: embaixo fica a barra fixa
+    const meio = innerHeight * 0.45;
+    let maisPerto: HTMLElement | null = null;
+    let distancia = Infinity;
+    for (const c of cartoes) {
+      const q = c.getBoundingClientRect();
+      const d = Math.abs(q.top + q.height / 2 - meio);
+      if (d < distancia) { distancia = d; maisPerto = c; }
+    }
+    // Só destaca quando o cartão já chegou perto do meio, não assim que aparece
+    if (maisPerto && distancia < innerHeight * 0.22 && !maisPerto.classList.contains('perfil--ativo')) ativar(maisPerto);
+  }
+
+  addEventListener('scroll', () => {
+    if (!agendado) { agendado = true; requestAnimationFrame(destacarPeloMeio); }
+  }, { passive: true });
+  destacarPeloMeio();
+</script>
+
+<style>
+  /* ---------- Cabeçalho centralizado, como na referência ---------- */
+  .perfis__cabeca {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .perfis__titulo {
+    color: var(--texto);
+    font-size: clamp(30px, 4.4vw, 46px);
+    max-width: 18ch;
+  }
+  .perfis__sub {
+    margin-top: 16px;
+    max-width: 50ch;
+    font-size: clamp(16.5px, 2vw, 18.5px);
+    font-weight: 500;
+    color: var(--destaque); /* frase de apoio em rosa (pedido de 13/09/2026) */
+    text-wrap: balance;
+  }
+
+  /* ---------- Cartões ---------- */
+  .perfis__grade {
+    list-style: none;
+    margin: clamp(36px, 5vw, 52px) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--fundo-card);
+    border: 1px solid color-mix(in srgb, var(--destaque) 38%, transparent);
+    border-radius: 18px;
+    padding: 14px 14px 26px;
+  }
+
+  .perfil__foto {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .perfil__titulo {
+    margin-top: 18px;
+    padding-inline: 6px;
+    color: var(--texto);
+    font-size: clamp(18px, 1.8vw, 20px);
+    line-height: 1.25;
+  }
+  .perfil__texto {
+    margin-top: 10px;
+    padding-inline: 6px;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--texto-apoio);
+  }
+
+  /* ---------- Cartão ativo (rosa) ---------- */
+  /* Vira rosa quando: passa pelo meio da tela no celular ou foi tocado
+     (.perfil--ativo, pelo script), o mouse está em cima (computador) ou o
+     "É o meu caso" recebeu foco pelo teclado. Texto branco no rosa: 5,57:1. */
+  .perfil {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+  .perfil__titulo,
+  .perfil__texto { transition: color .35s ease; }
+
+  .perfil:is(.perfil--ativo, :focus-within) {
+    background: var(--destaque);
+    border-color: var(--destaque);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--destaque) 25%, transparent);
+  }
+  .perfil:is(.perfil--ativo, :focus-within) .perfil__titulo { color: #fff; }
+  .perfil:is(.perfil--ativo, :focus-within) .perfil__texto { color: rgba(255, 255, 255, .92); }
+  @media (hover: hover) {
+    .perfil:hover {
+      background: var(--destaque);
+      border-color: var(--destaque);
+      box-shadow: 0 10px 24px color-mix(in srgb, var(--destaque) 25%, transparent);
+    }
+    .perfil:hover .perfil__titulo { color: #fff; }
+    .perfil:hover .perfil__texto { color: rgba(255, 255, 255, .92); }
+  }
+
+  /* "É o meu caso →": o espaço fica sempre reservado (assim o cartão não
+     muda de altura e a página não pula enquanto ela rola); só aparece no
+     cartão rosa. */
+  .perfil__acao {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    margin-top: 8px;
+    padding-inline: 6px;
+    font-weight: 700;
+    font-size: 15.5px;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .perfil:is(.perfil--ativo, :focus-within) .perfil__acao { opacity: 1; pointer-events: auto; }
+  @media (hover: hover) {
+    .perfil:hover .perfil__acao { opacity: 1; pointer-events: auto; }
+  }
+  .perfil__acao:focus-visible { outline-color: #fff; }
+
+  /* ---------- Nota + CTA ---------- */
+  .perfis__rodape {
+    margin-top: clamp(32px, 4vw, 44px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+  }
+
+  /* Quatro por linha só onde cabem; dois no tablet; um no celular */
+  @media (max-width: 1040px) {
+    .perfis__grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  /* Celular (13/09/2026): cartões compactos, foto pequena ao lado do texto.
+     Os 4 perfis cabem em cerca de uma tela, em vez de quase três. */
+  @media (max-width: 580px) {
+    .perfis__grade { grid-template-columns: 1fr; gap: 12px; }
+    .perfil {
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+      padding: 12px;
+      border-radius: 16px;
+    }
+    .perfil__foto { flex: none; width: 92px; height: 92px; aspect-ratio: 1; }
+    .perfil__titulo { margin-top: 0; padding-inline: 0; font-size: 17px; text-wrap: pretty; }
+    .perfil__texto { margin-top: 4px; padding-inline: 0; font-size: 15px; line-height: 1.45; }
+    .perfil__acao { margin-top: 4px; padding-inline: 0; min-height: 32px; }
+  }
+  @media (max-width: 420px) {
+    .perfis__rodape .botao { width: 100%; }
+  }
+</style>

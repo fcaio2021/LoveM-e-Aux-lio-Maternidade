@@ -1,0 +1,385 @@
+<meta charset="utf-8">
+<title>Desempregada também recebe — carrossel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600;700&family=Parisienne&display=swap">
+<link rel="stylesheet" href="../../../identidade/tokens.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #4a4a4a; }
+
+  .slide {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--fonte-corpo);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  /* ---- Superfícies ---- */
+  .creme  { background: var(--fundo-creme); color: var(--texto); }
+  .escuro { background: var(--fundo-escuro); color: #fff; }
+  .rosa   { background: var(--destaque); color: #fff; }
+
+  /* ---- Cabeçalho comum ---- */
+  .topo {
+    position: absolute;
+    top: 56px; left: 72px; right: 72px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 5;
+  }
+  .topo img { width: 132px; height: auto; display: block; }
+  .contador { font-size: 17px; font-weight: 600; letter-spacing: .18em; }
+  .creme  .contador { color: var(--texto-apoio); }
+  .escuro .contador { color: rgba(255,255,255,.6); }
+  .rosa   .contador { color: rgba(255,255,255,.75); }
+
+  /* ---- Conteúdo ---- */
+  .miolo {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 82px;
+    position: relative; z-index: 4;
+  }
+
+  .kicker {
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: var(--kerning-kicker);
+    color: var(--destaque);
+  }
+  .escuro .kicker, .rosa .kicker { color: var(--rosa-pastel); }
+
+  .regua {
+    width: var(--regua-largura); height: var(--regua-altura);
+    background: var(--destaque); border-radius: 2px; margin: 24px 0 30px;
+  }
+  .escuro .regua, .rosa .regua { background: var(--rosa-pastel); }
+
+  .script {
+    font-family: var(--fonte-script);
+    font-size: 76px; line-height: 1;
+    color: var(--destaque);
+  }
+  .escuro .script, .rosa .script { color: var(--rosa-pastel); }
+
+  h1 {
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-titulo);
+    font-size: 82px; line-height: 1.04;
+    letter-spacing: var(--kerning-titulo);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-titulo);
+    font-size: 68px; line-height: 1.06;
+    letter-spacing: var(--kerning-titulo);
+    text-transform: uppercase;
+  }
+  .corpo {
+    font-size: 30px; line-height: 1.5; margin-top: 30px; max-width: 22ch;
+  }
+  .creme .corpo  { color: var(--texto-apoio); }
+  .escuro .corpo { color: rgba(255,255,255,.8); }
+  .rosa .corpo   { color: rgba(255,255,255,.9); }
+
+  .destaca { color: var(--destaque); }
+  .escuro .destaca, .rosa .destaca { color: var(--rosa-pastel); }
+
+  /* ---- Caixa de valor (elemento da ref 1) ---- */
+  .caixa-valor {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--destaque);
+    border: 4px solid rgba(255,255,255,.55);
+    border-radius: 22px;
+    padding: 26px 48px;
+    margin-top: 34px;
+    align-self: flex-start;
+  }
+  .caixa-valor span {
+    font-family: var(--fonte-titulo); font-weight: 800;
+    font-size: 68px; line-height: 1; color: #fff;
+    letter-spacing: -.02em;
+  }
+  .rosa .caixa-valor { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.5); }
+
+  .faixa-valor {
+    background: var(--destaque);
+    padding: 26px 82px;
+    display: flex; align-items: center; gap: 18px;
+    font-family: var(--fonte-titulo); font-weight: 800;
+    font-size: 40px; color: #fff; letter-spacing: -.01em;
+  }
+
+  /* ---- Número gigante ---- */
+  .numeral {
+    font-family: var(--fonte-titulo); font-weight: 800;
+    font-size: 250px; line-height: .86;
+    letter-spacing: -.05em;
+    color: var(--destaque);
+  }
+  .escuro .numeral { color: var(--rosa-pastel); }
+
+  /* ---- Lista com check ---- */
+  ul { list-style: none; margin-top: 40px; display: flex; flex-direction: column; gap: 26px; }
+  li { display: flex; gap: 22px; align-items: flex-start; font-size: 31px; line-height: 1.35; }
+  .escuro li { color: rgba(255,255,255,.92); }
+  li svg { flex: none; margin-top: 5px; }
+
+  /* ---- Bloco superior + borda rasgada (assinatura do estilo) ---- */
+  .bloco-topo { position: relative; height: 620px; flex: none; }
+  .rasgo { position: absolute; left: 0; right: 0; bottom: -2px; width: 100%; display: block; }
+
+  .bloco-topo.foto { height: 640px; overflow: hidden; }
+  .bloco-topo.foto img.fundo {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center 58%;
+    display: block;
+  }
+
+  /* ---- Capa no layout da referência 1: tudo centralizado ---- */
+  /* padding-bottom reserva a faixa do rodapé — sem ele o logo encosta no @ */
+  .capa-ref { align-items: center; text-align: center; padding: 0 76px 104px; }
+  .capa-ref .script { font-size: 92px; line-height: 1.1; }
+  .capa-ref .linha-forte {
+    font-family: var(--fonte-titulo); font-weight: 700;
+    font-size: 36px; line-height: 1.3; margin-top: 14px;
+  }
+  .capa-ref .linha-leve {
+    font-size: 31px; line-height: 1.4; margin-top: 12px;
+    color: var(--texto-apoio); max-width: 28ch;
+  }
+  .capa-ref .logo-rodape { width: 178px; margin-top: 38px; }
+
+  /* Caixa de valor com as faíscas laterais, como na referência */
+  .valor-linha { display: flex; align-items: center; gap: 26px; margin-top: 30px; }
+  .valor-linha .caixa-valor { margin-top: 0; align-self: auto; }
+
+  /* ---- Doodles ---- */
+  .doodle { position: absolute; z-index: 1; }
+
+  /* ---- CTA ---- */
+  .cta-miolo { align-items: center; text-align: center; }
+  .cta-miolo .logo-cta { width: 290px; margin-bottom: 44px; }
+  .botao {
+    display: inline-flex; align-items: center; gap: 16px;
+    background: var(--cta-whatsapp); color: #fff;
+    border-radius: var(--raio-botao);
+    padding: 26px 56px; margin-top: 46px;
+    font-family: var(--fonte-titulo); font-weight: 700; font-size: 34px;
+  }
+  .handle {
+    margin-top: 40px; font-size: 21px; font-weight: 600;
+    letter-spacing: .08em; color: var(--rosa-pastel);
+  }
+
+  .rodape {
+    position: absolute; bottom: 56px; left: 82px; right: 82px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 19px; font-weight: 600; z-index: 5;
+  }
+  .creme .rodape  { color: var(--texto-apoio); }
+  .escuro .rodape { color: rgba(255,255,255,.6); }
+  .rosa .rodape   { color: rgba(255,255,255,.8); }
+  .arraste { color: var(--destaque); }
+  .escuro .arraste, .rosa .arraste { color: var(--rosa-pastel); }
+</style>
+
+<!-- ============ SLIDE 1 — CAPA ============ -->
+<div class="slide creme">
+  <div class="bloco-topo foto">
+    <img class="fundo" src="foto-gravida.jpg" alt="Mãe grávida com as mãos em formato de coração sobre a barriga">
+    <div class="topo">
+      <span></span>
+      <span class="contador" style="color:rgba(255,255,255,.9);">01 / 07</span>
+    </div>
+    <svg class="rasgo" viewBox="0 0 1080 60" preserveAspectRatio="none" height="60">
+      <path d="M0,34 C60,18 118,44 178,30 C242,15 292,42 356,32 C418,22 470,46 534,34 C598,22 652,44 716,31 C778,19 830,43 892,33 C950,24 1010,40 1080,26 L1080,60 L0,60 Z" fill="#FAF4EC"/>
+    </svg>
+  </div>
+
+  <!-- doodles de coração espalhados pela área creme, como na referência -->
+  <svg class="doodle" style="top:706px; left:64px;" width="78" height="70" viewBox="0 0 86 78" fill="none" opacity=".5">
+    <path d="M43 71C43 71 6 48 6 25C6 12 15 5 25 5C33 5 39 10 43 17C47 10 53 5 61 5C71 5 80 12 80 25C80 48 43 71 43 71Z" stroke="#F99CC0" stroke-width="4"/>
+  </svg>
+  <svg class="doodle" style="top:700px; right:70px;" width="58" height="52" viewBox="0 0 86 78" fill="none" opacity=".45">
+    <path d="M43 71C43 71 6 48 6 25C6 12 15 5 25 5C33 5 39 10 43 17C47 10 53 5 61 5C71 5 80 12 80 25C80 48 43 71 43 71Z" stroke="#F99CC0" stroke-width="5"/>
+  </svg>
+  <svg class="doodle" style="bottom:196px; right:88px;" width="66" height="60" viewBox="0 0 86 78" fill="none" opacity=".38">
+    <path d="M43 71C43 71 6 48 6 25C6 12 15 5 25 5C33 5 39 10 43 17C47 10 53 5 61 5C71 5 80 12 80 25C80 48 43 71 43 71Z" stroke="#F99CC0" stroke-width="4"/>
+  </svg>
+
+  <div class="miolo capa-ref">
+    <span class="script">Auxílio Maternidade</span>
+    <p class="linha-forte">Se você está grávida e desempregada</p>
+    <p class="linha-leve">
+      saiba como receber o seu <strong class="destaca">auxílio maternidade</strong> de até
+    </p>
+
+    <div class="valor-linha">
+      <svg width="46" height="52" viewBox="0 0 46 52" fill="none" opacity=".85">
+        <path d="M40 8L26 16M40 26H24M40 44L26 36" stroke="#C81B5C" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <div class="caixa-valor">
+        <span>R$ 15.900</span>
+      </div>
+      <svg width="46" height="52" viewBox="0 0 46 52" fill="none" opacity=".85">
+        <path d="M6 8L20 16M6 26H22M6 44L20 36" stroke="#C81B5C" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <img class="logo-rodape" src="../../../identidade/logo.png" alt="LoveMãe Auxílio Maternidade">
+  </div>
+
+  <div class="rodape">
+    <span>@lovemaeauxiliomaternidade</span>
+    <span class="arraste">Arraste pro lado →</span>
+  </div>
+</div>
+
+<!-- ============ SLIDE 2 ============ -->
+<div class="slide escuro">
+  <div class="topo">
+    <img src="../../../identidade/logo-branco.png" alt="LoveMãe Auxílio Maternidade">
+    <span class="contador">02 / 07</span>
+  </div>
+  <svg class="doodle" style="top:250px; right:88px;" width="74" height="68" viewBox="0 0 86 78" fill="none" opacity=".3">
+    <path d="M43 71C43 71 6 48 6 25C6 12 15 5 25 5C33 5 39 10 43 17C47 10 53 5 61 5C71 5 80 12 80 25C80 48 43 71 43 71Z" stroke="#F99CC0" stroke-width="4"/>
+  </svg>
+  <div class="miolo">
+    <span class="kicker">Poucas mães sabem</span>
+    <div class="regua"></div>
+    <h2>Oportunidade que poucas mães conhecem</h2>
+    <p class="corpo">
+      Mesmo sem carteira assinada hoje, o INSS pode te dever o auxílio-maternidade.
+    </p>
+  </div>
+  <div class="rodape">
+    <span>@lovemaeauxiliomaternidade</span>
+    <span class="arraste">→</span>
+  </div>
+</div>
+
+<!-- ============ SLIDE 3 ============ -->
+<div class="slide creme">
+  <div class="topo">
+    <img src="../../../identidade/logo.png" alt="LoveMãe Auxílio Maternidade">
+    <span class="contador">03 / 07</span>
+  </div>
+  <svg class="doodle" style="top:210px; right:100px;" width="64" height="64" viewBox="0 0 70 70" fill="none" opacity=".55">
+    <path d="M35 6V22M35 48V64M6 35H22M48 35H64M14 14L25 25M45 45L56 56M56 14L45 25M25 45L14 56" stroke="#F99CC0" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+  <div class="miolo">
+    <div style="display:flex; align-items:baseline; gap:24px;">
+      <span class="numeral">12</span>
+      <span style="font-family:var(--fonte-titulo); font-weight:800; font-size:92px;
+                   letter-spacing:-.03em; color:var(--destaque);">meses</span>
+    </div>
+    <div class="regua" style="margin-top:34px;"></div>
+    <h2 style="font-size:52px;">É o tempo que você continua com direito depois de sair do emprego</h2>
+    <p class="corpo">E, em alguns casos, pode chegar a <strong class="destaca">36</strong>.</p>
+  </div>
+  <div class="rodape">
+    <span>@lovemaeauxiliomaternidade</span>
+    <span class="arraste">→</span>
+  </div>
+</div>
+
+<!-- ============ SLIDE 4 ============ -->
+<div class="slide escuro">
+  <div class="topo">
+    <img src="../../../identidade/logo-branco.png" alt="LoveMãe Auxílio Maternidade">
+    <span class="contador">04 / 07</span>
+  </div>
+  <div class="miolo">
+    <span class="kicker">Confere na lista</span>
+    <div class="regua"></div>
+    <h2>Quem pode receber?</h2>
+    <ul>
+      <li>
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none"><path d="M6 18L14 26L28 8" stroke="#F99CC0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Mães que trabalharam de carteira assinada</span>
+      </li>
+      <li>
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none"><path d="M6 18L14 26L28 8" stroke="#F99CC0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Estavam desempregadas no momento do parto</span>
+      </li>
+      <li>
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none"><path d="M6 18L14 26L28 8" stroke="#F99CC0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Contribuíram com o INSS antes de sair</span>
+      </li>
+    </ul>
+  </div>
+  <div class="rodape">
+    <span>@lovemaeauxiliomaternidade</span>
+    <span class="arraste">→</span>
+  </div>
+</div>
+
+<!-- ============ SLIDE 5 — O VALOR É O HERÓI ============ -->
+<div class="slide rosa">
+  <div class="topo">
+    <img src="../../../identidade/logo-branco.png" alt="LoveMãe Auxílio Maternidade">
+    <span class="contador">05 / 07</span>
+  </div>
+  <svg class="doodle" style="top:352px; left:104px;" width="80" height="80" viewBox="0 0 70 70" fill="none" opacity=".45">
+    <path d="M35 6V22M35 48V64M6 35H22M48 35H64M14 14L25 25M45 45L56 56M56 14L45 25M25 45L14 56" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+  <svg class="doodle" style="bottom:230px; right:88px;" width="92" height="84" viewBox="0 0 86 78" fill="none" opacity=".35">
+    <path d="M43 71C43 71 6 48 6 25C6 12 15 5 25 5C33 5 39 10 43 17C47 10 53 5 61 5C71 5 80 12 80 25C80 48 43 71 43 71Z" stroke="#fff" stroke-width="4"/>
+  </svg>
+  <div class="miolo" style="align-items:center; text-align:center;">
+    <span class="kicker" style="color:rgba(255,255,255,.85);">Pode chegar a</span>
+    <div style="font-family:var(--fonte-titulo); font-weight:800; font-size:148px; line-height:1; letter-spacing:-.04em; margin-top:26px;">
+      R$ 15.900
+    </div>
+    <p class="corpo" style="max-width:16ch; margin-top:30px; font-size:34px; font-weight:600;">
+      Na sua conta.
+    </p>
+  </div>
+  <div class="rodape">
+    <span>@lovemaeauxiliomaternidade</span>
+    <span class="arraste">→</span>
+  </div>
+</div>
+
+<!-- ============ SLIDE 6 ============ -->
+<div class="slide creme">
+  <div class="topo">
+    <img src="../../../identidade/logo.png" alt="LoveMãe Auxílio Maternidade">
+    <span class="contador">06 / 07</span>
+  </div>
+  <svg class="doodle" style="top:240px; right:92px;" width="70" height="64" viewBox="0 0 86 78" fill="none" opacity=".5">
+    <path d="M43 71C43 71 6 48 6 25C6 12 15 5 25 5C33 5 39 10 43 17C47 10 53 5 61 5C71 5 80 12 80 25C80 48 43 71 43 71Z" stroke="#F99CC0" stroke-width="4"/>
+  </svg>
+  <div class="miolo">
+    <span class="kicker">Atenção ao prazo</span>
+    <div class="regua"></div>
+    <h2>Não deixe o prazo passar</h2>
+    <p class="corpo" style="max-width:24ch;">
+      O direito tem prazo. Quanto antes você descobrir, melhor.
+    </p>
+  </div>
+  <div class="rodape">
+    <span>@lovemaeauxiliomaternidade</span>
+    <span class="arraste">→</span>
+  </div>
+</div>
+
+<!-- ============ SLIDE 7 — CTA ============ -->
+<div class="slide escuro">
+  <div class="topo">
+    <span></span>
+    <span class="contador">07 / 07</span>
+  </div>
+  <div class="miolo cta-miolo">
+    <img class="logo-cta" src="../../../identidade/logo-branco.png" alt="LoveMãe Auxílio Maternidade">
+    <h2 style="font-size:66px;">Quero meu benefício</h2>
+    <p class="corpo" style="max-width:27ch; text-align:center;">
+      Descubra em poucos minutos se você tem direito. A análise é gratuita.
+    </p>
+    <span class="botao">Falar no WhatsApp →</span>
+    <span class="handle">@lovemaeauxiliomaternidade</span>
+  </div>
+</div>

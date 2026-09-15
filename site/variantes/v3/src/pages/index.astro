@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Hero from '../components/Hero.astro';
+import FaixaAtencao from '../components/FaixaAtencao.astro';
+import PerfisDireito from '../components/PerfisDireito.astro';
+// ConhecaDireitos.astro saiu da página (12/09/2026): PerfisDireito cobre o
+// mesmo assunto em cartões por perfil. O arquivo continua no projeto.
+// QuemTemDireito.astro (6 cartões de perfil) saiu da página: ConhecaDireitos
+// cobre o mesmo assunto com foto e 4 grupos. O arquivo continua no projeto —
+// pra voltar, basta reimportar e inserir depois de <ConhecaDireitos />.
+import ComoFunciona from '../components/ComoFunciona.astro';
+// SemLetraMiuda.astro e Documentos.astro saíram da página a pedido (12/09/2026).
+// Os arquivos continuam no projeto — pra voltar, basta reimportar e inserir.
+import FAQ from '../components/FAQ.astro';
+import CTAFinal from '../components/CTAFinal.astro';
+import Rodape from '../components/Rodape.astro';
+import BotaoFlutuante from '../components/BotaoFlutuante.astro';
+import { empresa, seo } from '../config';
+
+// Dados da empresa pro Google entender quem é e o que faz.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: empresa.nome,
+  description: seo.descricao,
+  url: `https://${empresa.dominio}`,
+  areaServed: { '@type': 'Country', name: 'Brasil' },
+  serviceType: 'Assessoria para auxílio-maternidade do INSS',
+  ...(empresa.email && { email: empresa.email }),
+};
+---
+
+<Base>
+  <Cabecalho />
+  <main>
+    <Hero />
+    <FaixaAtencao />
+    <ComoFunciona />
+    <PerfisDireito />
+    <FAQ />
+    <CTAFinal />
+  </main>
+  <Rodape />
+  <BotaoFlutuante />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+</Base>

@@ -1,0 +1,20 @@
+{
+  "name": "mamae-auxilio-maternidade-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "dev:v2": "astro dev --config astro.config.v2.mjs",
+    "build:v2": "astro build --config astro.config.v2.mjs",
+    "dev:v3": "astro dev --config astro.config.v3.mjs",
+    "build:v3": "astro build --config astro.config.v3.mjs",
+    "dev:v4": "astro dev --config astro.config.v4.mjs",
+    "build:v4": "astro build --config astro.config.v4.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.14.1"
+  }
+}

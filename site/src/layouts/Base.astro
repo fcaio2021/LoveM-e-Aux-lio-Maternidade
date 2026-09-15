@@ -1,0 +1,51 @@
+---
+import '../styles/global.css';
+import { empresa, seo } from '../config';
+
+interface Props {
+  titulo?: string;
+  descricao?: string;
+}
+const { titulo = seo.titulo, descricao = seo.descricao } = Astro.props;
+// Astro.site pode vir vazio no dev depois de um reinício a quente do config —
+// sem o fallback, `new URL` lança "Invalid URL" e a página inteira não renderiza.
+const canonica = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <!-- viewport-fit=cover: a barra fixa de baixo respeita a área do gesto do iPhone -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- Barra do navegador no Android na mesma cor do cabeçalho -->
+    <meta name="theme-color" content="#FF0076" />
+    <title>{titulo}</title>
+    <meta name="description" content={descricao} />
+    <link rel="canonical" href={canonica} />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+    <!-- Ícone ao "adicionar à tela de início": fundo branco (transparente o
+         iPhone pinta de preto) -->
+    <link rel="apple-touch-icon" href="/icone-app.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={empresa.nome} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

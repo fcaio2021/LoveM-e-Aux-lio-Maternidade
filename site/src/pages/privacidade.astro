@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Rodape from '../components/Rodape.astro';
+import Formulario from '../components/Formulario.astro';
+import { empresa } from '../config';
+
+// ⚠️ RASCUNHO (13/09/2026) — precisa de revisão jurídica antes de publicar.
+// Informações de gravidez são dado de saúde, que a LGPD trata como dado
+// pessoal sensível (art. 5º, II) e exige consentimento específico (art. 11, I).
+// CNPJ e e-mail preenchidos em 14/09/2026 (config.ts). O prazo de 12 meses
+// abaixo é SUGESTÃO — a empresa ainda vai definir o prazo de guarda.
+const cnpj = empresa.cnpj || '[CNPJ a informar]';
+const contato = empresa.email || '[e-mail a informar]';
+---
+
+<Base
+  titulo={`Política de Privacidade | ${empresa.nome}`}
+  descricao={`Como a ${empresa.nome} coleta, usa e protege os seus dados.`}
+>
+  <Cabecalho />
+  <main class="secao">
+    <article class="envelope privacidade">
+      <p class="sobretitulo">Seus dados</p>
+      <h1>Política de Privacidade</h1>
+      <p class="apoio">
+        Aqui explicamos, sem juridiquês, quais dados pedimos, para que usamos e quais
+        são os seus direitos. Esta política segue a Lei Geral de Proteção de Dados
+        (LGPD — Lei nº 13.709/2018).
+      </p>
+
+      <h2>Quem cuida dos seus dados</h2>
+      <p>
+        A {empresa.nome} ({cnpj}) é a responsável pelos dados que você envia neste
+        site. Para qualquer assunto sobre privacidade, fale com a gente em {contato}.
+      </p>
+
+      <h2>Quais dados pedimos</h2>
+      <ul>
+        <li><strong>Para falar com você:</strong> nome completo e WhatsApp.</li>
+        <li>
+          <strong>Para analisar o seu direito:</strong> se você está grávida ou se o bebê já
+          nasceu, a idade aproximada do bebê, como você trabalhava ou contribuía com o INSS,
+          se já pediu ou recebeu o benefício e se recebe outros benefícios do INSS.
+        </li>
+        <li>
+          <strong>Automaticamente:</strong> dados técnicos básicos de navegação (como
+          endereço IP e tipo de navegador), registrados pelo serviço que hospeda o site,
+          e de qual anúncio ou link você chegou ao site — para sabermos quais divulgações
+          funcionam.
+        </li>
+      </ul>
+
+      <h2>Informações sobre a gravidez</h2>
+      <p>
+        Saber se você está grávida é um dado de saúde, que a LGPD chama de dado pessoal
+        sensível. Só usamos essa informação com a sua concordância — ao continuar no
+        formulário, depois do aviso de privacidade — e apenas para analisar o
+        auxílio-maternidade.
+      </p>
+
+      <h2>Para que usamos</h2>
+      <ul>
+        <li>Analisar se você pode ter direito ao auxílio-maternidade;</li>
+        <li>Entrar em contato com você pelo WhatsApp sobre a sua análise;</li>
+        <li>Se você contratar a assessoria, preparar e acompanhar o seu pedido no INSS.</li>
+      </ul>
+      <p>Não vendemos seus dados e não usamos para outras finalidades.</p>
+
+      <h2>Com quem compartilhamos</h2>
+      <ul>
+        <li>Com o INSS, somente se você contratar o serviço e autorizar o pedido;</li>
+        <li>
+          Com empresas de tecnologia que fazem o site e as conversas funcionarem — o serviço
+          de hospedagem do site, o Google (onde recebemos os contatos do formulário, por
+          e-mail e planilha) e o WhatsApp — apenas no necessário para isso.
+        </li>
+      </ul>
+
+      <h2>Por quanto tempo guardamos</h2>
+      <p>
+        Pelo tempo necessário para a análise e o atendimento. Se você não contratar o
+        serviço, os dados são apagados em até 12 meses após o último contato, salvo quando
+        a lei exigir que sejam guardados por mais tempo.
+      </p>
+
+      <h2>Seus direitos</h2>
+      <p>A qualquer momento você pode pedir para:</p>
+      <ul>
+        <li>saber se temos dados seus e ter acesso a eles;</li>
+        <li>corrigir dados incompletos ou errados;</li>
+        <li>apagar os seus dados ou retirar o seu consentimento;</li>
+        <li>saber com quem os seus dados foram compartilhados.</li>
+      </ul>
+      <p>É só pedir pelo {contato}. Respondemos o mais rápido possível.</p>
+
+      <h2>Segurança</h2>
+      <p>
+        Usamos conexão protegida (https) e limitamos o acesso aos seus dados às pessoas
+        da equipe que precisam deles para atender você.
+      </p>
+
+      <h2>Mudanças nesta política</h2>
+      <p>
+        Se esta política mudar, a versão atualizada fica sempre nesta página.
+      </p>
+    </article>
+  </main>
+  <Rodape />
+  <Formulario />
+</Base>
+
+<style>
+  .privacidade { max-width: 760px; }
+  .privacidade h1 { margin-bottom: 16px; }
+  .privacidade h2 { margin-top: 36px; margin-bottom: 10px; font-size: clamp(20px, 2.4vw, 24px); }
+  .privacidade p,
+  .privacidade li { font-size: 16.5px; line-height: 1.65; }
+  .privacidade p + p { margin-top: 10px; }
+  .privacidade ul { margin: 8px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .privacidade .apoio { font-size: 17.5px; }
+</style>

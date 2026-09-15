@@ -1,0 +1,90 @@
+---
+import { empresa } from '../config';
+const ano = new Date().getFullYear();
+---
+
+<footer class="rodape">
+  <div class="envelope rodape__interno">
+    <div class="rodape__marca">
+      <img src="/logo-branco.png" alt={empresa.nome} width="168" height="151" />
+      <p class="apoio">
+        Assessoria de apoio administrativo para mães que querem acessar o
+        auxílio-maternidade do INSS.
+      </p>
+    </div>
+
+    <nav class="rodape__links" aria-label="Seções do site">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#quem-tem-direito">Quem tem direito</a>
+      <a href="#duvidas">Dúvidas</a>
+      {empresa.instagramUrl && (
+        <a href={empresa.instagramUrl} rel="noopener">Instagram</a>
+      )}
+    </nav>
+  </div>
+
+  <div class="envelope rodape__base">
+    <p class="aviso apoio">
+      A {empresa.nome} é uma empresa privada de apoio administrativo e
+      <strong>não tem vínculo com o INSS nem com qualquer órgão do governo</strong>.
+      A concessão do benefício e os prazos são decisão exclusiva do INSS.
+      As informações deste site são explicativas e não substituem a análise do
+      seu caso concreto.
+    </p>
+    <p class="apoio rodape__assinatura">
+      © {ano} {empresa.nome}{empresa.cnpj ? ` · CNPJ ${empresa.cnpj}` : ''}
+    </p>
+  </div>
+</footer>
+
+<style>
+  /* Rodapé em azul-marinho: fecha a página com contraste claro depois do CTA
+     rosa (rosa com rosa viraria um bloco só) e conversa com o azul dos
+     títulos e do logo. As variáveis de cor são redefinidas aqui e herdadas
+     por tudo dentro — texto, links e aviso passam a funcionar no escuro. */
+  .rodape {
+    --texto: #FFFFFF;
+    --texto-apoio: rgba(255, 255, 255, .72);
+    --linha: rgba(255, 255, 255, .14);
+    --destaque: var(--destaque-no-escuro);
+    background: var(--fundo-escuro);
+    color: var(--texto);
+    padding-block: 56px 34px;
+  }
+
+  .rodape__interno {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 36px;
+    padding-bottom: 34px;
+  }
+
+  .rodape__marca img { width: 138px; height: auto; margin-bottom: 16px; }
+  .rodape__marca p { max-width: 42ch; font-size: 15.5px; }
+
+  .rodape__links {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    font-size: 15.5px;
+  }
+  .rodape__links a { color: var(--texto); text-decoration: none; }
+  .rodape__links a:hover { color: var(--destaque); text-decoration: underline; }
+
+  .rodape__base {
+    border-top: 1px solid var(--linha);
+    padding-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .aviso { font-size: 13.5px; line-height: 1.6; max-width: 88ch; }
+  .aviso strong { color: var(--texto); font-weight: 700; }
+
+  .rodape__assinatura { font-size: 13.5px; }
+
+  @media (max-width: 700px) {
+    .rodape__interno { grid-template-columns: 1fr; }
+  }
+</style>
