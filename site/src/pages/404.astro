@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Rodape from '../components/Rodape.astro';
+import Formulario from '../components/Formulario.astro';
+import { empresa, linkWhatsApp } from '../config';
+
+// Endereço que não existe. O Netlify serve este arquivo (dist/404.html)
+// automaticamente, com o código 404. Quem cai aqui geralmente veio de um link
+// errado: o botão leva direto pra análise, que é o que ela queria.
+---
+
+<Base
+  titulo={`Página não encontrada | ${empresa.nome}`}
+  descricao="Essa página não existe, mas a sua análise gratuita do auxílio-maternidade continua aqui."
+>
+  <Cabecalho />
+  <main class="secao">
+    <div class="envelope nao-encontrada">
+      <p class="sobretitulo">Página não encontrada</p>
+      <h1>Ops, mamãe! Esse endereço não existe.</h1>
+      <p class="nao-encontrada__texto">
+        O link pode ter sido digitado errado ou mudou. Mas fica tranquila: a sua análise
+        gratuita do auxílio-maternidade continua a um toque daqui.
+      </p>
+      <div class="nao-encontrada__acoes">
+        <a class="botao botao--whats" href={linkWhatsApp('página 404')}>
+          Fazer minha análise gratuita
+        </a>
+        <a class="nao-encontrada__inicio" href="/">Voltar pro início</a>
+      </div>
+    </div>
+  </main>
+  <Rodape />
+  <Formulario />
+</Base>
+
+<style>
+  .nao-encontrada {
+    max-width: 640px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .nao-encontrada h1 { font-size: clamp(30px, 5vw, 44px); }
+  .nao-encontrada__texto {
+    margin-top: 18px;
+    font-size: 18px;
+    color: var(--texto-apoio);
+  }
+  .nao-encontrada__acoes {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .nao-encontrada__inicio {
+    color: var(--texto-apoio);
+    font-weight: 600;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+</style>
