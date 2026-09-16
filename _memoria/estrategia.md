@@ -51,15 +51,18 @@ Política de Privacidade.
    e passo a passo em `site/integracoes/planilha-leads/`; falta instalar na conta Google e
    colar o link em `site/src/config.ts` (`envioLeads.url`). VPS TurboCloud fica pra fase
    do CRM/automações.
-2. Publicar: repositório próprio no GitHub ✅ (github.com/fcaio2021/LoveM-e-Aux-lio-Maternidade;
-   o primeiro envio ainda não foi feito — o usuário roda `git push` no terminal do VS Code)
-   → Netlify grátis → domínio. **E-mail (decidido 15/09/2026):** Google Workspace Base
+2. Publicar: ✅ **site no ar em 15/09/2026** — github.com/fcaio2021/LoveM-e-Aux-lio-Maternidade
+   → Netlify grátis em **lovemaeauxiliomaternidade.netlify.app** (público, HTTPS, deploy
+   automático a cada `git push`; `netlify.toml` na raiz + `site/public/_headers`). Falta só
+   apontar o domínio. **E-mail (decidido 15/09/2026):** Google Workspace Base
    (R$ 20/mês), 1 usuário contato@ + apelido leads@. Por isso o DNS fica no Registro.br
    (MX do Google lá) e o site é apontado pro Netlify só com CNAME/A. Automação da
    planilha instalada na conta contato@ (limite ~1.500 e-mails/dia).
 
-**Próxima sessão:** envio pro GitHub → contratar Workspace e verificar domínio →
-instalar a automação da planilha (link /exec em `config.ts`) → Netlify → domínio →
+**Próxima sessão:** verificar o domínio no Registro.br (zona DNS travada até ~23h de
+15/09 pela transição; registros TXT do Google + SPF e MX `1 smtp.google.com.`, campo
+NOME sempre vazio — o painel não aceita "@") → contratar Workspace → instalar a
+automação da planilha (link /exec em `config.ts`) → apontar o domínio pro Netlify →
 Pixel da Meta → perfil do Instagram.
 3. Prazo de guarda dos dados na Política de Privacidade — no site está a sugestão de
    12 meses, a empresa vai definir; revisão jurídica
