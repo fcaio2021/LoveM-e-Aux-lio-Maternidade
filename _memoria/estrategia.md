@@ -55,9 +55,11 @@ Política de Privacidade.
    → Netlify grátis em **lovemaeauxiliomaternidade.netlify.app** (público, HTTPS, deploy
    automático a cada `git push`; `netlify.toml` na raiz + `site/public/_headers`). Falta só
    apontar o domínio. **E-mail (decidido 15/09/2026):** Google Workspace Base
-   (R$ 20/mês), 1 usuário contato@ + apelido leads@. Por isso o DNS fica no Registro.br
+   (R$ 20/mês), 1 usuário francisco@ (administrador) + apelidos contato@ e leads@ ·
+   domínio verificado com MX, SPF e DKIM em 16/09/2026. Por isso o DNS fica no Registro.br
    (MX do Google lá) e o site é apontado pro Netlify só com CNAME/A. Automação da
-   planilha instalada na conta contato@ (limite ~1.500 e-mails/dia).
+   planilha será instalada na conta francisco@ (limite ~1.500 e-mails/dia). E-mail de
+   confirmação pra mãe: descartado por enquanto (formulário não pede e-mail).
 
 **Próxima sessão:** verificar o domínio no Registro.br (zona DNS travada até ~23h de
 15/09 pela transição; registros TXT do Google + SPF e MX `1 smtp.google.com.`, campo

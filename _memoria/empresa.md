@@ -26,7 +26,8 @@ saiu com a troca de nome)
 **WhatsApp de atendimento:** (11) 96963-9342 — destino dos CTAs de tudo que o sistema gera.
 **CNPJ:** 54.787.995/0001-01
 **E-mails:** contato@lovemaeauxiliomaternidade.com.br (contato geral e privacidade) ·
-leads@lovemaeauxiliomaternidade.com.br (avisos de lead do site)
+leads@lovemaeauxiliomaternidade.com.br (avisos de lead do site) — ambos são apelidos da caixa
+francisco@lovemaeauxiliomaternidade.com.br (Google Workspace Base, único usuário e administrador)
 **Prova social confirmada (14/09/2026):** +5 mil mães aprovadas, +5 anos de experiência,
 99% de taxa de aprovação.
 **Faixa de valor comunicada (oficial):** R$ 6.900 a R$ 15.900 — é o que vai no site e nos conteúdos.

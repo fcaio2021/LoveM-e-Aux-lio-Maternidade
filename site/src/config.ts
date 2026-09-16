@@ -61,7 +61,7 @@ export const valores = {
  * funciona normalmente, mas NÃO salva os contatos (só avisa no console).
  */
 export const envioLeads = {
-  url: '',
+  url: 'https://script.google.com/macros/s/AKfycbwsBE7AbIb4qKxmsDE2rdiWiOhfRhJg8b8G3ExUUKnFNQIWZ6oNEPsqvaDFHgjsXeFH/exec',
 };
 
 export const provaSocial = [
