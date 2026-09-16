@@ -8,8 +8,12 @@ Cada mãe que preenche o formulário do site vira:
    conversa com uma mensagem pronta. Chegam dois por mãe: "Novo contato" (assim que
    ela deixa nome e WhatsApp) e "Análise concluída" (se ela terminar o formulário).
 
-Tudo grátis, rodando na sua conta Google. Limite da conta Gmail grátis: ~100 e-mails
-por dia (≈ 50 mães completando por dia). A planilha não tem esse limite.
+Tudo grátis, rodando na conta francisco@ (Google Workspace): limite de ~1.500 e-mails
+por dia. A planilha não tem esse limite.
+
+O leads@ é apelido da própria conta que roda o script, e o Gmail guarda e-mail "pra si
+mesmo" só em Enviados. Por isso o script devolve cada aviso pra **Caixa de entrada,
+como não lido** (função `enviar_`).
 
 ## Instalar (uma vez, ~10 minutos)
 
@@ -39,5 +43,7 @@ funcionando."
 
 ## Mudou o código?
 
-Colar o `leads.gs` novo no editor → **Implantar → Gerenciar implantações** → lápis
-→ Versão: **Nova versão** → **Implantar**. O link continua o mesmo.
+Colar o `leads.gs` novo no editor → **Salvar** → se o código passou a usar um serviço
+novo do Google, rodar **configurar** de novo pra autorizar → **Implantar → Gerenciar
+implantações** → lápis → Versão: **Nova versão** → **Implantar**. O link continua o
+mesmo (nunca usar "Nova implantação": gera outro link e o site para de enviar).

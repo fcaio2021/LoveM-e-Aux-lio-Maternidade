@@ -11,8 +11,9 @@
  * Instalação e atualização: ver README.md nesta pasta.
  */
 
-// Quem recebe os avisos. Enquanto a caixa leads@ não existir, trocar por um
-// Gmail da equipe (dá pra pôr mais de um, separados por vírgula).
+// Quem recebe os avisos. O leads@ é apelido da própria conta que roda o script
+// (francisco@): o Gmail guarda e-mail "pra si mesmo" só em Enviados, então
+// enviar_() devolve cada aviso pra Caixa de entrada, marcado como não lido.
 const EMAIL_AVISOS = 'leads@lovemaeauxiliomaternidade.com.br';
 const NOME_ABA = 'Leads';
 
@@ -79,10 +80,9 @@ function doGet() {
 /** Rodar UMA vez pelo editor (botão Executar) pra autorizar e criar a aba. */
 function configurar() {
   aba_();
-  MailApp.sendEmail(
-    EMAIL_AVISOS,
+  enviar_(
     'LoveMãe: aviso de leads configurado',
-    'Tudo certo. Os próximos contatos do formulário do site chegam neste e-mail e na planilha.'
+    '<p>Tudo certo. Os próximos contatos do formulário do site chegam neste e-mail e na planilha.</p>'
   );
 }
 
@@ -158,12 +158,18 @@ function avisar_(p, etapa) {
     '<p style="margin-top:22px;font-size:12px;color:#6A5F67">Enviado pelo formulário do site. ' +
     'A lista completa fica na planilha de leads.</p></div>';
 
-  MailApp.sendEmail({
-    to: EMAIL_AVISOS,
-    subject: etapa + ': ' + nome + ' · ' + p.whatsapp,
+  enviar_(etapa + ': ' + nome + ' · ' + p.whatsapp, html);
+}
+
+/** Envia o aviso e garante que ele aparece na Caixa de entrada, como não lido. */
+function enviar_(assunto, html) {
+  const mensagem = GmailApp.createDraft(EMAIL_AVISOS, assunto, '', {
     htmlBody: html,
     name: 'Site LoveMãe',
-  });
+  }).send();
+  const conversa = mensagem.getThread();
+  conversa.moveToInbox();
+  conversa.markUnread();
 }
 
 function esc_(t) {
