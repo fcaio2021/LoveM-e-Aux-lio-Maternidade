@@ -22,7 +22,9 @@ a providenciar.
 saiu com a troca de nome)
 **Instagram:** @lovemaeauxiliomaternidade
 **Stack do site:** Astro + Netlify (deploy automático a partir do `main` — é o que as skills
-`/publicar-tema` e `/aprovar-post` esperam). Site construído em `site/`, ainda não publicado.
+`/publicar-tema` e `/aprovar-post` esperam). Site em `site/`, no ar desde 16/09/2026.
+**Meta:** portfólio empresarial "LoveMãe Auxílio Maternidade", com Página do Facebook,
+Pixel "LoveMãe Site" (ID 1104915952108605) e domínio verificado (17/09/2026).
 **WhatsApp de atendimento:** (11) 96963-9342 — destino dos CTAs de tudo que o sistema gera.
 **CNPJ:** 54.787.995/0001-01
 **E-mails:** contato@lovemaeauxiliomaternidade.com.br (contato geral e privacidade) ·

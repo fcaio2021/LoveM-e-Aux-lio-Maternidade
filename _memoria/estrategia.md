@@ -25,8 +25,7 @@ produzir posts e stories, roteirizar. Candidata a virar skill própria via `/map
   raster de IA; favicon a 32px fica fraco).
 
 - ✅ Landing page de conversão construída (10/09/2026) — Astro + Netlify em `site/`.
-  Estrutura baseada nas 3 referências do nicho. **Bloqueada pro ar** até definir o
-  número de WhatsApp (`site/src/config.ts`) e o time de operação revisar os textos.
+  Estrutura baseada nas 3 referências do nicho. (No ar desde 16/09/2026 — ver abaixo.)
 - ✅ Primeiro carrossel produzido — `marketing/conteudo/carrossel-desempregada-recebe-2026-09-10/`
 
 - ✅ Nova marca LoveMãe (13/09/2026) — nome "LoveMãe auxílio maternidade". Logo com o
@@ -37,7 +36,7 @@ produzir posts e stories, roteirizar. Candidata a virar skill própria via `/map
 
 - ✅ Formulário de análise no site (13/09/2026) — todo botão abre o formulário
   (nome + WhatsApp → situação → trabalho → contribuição → histórico do pedido →
-  outros benefícios). Salva no **Netlify Forms** logo após nome + WhatsApp
+  outros benefícios). Salva (hoje na planilha via Apps Script) logo após nome + WhatsApp
   ("contato-inicial") e no fim ("analise-completa"); termina no WhatsApp com o
   resumo. Valor oficial comunicado: **R$ 6.900 a R$ 15.900**. Variantes A/B
   (v2–v4) guardadas em `site/variantes/` — a v1 foi a escolhida.
@@ -46,32 +45,34 @@ produzir posts e stories, roteirizar. Candidata a virar skill própria via `/map
 botões no verde original `#177E40` · números de prova social confirmados · CNPJ e e-mail na
 Política de Privacidade.
 
-**Pendências pro site ir ao ar:**
-1. Leads: ✅ decidido — e-mail (leads@) + planilha Google via Apps Script (grátis). Código
-   e passo a passo em `site/integracoes/planilha-leads/`; falta instalar na conta Google e
-   colar o link em `site/src/config.ts` (`envioLeads.url`). VPS TurboCloud fica pra fase
-   do CRM/automações.
-2. Publicar: ✅ **site no ar em 15/09/2026** — github.com/fcaio2021/LoveM-e-Aux-lio-Maternidade
-   → Netlify grátis em **lovemaeauxiliomaternidade.netlify.app** (público, HTTPS, deploy
-   automático a cada `git push`; `netlify.toml` na raiz + `site/public/_headers`). Falta só
-   apontar o domínio. **E-mail (decidido 15/09/2026):** Google Workspace Base
-   (R$ 20/mês), 1 usuário francisco@ (administrador) + apelidos contato@ e leads@ ·
-   domínio verificado com MX, SPF e DKIM em 16/09/2026. Por isso o DNS fica no Registro.br
-   (MX do Google lá) e o site é apontado pro Netlify só com CNAME/A. Automação da
-   planilha será instalada na conta francisco@ (limite ~1.500 e-mails/dia). E-mail de
-   confirmação pra mãe: descartado por enquanto (formulário não pede e-mail).
+- ✅ **Site no ar em www.lovemaeauxiliomaternidade.com.br (16/09/2026)** — GitHub
+  (github.com/fcaio2021/LoveM-e-Aux-lio-Maternidade) → Netlify grátis, deploy automático a
+  cada `git push` (o Claude já consegue dar push). www é o principal; sem www redireciona.
+  HTTPS, cabeçalhos de segurança, selo do Netlify desligado, imagem de pré-visualização
+  (`site/public/og-image.jpg`), página 404, robots.txt e sitemap.
+- ✅ **Leads (16/09/2026)** — formulário → planilha "Leads LoveMãe" (Apps Script na conta
+  francisco@) + aviso no leads@, devolvido à Caixa de entrada como não lido. Código e passo
+  a passo em `site/integracoes/planilha-leads/`. Mudança no Apps Script NÃO publica sozinha
+  (colar código → Nova versão). VPS TurboCloud fica pra fase do CRM/automações.
+- ✅ **E-mail (16/09/2026)** — Google Workspace Base (R$ 20/mês), 1 usuário francisco@
+  (administrador) + apelidos contato@ e leads@. DNS fica no Registro.br (campo NOME vazio —
+  o painel não aceita "@"): A e CNAME do Netlify, MX, SPF, DKIM e verificações Google/Meta.
+  E-mail de confirmação pra mãe: descartado (formulário não pede e-mail).
+- ✅ **Meta (17/09/2026)** — portfólio LoveMãe com a Página do Facebook, Pixel "LoveMãe
+  Site" (ID 1104915952108605) com PageView, Lead, CompleteRegistration e Contact testados,
+  sem enviar respostas do formulário (gravidez = dado de saúde), e domínio verificado.
+  Política de Privacidade avisa do Pixel. Categoria do conjunto: não usar Saúde.
 
-**Próxima sessão:** verificar o domínio no Registro.br (zona DNS travada até ~23h de
-15/09 pela transição; registros TXT do Google + SPF e MX `1 smtp.google.com.`, campo
-NOME sempre vazio — o painel não aceita "@") → contratar Workspace → instalar a
-automação da planilha (link /exec em `config.ts`) → apontar o domínio pro Netlify →
-Pixel da Meta → perfil do Instagram.
-3. Prazo de guarda dos dados na Política de Privacidade — no site está a sugestão de
+**Próximos passos (antes do primeiro anúncio):** conta de anúncios no portfólio → ligar
+o Pixel a ela → Instagram @lovemaeauxiliomaternidade no portfólio → foto da Página →
+criativos do Meta Ads → Google Search Console → CRM e dashboard pros leads.
+
+**Pendências da empresa:**
+1. Prazo de guarda dos dados na Política de Privacidade — no site está a sugestão de
    12 meses, a empresa vai definir; revisão jurídica
-4. Time de operação revisar as perguntas do formulário e as respostas do FAQ
+2. Time de operação revisar as perguntas do formulário e as respostas do FAQ
 
 **Público chega 100% pelo celular:** site, formulário e peças são pensados primeiro pro celular. A conversão no celular é o que decide.
-**Próxima rodada (13/09/2026):** pente fino do site no celular + Pixel da Meta → perfil do Instagram → criativos do Meta Ads → CRM e dashboard pros leads.
 
 **Próximas prioridades (atacam o gargalo direto):**
 - Criar o @ do Instagram — destrava os carrosséis
