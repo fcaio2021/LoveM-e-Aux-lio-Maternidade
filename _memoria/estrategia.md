@@ -62,10 +62,13 @@ Política de Privacidade.
   Site" (ID 1104915952108605) com PageView, Lead, CompleteRegistration e Contact testados,
   sem enviar respostas do formulário (gravidez = dado de saúde), e domínio verificado.
   Política de Privacidade avisa do Pixel. Categoria do conjunto: não usar Saúde.
+  Conta de anúncios "LoveMãe Auxílio Maternidade" (ID 1099371686260745, BRL, São Paulo,
+  saldo pré-pago — pausa quando zera) ligada ao Pixel. Instagram @lovemaeauxiliomaternidade
+  (ID 17841426616101590) no portfólio, ligado à Página e à conta de anúncios.
 
-**Próximos passos (antes do primeiro anúncio):** conta de anúncios no portfólio → ligar
-o Pixel a ela → Instagram @lovemaeauxiliomaternidade no portfólio → foto da Página →
-criativos do Meta Ads → Google Search Console → CRM e dashboard pros leads.
+**Próximos passos (antes do primeiro anúncio):** vitrine do Instagram e da Página (foto,
+capa, bio, destaques, primeiros posts) → criativos do Meta Ads → campanha de Leads
+otimizada pelo evento Lead → Google Search Console → CRM e dashboard pros leads.
 
 **Pendências da empresa:**
 1. Prazo de guarda dos dados na Política de Privacidade — no site está a sugestão de
