@@ -370,6 +370,15 @@ const camposOrigem = [
       }).catch((e) => console.warn(`[formulário] falha ao enviar "${form}":`, e));
     }
 
+    // Pixel da Meta (código base no Base.astro). Só o NOME do evento vai pra
+    // Meta — nunca as respostas: gravidez é dado de saúde. O eventID usa o
+    // código da mãe, pra a Meta não contar duas vezes quando a API de
+    // Conversões mandar o mesmo evento pelo servidor.
+    function rastrear(evento: string, sufixo: string) {
+      const fbq = (window as unknown as { fbq?: (...a: unknown[]) => void }).fbq;
+      if (fbq && idLead) fbq('track', evento, {}, { eventID: `${sufixo}-${idLead}` });
+    }
+
     function linkFinal() {
       const linhas = [dlg.dataset.mensagem || '', '', 'Respondi a análise no site:'];
       const itens: [string, string | undefined][] = [
@@ -389,6 +398,7 @@ const camposOrigem = [
       ['situacao', 'idade', 'trabalho', 'contribuiu', 'tempo', 'seguro', 'recebeu', 'pedido', 'beneficios', 'desfecho']
         .forEach((c) => { if (rotulo[c]) envio[c] = rotulo[c]; });
       enviar('analise-completa', envio);
+      rastrear('CompleteRegistration', 'analise');
       const link = linkFinal();
       dlg.querySelectorAll<HTMLAnchorElement>('[data-link-final]').forEach((a) => { a.href = link; a.target = '_blank'; a.rel = 'noopener'; });
       dlg.querySelectorAll('[data-nome]').forEach((el) => { el.textContent = primeiroNome(); });
@@ -416,7 +426,12 @@ const camposOrigem = [
       }
       rotulo.nome = nome;
       rotulo.whatsapp = fZap.value;
-      if (!enviouInicial) { idLead = novoId(); enviar('contato-inicial', dadosBase()); enviouInicial = true; }
+      if (!enviouInicial) {
+        idLead = novoId();
+        enviar('contato-inicial', dadosBase());
+        rastrear('Lead', 'lead');
+        enviouInicial = true;
+      }
       ir('situacao');
     }
 
@@ -454,6 +469,9 @@ const camposOrigem = [
     dlg.addEventListener('click', (e) => {
       const alvo = e.target as HTMLElement;
       if (alvo === dlg) { dlg.close(); return; } // clique fora do cartão
+
+      // Botão final que abre o WhatsApp com o resumo (o link segue normal)
+      if (alvo.closest('[data-link-final]')) { rastrear('Contact', 'whatsapp'); return; }
 
       const opcao = alvo.closest<HTMLButtonElement>('.opcao[data-campo]');
       if (opcao) {

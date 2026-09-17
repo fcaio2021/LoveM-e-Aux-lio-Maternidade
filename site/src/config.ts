@@ -60,6 +60,17 @@ export const valores = {
  * Colar aqui o link do "App da Web" (termina em /exec). Vazio = o formulário
  * funciona normalmente, mas NÃO salva os contatos (só avisa no console).
  */
+/**
+ * Pixel da Meta (conjunto de dados "LoveMãe Site", criado em 17/09/2026).
+ * Vazio = o site funciona sem Pixel. Eventos: PageView (toda página), Lead
+ * (deixou nome + WhatsApp), CompleteRegistration (terminou a análise) e Contact
+ * (tocou pra ir pro WhatsApp no fim). NUNCA mandar as respostas do formulário:
+ * gravidez é dado de saúde (LGPD) e a Meta proíbe esse dado no Pixel.
+ */
+export const metaPixel = {
+  id: '1104915952108605',
+};
+
 export const envioLeads = {
   url: 'https://script.google.com/macros/s/AKfycbwsBE7AbIb4qKxmsDE2rdiWiOhfRhJg8b8G3ExUUKnFNQIWZ6oNEPsqvaDFHgjsXeFH/exec',
 };
