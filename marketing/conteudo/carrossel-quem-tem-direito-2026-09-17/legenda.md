@@ -40,8 +40,13 @@ Não achou a sua situação? Cada história é diferente — a gente confere pra
 
 ## Primeiro comentário
 
-Descubra em 2 minutos se você tem direito 👉
-https://www.lovemaeauxiliomaternidade.com.br/?utm_source=instagram&utm_medium=post&utm_campaign=trilogia-quem-tem-direito
+⚠️ Link em comentário **não é clicável** no Instagram — só o da bio é. Descoberto na
+publicação do post 1, em 18/09/2026. Por isso o comentário aponta o caminho em vez de
+tentar levar o clique, e usa a menção do perfil, que é clicável.
+
+Não achou o seu caso? A gente confere pra você, de graça e em 2 minutos 💗
+
+👉 É só tocar em @lovemaeauxiliomaternidade aqui em cima e clicar no link da bio.
 
 ## Arquivos
 

@@ -35,8 +35,13 @@ pra você focar no que importa: o seu bebê. 💗
 
 ## Primeiro comentário
 
-Quer saber se você tem direito? A análise é gratuita e leva 2 minutos 👉
-https://www.lovemaeauxiliomaternidade.com.br/?utm_source=instagram&utm_medium=post&utm_campaign=trilogia-o-que-e
+⚠️ Link em comentário **não é clicável** no Instagram — só o da bio é. Descoberto na
+publicação do post 1, em 18/09/2026. Por isso o comentário aponta o caminho em vez de
+tentar levar o clique, e usa a menção do perfil, que é clicável.
+
+Quer saber se você tem direito? A análise é gratuita e leva 2 minutos 💗
+
+👉 É só tocar em @lovemaeauxiliomaternidade aqui em cima e clicar no link da bio.
 
 ## Arquivos
 

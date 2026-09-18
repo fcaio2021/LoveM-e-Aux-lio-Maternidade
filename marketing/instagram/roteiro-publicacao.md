@@ -39,7 +39,12 @@ Para cada post:
 1. Selecionar os slides em ordem (`slide-1.png`, `slide-2.png`, …)
 2. **Não aplicar filtro** e não recortar — as artes já saem em 1080×1350
 3. Colar a legenda do `legenda.md` da pasta
-4. Publicar e, logo em seguida, colar o **primeiro comentário** (o link com UTM)
+4. Publicar e, logo em seguida, colar o **primeiro comentário** do `legenda.md`
+
+⚠️ Link em comentário **não é clicável** no Instagram — só o da bio. O primeiro comentário
+serve para apontar o caminho (menção do perfil → link da bio), não para levar o clique.
+Por isso a medição por post não existe hoje: todo lead entra pelo link da bio, marcado como
+`utm_medium=bio`. Para separar por post seria preciso uma página de links na bio.
 
 ## Etapa 3 — Fixar os três
 

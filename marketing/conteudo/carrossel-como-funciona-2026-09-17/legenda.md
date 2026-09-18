@@ -32,8 +32,13 @@ A análise é gratuita e sem compromisso: você só decide depois de saber se te
 
 ## Primeiro comentário
 
-Comece a sua análise gratuita aqui 👉
-https://www.lovemaeauxiliomaternidade.com.br/?utm_source=instagram&utm_medium=post&utm_campaign=trilogia-como-funciona
+⚠️ Link em comentário **não é clicável** no Instagram — só o da bio é. Descoberto na
+publicação do post 1, em 18/09/2026. Por isso o comentário aponta o caminho em vez de
+tentar levar o clique, e usa a menção do perfil, que é clicável.
+
+Quer começar a sua análise? É gratuita e leva 2 minutos 💗
+
+👉 É só tocar em @lovemaeauxiliomaternidade aqui em cima e clicar no link da bio.
 
 ## Arquivos
 
