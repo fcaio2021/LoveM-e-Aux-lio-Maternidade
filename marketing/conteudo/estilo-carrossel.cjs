@@ -190,7 +190,7 @@ const fechamento = ({ cor = ROSA, kicker, titulo, corpo, n }) => `${base}
       <p class="kicker">${kicker}</p><div class="regua"></div>
       <h2>${titulo}</h2>
       ${corpo ? `<p style="margin-top:32px">${corpo}</p>` : ''}
-      <p style="margin-top:44px"><span class="pill">👉 Link na bio</span></p>
+      <p style="margin-top:44px"><span class="pill">Link na bio</span></p>
     </div>
     ${rodape(n, true)}
   </body>`;
