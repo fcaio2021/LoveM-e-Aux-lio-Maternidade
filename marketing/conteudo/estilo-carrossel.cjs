@@ -128,6 +128,24 @@ const texto = ({ kicker, titulo, corpo, extra = '', passo, cor, n }) => `${base}
     ${rodape(n, !!cor)}
   </body>`;
 
+/**
+ * Slide com dois assuntos na mesma imagem (um em cima, outro embaixo), separados
+ * por um fio. Serve pra juntar dois perfis parecidos e encurtar o carrossel.
+ */
+const duplo = ({ blocos, n }) => `${base}
+  <body>${marca(false)}
+    <div class="caixa" style="gap:56px">
+      ${blocos.map((b, i) => `
+        ${i ? '<hr style="border:0;border-top:1px solid rgba(26,37,48,.12)">' : ''}
+        <div>
+          <p class="kicker">${b.kicker}</p><div class="regua" style="margin:18px 0 20px"></div>
+          <h2 style="font-size:54px">${b.titulo}</h2>
+          ${b.corpo ? `<p style="margin-top:22px;font-size:34px">${b.corpo}</p>` : ''}
+        </div>`).join('')}
+    </div>
+    ${rodape(n, false)}
+  </body>`;
+
 /** Slide com foto sangrando embaixo. */
 const comFoto = ({ kicker, titulo, corpo, foto, posicao = 'center 20%', altura = 620, passo, cor, n }) => `${base}
   <body${cor ? ` style="background:${cor}"` : ''}>
@@ -183,5 +201,5 @@ async function renderizar(pasta, slides) {
 
 module.exports = {
   ROSA, AZUL, ROSA_TEXTO, ESCURO, APOIO, FUNDO,
-  base, capa, texto, comFoto, fechamento, renderizar, config, VARIACOES,
+  base, capa, texto, duplo, comFoto, fechamento, renderizar, config, VARIACOES,
 };
