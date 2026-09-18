@@ -65,10 +65,15 @@ Política de Privacidade.
   Conta de anúncios "LoveMãe Auxílio Maternidade" (ID 1099371686260745, BRL, São Paulo,
   saldo pré-pago — pausa quando zera) ligada ao Pixel. Instagram @lovemaeauxiliomaternidade
   (ID 17841426616101590) no portfólio, ligado à Página e à conta de anúncios.
+- ✅ **Instagram (18/09/2026)** — perfil @lovemaeauxiliomaternidade montado (foto, nome,
+  bio, link com UTM, botões de WhatsApp e e-mail, categoria Serviço financeiro) e a
+  trilogia fixada no ar: "O que é o auxílio-maternidade?", "Será que eu tenho direito?" e
+  "Como funciona com a LoveMãe". Artes e legendas em `marketing/conteudo/`, passo a passo
+  em `marketing/instagram/roteiro-publicacao.md`.
 
-**Próximos passos (antes do primeiro anúncio):** vitrine do Instagram e da Página (foto,
-capa, bio, destaques, primeiros posts) → criativos do Meta Ads → campanha de Leads
-otimizada pelo evento Lead → Google Search Console → CRM e dashboard pros leads.
+**Próximos passos (antes do primeiro anúncio):** completar a Fase 1 do feed (9 posts) e os
+destaques → criativos do Meta Ads → campanha de Leads otimizada pelo evento Lead →
+Google Search Console → CRM e dashboard pros leads.
 
 **Pendências da empresa:**
 1. Prazo de guarda dos dados na Política de Privacidade — no site está a sugestão de
@@ -78,10 +83,15 @@ otimizada pelo evento Lead → Google Search Console → CRM e dashboard pros le
 **Público chega 100% pelo celular:** site, formulário e peças são pensados primeiro pro celular. A conversão no celular é o que decide.
 
 **Próximas prioridades (atacam o gargalo direto):**
-- Criar o @ do Instagram — destrava os carrosséis
-- Montar linha editorial do Instagram (pilares de conteúdo, formatos, frequência)
-- Produzir os primeiros carrosséis-base: "Quem tem direito?", "O que é o auxílio
-  maternidade?", "Como solicitar", "Mitos e verdades"
+- Publicar os destaques (cada um precisa de um story dentro pra aparecer no perfil)
+- Produzir os posts 4 a 9 da Fase 1 do plano estratégico — 9 posts é o mínimo antes de
+  ligar mídia paga
+- Definir o prazo de guarda dos dados na Política de Privacidade
+
+**Instagram — link só funciona na bio:** link em legenda ou comentário não é clicável.
+O primeiro comentário aponta o caminho pela menção @lovemaeauxiliomaternidade, que é
+clicável. Consequência: não dá pra medir lead por post (todos entram como `utm_medium=bio`)
+— só com uma página de links na bio, quando houver volume.
 
 ## O que pode esperar
 
