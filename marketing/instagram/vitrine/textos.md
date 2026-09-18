@@ -26,21 +26,22 @@ LoveMãe | Auxílio Maternidade
 
 **Botões de contato:** WhatsApp (11) 96963-9342 · e-mail contato@lovemaeauxiliomaternidade.com.br
 
-**Destaques** (revistos em 18/09/2026 — 6 capas alternando as duas cores do logo;
-capas em `destaques/`, prévia em `previa-destaques.png`):
+**Destaques** (revistos em 18/09/2026 — 6 capas alternando as duas cores do logo,
+ícone sólido ocupando quase todo o círculo; capas em `destaques/`, prévia em
+`previa-destaques.png`):
 
-| # | Nome no Instagram | Cor | Arquivo |
-|---|---|---|---|
-| 1 | O que é? | `#FF0076` rosa do logo | `1-o-que-e.png` |
-| 2 | Quem tem direito | `#0038E5` azul do logo | `2-quem-tem-direito.png` |
-| 3 | Qual valor? | `#FF0076` | `3-qual-valor.png` |
-| 4 | Como funciona | `#0038E5` | `4-como-funciona.png` |
-| 5 | Dúvidas | `#FF0076` | `5-duvidas.png` |
-| 6 | Depoimentos | `#0038E5` | `6-depoimentos.png` |
+| # | Nome no Instagram | Cor | Ícone | Arquivo |
+|---|---|---|---|---|
+| 1 | Com a LoveMãe | `#FF0076` | coração | `1-com-a-lovemae.png` |
+| 2 | Como Solicitar? | `#0038E5` | prancheta com check | `2-como-solicitar.png` |
+| 3 | Quem tem Direito? | `#FF0076` | escudo com check | `3-quem-tem-direito.png` |
+| 4 | Qual valor? | `#0038E5` | moeda com cifrão | `4-qual-valor.png` |
+| 5 | Perguntas? | `#FF0076` | interrogação | `5-perguntas.png` |
+| 6 | Depoimentos | `#0038E5` | balão com estrela | `6-depoimentos.png` |
 
-Testadas seis variações de tom em 18/09/2026 e descartadas: com seis cores a linha fica
-poluída. Só as duas do logo. Os pastéis da marca (`#FAA9C7`, `#80BBEF`) também estão
-fora — com ícone branco dão 1,8:1 e 2,0:1, abaixo do mínimo de 3:1 para símbolo.
+Descartado em 18/09/2026: seis tons diferentes (linha poluída) e ícone de traço fino
+(sumia na miniatura). Os pastéis da marca (`#FAA9C7`, `#80BBEF`) também estão fora —
+com ícone branco dão 1,8:1 e 2,0:1, abaixo do mínimo de 3:1 para símbolo.
 
 ⚠️ **Depoimentos** só entra quando houver depoimento com autorização por escrito.
 Destaque vazio, ou com print de conversa sem permissão, é pior que destaque nenhum.

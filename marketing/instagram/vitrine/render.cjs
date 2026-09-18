@@ -9,41 +9,46 @@ const fs = require('fs');
 
 const ROSA = '#FF0076';
 const FONTE = '<link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700;800&display=swap" rel="stylesheet">';
-const traco = 'fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"';
 
 // Só as duas cores do logo, alternando (decisão de 18/09/2026: seis tons ficaram
-// poluídos). Ambas passam com folga no mínimo de 3:1 para ícone branco.
-const AZUL = "#0038E5"; // 7,79:1
+// poluídos). Ícones sólidos e grandes, quase preenchendo o círculo (18/09/2026) —
+// traço fino sumia na miniatura do perfil.
+const AZUL = "#0038E5"; // 7,79:1 no branco · ROSA #FF0076 dá 3,81:1
 const destaques = [
   {
-    nome: "1-o-que-e", rotulo: "O que é?", cor: ROSA,
-    svg: `<path d="M60 36c-8-8-20-12-34-12v60c14 0 26 4 34 12 8-8 20-12 34-12V24c-14 0-26 4-34 12Z"/><path d="M60 36v60"/>`,
+    nome: "1-com-a-lovemae", rotulo: "Com a LoveMãe", cor: ROSA,
+    svg: () => `<path d="M60 106S10 76 10 42A26 26 0 0 1 60 27 26 26 0 0 1 110 42c0 34-50 64-50 64Z" fill="#fff"/>`,
   },
   {
-    nome: "2-quem-tem-direito", rotulo: "Quem tem direito", cor: AZUL,
-    svg: `<path d="M60 14 22 28v28c0 26 16 42 38 50 22-8 38-24 38-50V28Z"/><path d="m42 60 13 13 25-27"/>`,
+    nome: "2-como-solicitar", rotulo: "Como Solicitar?", cor: AZUL,
+    svg: (c) => `<rect x="16" y="18" width="88" height="96" rx="14" fill="#fff"/>
+      <rect x="42" y="6" width="36" height="22" rx="11" fill="#fff"/>
+      <path d="m36 66 15 15 33-35" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    nome: "3-qual-valor", rotulo: "Qual valor?", cor: ROSA,
-    svg: `<circle cx="60" cy="60" r="44"/><path d="M60 30v60"/><path d="M75 45c0-6-7-10-15-10s-15 4-15 10 7 9 15 11 15 5 15 11-7 10-15 10-15-4-15-10"/>`,
+    nome: "3-quem-tem-direito", rotulo: "Quem tem Direito?", cor: ROSA,
+    svg: (c) => `<path d="M60 6 12 24v32c0 32 19 52 48 62 29-10 48-30 48-62V24Z" fill="#fff"/>
+      <path d="m38 60 15 15 31-33" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    nome: "4-como-funciona", rotulo: "Como funciona", cor: AZUL,
-    svg: `<rect x="22" y="16" width="76" height="92" rx="12"/><path d="M40 16v-4h40v4"/><path d="m36 46 7 7 12-13M36 78l7 7 12-13M66 48h18M66 80h18"/>`,
+    nome: "4-qual-valor", rotulo: "Qual valor?", cor: AZUL,
+    svg: (c) => `<circle cx="60" cy="60" r="54" fill="#fff"/>
+      <text x="60" y="92" text-anchor="middle" font-family="Onest,sans-serif" font-size="92" font-weight="800" fill="${c}">$</text>`,
   },
   {
-    nome: "5-duvidas", rotulo: "Dúvidas", cor: ROSA,
-    svg: `<path d="M16 32a8 8 0 0 1 8-8h72a8 8 0 0 1 8 8v40a8 8 0 0 1-8 8H54L32 98V80h-8a8 8 0 0 1-8-8V32Z"/><path d="M50 44a10 10 0 1 1 14 9c-3 2-4 4-4 7"/><circle cx="60" cy="66" r="2.5" fill="#fff"/>`,
+    nome: "5-perguntas", rotulo: "Perguntas?", cor: ROSA,
+    svg: () => `<text x="60" y="102" text-anchor="middle" font-family="Onest,sans-serif" font-size="126" font-weight="800" fill="#fff">?</text>`,
   },
   {
     nome: "6-depoimentos", rotulo: "Depoimentos", cor: AZUL,
-    svg: `<path d="M16 32a8 8 0 0 1 8-8h72a8 8 0 0 1 8 8v40a8 8 0 0 1-8 8H54L32 98V80h-8a8 8 0 0 1-8-8V32Z"/><path d="m60 34 6 13 14 2-10 10 3 14-13-7-13 7 3-14-10-10 14-2Z"/>`,
+    svg: (c) => `<path d="M10 26a14 14 0 0 1 14-14h72a14 14 0 0 1 14 14v46a14 14 0 0 1-14 14H58L30 112V86h-6a14 14 0 0 1-14-14V26Z" fill="#fff"/>
+      <path d="m60 28 9 18 20 3-14 14 3 20-18-10-18 10 3-20-14-14 20-3Z" fill="${c}"/>`,
   },
 ];
 
-const destaqueHtml = ({ svg, cor }) => `<!doctype html><html><head><meta charset="utf-8"><style>
+const destaqueHtml = ({ svg, cor }) => `<!doctype html><html><head><meta charset="utf-8">${FONTE}<style>
 *{margin:0}body{width:1080px;height:1920px;background:${cor};display:grid;place-items:center}
-svg{width:430px;height:430px}</style></head><body><svg viewBox="0 0 120 120" ${traco}>${svg}</svg></body></html>`;
+svg{width:780px;height:780px}</style></head><body><svg viewBox="0 0 120 120">${svg(cor)}</svg></body></html>`;
 
 // Prévia: os seis como o Instagram mostra — círculo com anel branco e o nome embaixo.
 const previaHtml = `<!doctype html><html><head><meta charset="utf-8">${FONTE}<style>
@@ -57,7 +62,7 @@ body{width:1400px;height:340px;background:#fff;font-family:Onest,sans-serif;colo
 .rotulo{font-size:25px;font-weight:600}
 </style></head><body>
 ${destaques.map((d) => `<div class="item"><div class="anel"><div class="circulo" style="background:${d.cor}">
-<svg viewBox="0 0 120 120" ${traco}>${d.svg}</svg></div></div>
+<svg viewBox="0 0 120 120">${d.svg(d.cor)}</svg></div></div>
 <p class="rotulo">${d.rotulo}</p></div>`).join('')}
 </body></html>`;
 
