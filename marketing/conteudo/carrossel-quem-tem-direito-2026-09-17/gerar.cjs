@@ -75,8 +75,8 @@ e.renderizar(__dirname, [
     nome: 'slide-5.png',
     html: e.fechamento({
       kicker: 'Análise gratuita',
-      titulo: 'Não achou o seu caso? A gente confere para você.',
-      corpo: 'Cada história é diferente. Responda 6 perguntas e descubra em 2 minutos — <strong style="color:#fff">de graça e sem compromisso</strong>.',
+      titulo: 'Ficou na dúvida se tem direito?',
+      corpo: 'Veja se você tem direito ao auxílio-maternidade! Clique no link da bio e faça o teste em 2 minutos. <strong style="color:#fff">Análise totalmente gratuita e sem qualquer compromisso.</strong>',
       n: 5,
     }),
   },
