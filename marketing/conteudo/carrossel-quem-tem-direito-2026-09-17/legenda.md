@@ -1,7 +1,7 @@
 # Carrossel 2 da trilogia — "Será que eu tenho direito?"
 
 Produzido em 17/09/2026. Post **fixado** no topo do perfil (o do meio).
-6 slides, 1080×1350. Capa rosa (decisão de 17/09/2026).
+5 slides, 1080×1350. Capa rosa (decisão de 17/09/2026).
 
 ⚠️ **Antes de publicar:** o time de operação precisa conferir as regras citadas —
 carência de 10 meses para MEI/autônoma, segurada especial rural, período de graça
@@ -49,9 +49,8 @@ https://www.lovemaeauxiliomaternidade.com.br/?utm_source=instagram&utm_medium=po
 | 1 (capa) | `slide-1.png` |
 | 2 — carteira assinada + MEI/autônoma | `slide-2.png` |
 | 3 — doméstica e rural | `slide-3.png` |
-| 4 — desempregada | `slide-4.png` |
-| 5 — prazo de 4 anos e 11 meses | `slide-5.png` |
-| 6 — CTA | `slide-6.png` |
+| 4 — desempregada + prazo de 4 anos e 11 meses | `slide-4.png` |
+| 5 — CTA | `slide-5.png` |
 
 Regerar: `NODE_PATH=../../../identidade/propostas/node_modules node gerar.cjs`
 Estilo compartilhado: `../estilo-carrossel.cjs`

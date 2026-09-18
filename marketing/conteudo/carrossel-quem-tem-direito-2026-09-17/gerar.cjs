@@ -40,34 +40,31 @@ e.renderizar(__dirname, [
     }),
   },
   {
+    // Desempregada e prazo juntos, no mesmo formato do slide 2 (17/09/2026)
     nome: 'slide-4.png',
-    html: e.texto({
-      kicker: 'Desempregada',
-      titulo: 'Parou de trabalhar? Você pode continuar segurada.',
-      corpo: 'É o <strong>período de graça</strong>: em geral até 12 meses depois da última contribuição, e em alguns casos até 36.',
+    html: e.duplo({
+      blocos: [
+        {
+          kicker: 'Desempregada',
+          titulo: 'Parou de trabalhar? Você pode continuar segurada.',
+          corpo: 'É o <strong>período de graça</strong>: em geral até 12 meses depois da última contribuição, e em alguns casos até 36.',
+        },
+        {
+          kicker: 'O bebê já nasceu',
+          titulo: 'Não perdeu o prazo só porque o bebê cresceu.',
+          corpo: 'Dá para pedir até o seu filho completar <strong>4 anos e 11 meses</strong>. Depois disso, o direito prescreve.',
+        },
+      ],
       n: 4,
     }),
   },
   {
     nome: 'slide-5.png',
-    html: e.texto({
-      kicker: 'O bebê já nasceu',
-      titulo: 'Não perdeu o prazo só porque o bebê cresceu.',
-      extra: `<div class="valor" style="margin-top:44px">
-        <span>Dá para pedir até o seu filho completar</span>
-        <b>4 anos e 11 meses</b></div>
-        <p style="margin-top:36px">Depois disso, o direito prescreve. <strong>Quanto antes você
-        checar, melhor.</strong></p>`,
-      n: 5,
-    }),
-  },
-  {
-    nome: 'slide-6.png',
     html: e.fechamento({
       kicker: 'Análise gratuita',
       titulo: 'Não achou o seu caso? A gente confere para você.',
       corpo: 'Cada história é diferente. Responda 6 perguntas e descubra em 2 minutos — <strong style="color:#fff">de graça e sem compromisso</strong>.',
-      n: 6,
+      n: 5,
     }),
   },
 ]);

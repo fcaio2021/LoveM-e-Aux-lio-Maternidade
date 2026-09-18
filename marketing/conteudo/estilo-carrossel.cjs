@@ -134,9 +134,8 @@ const texto = ({ kicker, titulo, corpo, extra = '', passo, cor, n }) => `${base}
  */
 const duplo = ({ blocos, n }) => `${base}
   <body>${marca(false)}
-    <div class="caixa" style="gap:56px">
-      ${blocos.map((b, i) => `
-        ${i ? '<hr style="border:0;border-top:1px solid rgba(26,37,48,.12)">' : ''}
+    <div class="caixa" style="gap:76px">
+      ${blocos.map((b) => `
         <div>
           <p class="kicker">${b.kicker}</p><div class="regua" style="margin:18px 0 20px"></div>
           <h2 style="font-size:54px">${b.titulo}</h2>
