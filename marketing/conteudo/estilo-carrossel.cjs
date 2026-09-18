@@ -26,7 +26,7 @@ const base = `<meta charset="utf-8">
   body{width:1080px;height:1350px;overflow:hidden;font-family:Onest,sans-serif;color:${ESCURO};
        background:${FUNDO};position:relative}
   /* Coração da marca em segundo plano: grande, sangrando pelo canto e bem discreto */
-  .marca{position:absolute;right:-180px;bottom:-150px;width:820px;pointer-events:none}
+  .marca{position:absolute;pointer-events:none}
   .caixa{position:absolute;inset:0;padding:84px 78px;display:flex;flex-direction:column;
          justify-content:center}
   /* Corpos de texto grandes: a mãe lê no celular, quase sempre com pressa (17/09/2026) */
@@ -57,10 +57,26 @@ const base = `<meta charset="utf-8">
         padding:22px 44px;border-radius:999px}
 </style>`;
 
+// Coração de fundo: posição e tamanho escolhidos em `config.marca`.
+// Variações desenhadas em 17/09/2026 pra comparação (ver prévia na pasta da trilogia).
+const VARIACOES = {
+  canto: 'right:-180px;bottom:-150px;width:820px',
+  'canto-grande': 'right:-240px;bottom:-230px;width:1150px',
+  tela: 'left:50%;top:50%;transform:translate(-50%,-50%);width:1280px',
+  direita: 'right:-300px;top:50%;transform:translateY(-50%);width:1200px',
+  esquerda: 'left:-320px;bottom:-120px;width:1150px',
+  topo: 'right:-200px;top:-260px;width:1050px',
+};
+
+const config = { marca: 'canto', opacidadeClara: 0.07, opacidadeColorida: 0.13 };
+
 /** Coração de fundo: branco e translúcido no fundo colorido, rosa clarinho no fundo claro. */
-const marca = (colorido) => colorido
-  ? `<img class="marca" src="simbolo-branco.png" style="opacity:.13">`
-  : `<img class="marca" src="simbolo.png" style="opacity:.07">`;
+const marca = (colorido) => {
+  const pos = VARIACOES[config.marca] || VARIACOES.canto;
+  const opacidade = colorido ? config.opacidadeColorida : config.opacidadeClara;
+  const arquivo = colorido ? 'simbolo-branco.png' : 'simbolo.png';
+  return `<img class="marca" src="${arquivo}" style="${pos};opacity:${opacidade}">`;
+};
 
 const rodape = (n, colorido) =>
   `<img class="logo" src="${colorido ? 'logo-branco.png' : 'logo.png'}">
@@ -143,4 +159,7 @@ async function renderizar(pasta, slides) {
   console.log(`${slides.length} slides gerados em ${path.basename(pasta)}`);
 }
 
-module.exports = { ROSA, AZUL, ROSA_TEXTO, ESCURO, APOIO, FUNDO, base, capa, texto, comFoto, fechamento, renderizar };
+module.exports = {
+  ROSA, AZUL, ROSA_TEXTO, ESCURO, APOIO, FUNDO,
+  base, capa, texto, comFoto, fechamento, renderizar, config, VARIACOES,
+};

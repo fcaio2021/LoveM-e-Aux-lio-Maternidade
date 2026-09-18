@@ -1,7 +1,7 @@
 # Carrossel 3 da trilogia — "Como funciona com a LoveMãe"
 
 Produzido em 17/09/2026. Post **fixado** no topo do perfil (o terceiro).
-6 slides, 1080×1350. Duas versões de capa (rosa e azul).
+6 slides, 1080×1350. Capa rosa (decisão de 17/09/2026).
 
 ⚠️ **Antes de publicar:** o time de operação precisa confirmar que o passo a passo
 descreve o processo real (análise → contato no WhatsApp → entrada e acompanhamento no INSS).
@@ -39,8 +39,7 @@ https://www.lovemaeauxiliomaternidade.com.br/?utm_source=instagram&utm_medium=po
 
 | Slide | Arquivo |
 |---|---|
-| 1 (capa rosa) | `slide-1-capa-rosa.png` |
-| 1 (capa azul) | `slide-1-capa-azul.png` |
+| 1 (capa) | `slide-1.png` |
 | 2 — passo 1 | `slide-2.png` |
 | 3 — passo 2 | `slide-3.png` |
 | 4 — passo 3 | `slide-4.png` |

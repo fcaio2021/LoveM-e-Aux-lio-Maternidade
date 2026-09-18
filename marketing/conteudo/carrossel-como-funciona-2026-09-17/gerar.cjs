@@ -2,19 +2,15 @@
 // Uso: NODE_PATH=../../../identidade/propostas/node_modules node gerar.cjs
 const e = require('../estilo-carrossel.cjs');
 
-const capa = (cor, nome) => ({
-  nome,
-  html: e.capa({
-    cor,
-    kicker: 'Passo a passo',
-    titulo: 'Como funciona<br>com a LoveMãe',
-    sub: 'Do primeiro clique<br>até o INSS pagar.',
-  }),
-});
-
 e.renderizar(__dirname, [
-  capa(e.ROSA, 'slide-1-capa-rosa.png'),
-  capa(e.AZUL, 'slide-1-capa-azul.png'),
+  {
+    nome: 'slide-1.png',
+    html: e.capa({
+      kicker: 'Passo a passo',
+      titulo: 'Como funciona<br>com a LoveMãe',
+      sub: 'Do primeiro clique<br>até o INSS pagar.',
+    }),
+  },
   {
     nome: 'slide-2.png',
     html: e.texto({

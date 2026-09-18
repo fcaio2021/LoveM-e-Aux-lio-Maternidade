@@ -1,7 +1,7 @@
 # Carrossel 1 da trilogia — "O que é o auxílio-maternidade?"
 
 Produzido em 17/09/2026. Post **fixado** no topo do perfil.
-5 slides, 1080×1350. Duas versões de capa (rosa e azul) — escolher uma antes de publicar.
+5 slides, 1080×1350. Capa rosa (decisão de 17/09/2026).
 
 ⚠️ **Antes de publicar:** o time de operação precisa conferir as regras citadas
 (parto, adoção, guarda judicial, perda gestacional e a faixa de valor).
@@ -12,16 +12,11 @@ Você sabe o que é o auxílio-maternidade? 💗
 
 É um pagamento do INSS pra você poder cuidar do seu bebê sem perder a renda. Simples assim.
 
-Mas muita mãe só descobre esse direito quando já passou do prazo — e é justamente isso que a gente quer evitar.
+Ele garante a proteção e a estabilidade financeira que a sua família precisa nesse momento tão especial — pra você focar no seu bebê com a renda protegida.
 
-Ele vale para:
-✔️ parto
-✔️ adoção ou guarda judicial
-✔️ casos de perda gestacional
+Mas muita mãe só descobre esse direito quando já passou do prazo, e é justamente isso que a gente quer evitar.
 
-E não é só pra quem está grávida agora: se o seu bebê já nasceu, você ainda pode ter direito.
-
-As mães que atendemos recebem de R$ 6.900 a R$ 15.900, conforme o caso de cada uma.
+É um direito de mães biológicas e adotivas, e você pode receber de R$ 6.900 a R$ 15.900. Se você já contribuiu com o INSS, pode ter esse dinheiro a receber.
 
 ➡️ Arraste pro lado e entenda como funciona.
 
@@ -47,8 +42,7 @@ https://www.lovemaeauxiliomaternidade.com.br/?utm_source=instagram&utm_medium=po
 
 | Slide | Arquivo |
 |---|---|
-| 1 (capa rosa) | `slide-1-capa-rosa.png` |
-| 1 (capa azul) | `slide-1-capa-azul.png` |
+| 1 (capa) | `slide-1.png` |
 | 2 — o que é | `slide-2.png` |
 | 3 — quando vale | `slide-3.png` |
 | 4 — quanto é | `slide-4.png` |
