@@ -1,5 +1,6 @@
 // Vitrine do Instagram e da Página do Facebook (17/09/2026).
-// Gera: destaques/*.png (capas dos destaques, 1080×1920) e capa-facebook.png (1640×856).
+// Destaques revistos em 18/09/2026: 6 capas alternando 3 tons de rosa e 3 de azul.
+// Gera: destaques/*.png (1080×1920), previa-destaques.png e capa-facebook.png (1640×856).
 // Uso (desta pasta): NODE_PATH=../../../identidade/propostas/node_modules node render.cjs
 const { chromium } = require('playwright');
 const { pathToFileURL } = require('url');
@@ -10,18 +11,54 @@ const ROSA = '#FF0076';
 const FONTE = '<link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700;800&display=swap" rel="stylesheet">';
 const traco = 'fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"';
 
-// Ícones de traço, no centro da capa (o Instagram mostra só o círculo do meio)
-const destaques = {
-  '1-direitos': `<svg viewBox="0 0 120 120" ${traco}><path d="M60 14 22 28v28c0 26 16 42 38 50 22-8 38-24 38-50V28Z"/><path d="m42 60 13 13 25-27"/></svg>`,
-  '2-como-funciona': `<svg viewBox="0 0 120 120" ${traco}><rect x="22" y="16" width="76" height="92" rx="12"/><path d="M40 16v-4h40v4"/><path d="m36 46 7 7 12-13M36 78l7 7 12-13M66 48h18M66 80h18"/></svg>`,
-  '3-duvidas': `<svg viewBox="0 0 120 120" ${traco}><circle cx="60" cy="60" r="44"/><path d="M45 47a15 15 0 1 1 22 13c-5 3-7 6-7 11"/><circle cx="60" cy="86" r="2.5" fill="#fff"/></svg>`,
-  '4-sobre-nos': `<svg viewBox="0 0 120 120" ${traco}><path d="M60 100S16 74 16 44a22 22 0 0 1 44-6 22 22 0 0 1 44 6c0 30-44 56-44 56Z"/></svg>`,
-  '5-fale-conosco': `<svg viewBox="0 0 120 120" ${traco}><path d="M20 100l6-22a42 42 0 1 1 16 15Z"/><path d="M46 44c0 16 14 30 30 30l6-8-10-6-5 4c-5-2-9-6-11-11l4-5-6-10Z" stroke-width="5"/></svg>`,
-};
+// Tons alternados rosa/azul. Todos medidos contra o branco do ícone: o mínimo para
+// símbolo é 3:1, e os pastéis da marca (#FAA9C7, #80BBEF) reprovam — o ícone sumiria.
+const destaques = [
+  {
+    nome: '1-o-que-e', rotulo: 'O que é?', cor: '#FF0076', // rosa do logo · 3,81:1
+    svg: `<path d="M60 36c-8-8-20-12-34-12v60c14 0 26 4 34 12 8-8 20-12 34-12V24c-14 0-26 4-34 12Z"/><path d="M60 36v60"/>`,
+  },
+  {
+    nome: '2-quem-tem-direito', rotulo: 'Quem tem direito', cor: '#0038E5', // azul do logo · 7,79:1
+    svg: `<path d="M60 14 22 28v28c0 26 16 42 38 50 22-8 38-24 38-50V28Z"/><path d="m42 60 13 13 25-27"/>`,
+  },
+  {
+    nome: '3-qual-valor', rotulo: 'Qual valor?', cor: '#C81B5C', // rosa profundo · 5,57:1
+    svg: `<circle cx="60" cy="60" r="44"/><path d="M60 30v60"/><path d="M75 45c0-6-7-10-15-10s-15 4-15 10 7 9 15 11 15 5 15 11-7 10-15 10-15-4-15-10"/>`,
+  },
+  {
+    nome: '4-como-funciona', rotulo: 'Como funciona', cor: '#0B6FC4', // azul médio · 5,14:1
+    svg: `<rect x="22" y="16" width="76" height="92" rx="12"/><path d="M40 16v-4h40v4"/><path d="m36 46 7 7 12-13M36 78l7 7 12-13M66 48h18M66 80h18"/>`,
+  },
+  {
+    nome: '5-duvidas', rotulo: 'Dúvidas', cor: '#FF4D9E', // rosa claro · 3,08:1
+    svg: `<path d="M16 32a8 8 0 0 1 8-8h72a8 8 0 0 1 8 8v40a8 8 0 0 1-8 8H54L32 98V80h-8a8 8 0 0 1-8-8V32Z"/><path d="M50 44a10 10 0 1 1 14 9c-3 2-4 4-4 7"/><circle cx="60" cy="66" r="2.5" fill="#fff"/>`,
+  },
+  {
+    nome: '6-depoimentos', rotulo: 'Depoimentos', cor: '#1D5386', // azul institucional · 7,97:1
+    svg: `<path d="M16 32a8 8 0 0 1 8-8h72a8 8 0 0 1 8 8v40a8 8 0 0 1-8 8H54L32 98V80h-8a8 8 0 0 1-8-8V32Z"/><path d="m60 34 6 13 14 2-10 10 3 14-13-7-13 7 3-14-10-10 14-2Z"/>`,
+  },
+];
 
-const destaqueHtml = (svg) => `<!doctype html><html><head><meta charset="utf-8"><style>
-*{margin:0}body{width:1080px;height:1920px;background:${ROSA};display:grid;place-items:center}
-svg{width:430px;height:430px}</style></head><body>${svg}</body></html>`;
+const destaqueHtml = ({ svg, cor }) => `<!doctype html><html><head><meta charset="utf-8"><style>
+*{margin:0}body{width:1080px;height:1920px;background:${cor};display:grid;place-items:center}
+svg{width:430px;height:430px}</style></head><body><svg viewBox="0 0 120 120" ${traco}>${svg}</svg></body></html>`;
+
+// Prévia: os seis como o Instagram mostra — círculo com anel branco e o nome embaixo.
+const previaHtml = `<!doctype html><html><head><meta charset="utf-8">${FONTE}<style>
+*{margin:0;box-sizing:border-box}
+body{width:1400px;height:340px;background:#fff;font-family:Onest,sans-serif;color:#1A2530;
+     display:flex;align-items:center;justify-content:center;gap:44px}
+.item{width:170px;text-align:center}
+.anel{width:170px;height:170px;border-radius:50%;border:5px solid #E6E6E6;padding:7px;margin-bottom:18px}
+.circulo{width:100%;height:100%;border-radius:50%;display:grid;place-items:center}
+.circulo svg{width:78px;height:78px}
+.rotulo{font-size:25px;font-weight:600}
+</style></head><body>
+${destaques.map((d) => `<div class="item"><div class="anel"><div class="circulo" style="background:${d.cor}">
+<svg viewBox="0 0 120 120" ${traco}>${d.svg}</svg></div></div>
+<p class="rotulo">${d.rotulo}</p></div>`).join('')}
+</body></html>`;
 
 const capaHtml = `<!doctype html><html><head><meta charset="utf-8">${FONTE}<style>
 *{margin:0;box-sizing:border-box}
@@ -51,7 +88,9 @@ h1 span{color:${ROSA}}
     await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(300);
     await p.screenshot({ path: path.join(__dirname, saida) }); await p.close();
   };
-  for (const [nome, svg] of Object.entries(destaques)) await render(destaqueHtml(svg), 1080, 1920, `destaques/${nome}.png`);
+  for (const d of destaques) await render(destaqueHtml(d), 1080, 1920, `destaques/${d.nome}.png`);
+  await render(previaHtml, 1400, 340, 'previa-destaques.png');
   await render(capaHtml, 1640, 856, 'capa-facebook.png');
   fs.unlinkSync(tmp); await b.close();
+  console.log(`${destaques.length} destaques + prévia + capa do Facebook`);
 })();

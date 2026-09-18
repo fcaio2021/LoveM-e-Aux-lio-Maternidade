@@ -26,12 +26,23 @@ LoveMãe | Auxílio Maternidade
 
 **Botões de contato:** WhatsApp (11) 96963-9342 · e-mail contato@lovemaeauxiliomaternidade.com.br
 
-**Destaques** (nome ↔ capa em `destaques/`):
-1. Quem tem direito → `1-direitos.png`
-2. Como funciona → `2-como-funciona.png`
-3. Dúvidas → `3-duvidas.png`
-4. Sobre nós → `4-sobre-nos.png`
-5. Fale conosco → `5-fale-conosco.png`
+**Destaques** (revistos em 18/09/2026 — 6 capas alternando 3 tons de rosa e 3 de azul;
+capas em `destaques/`, prévia em `previa-destaques.png`):
+
+| # | Nome no Instagram | Cor | Arquivo |
+|---|---|---|---|
+| 1 | O que é? | `#FF0076` rosa do logo | `1-o-que-e.png` |
+| 2 | Quem tem direito | `#0038E5` azul do logo | `2-quem-tem-direito.png` |
+| 3 | Qual valor? | `#C81B5C` rosa profundo | `3-qual-valor.png` |
+| 4 | Como funciona | `#0B6FC4` azul médio | `4-como-funciona.png` |
+| 5 | Dúvidas | `#FF4D9E` rosa claro | `5-duvidas.png` |
+| 6 | Depoimentos | `#1D5386` azul institucional | `6-depoimentos.png` |
+
+Os tons pastel da marca (`#FAA9C7`, `#80BBEF`) ficaram de fora: com ícone branco dão
+1,8:1 e 2,0:1, abaixo do mínimo de 3:1 para símbolo — o ícone sumiria na miniatura.
+
+⚠️ **Depoimentos** só entra quando houver depoimento com autorização por escrito.
+Destaque vazio, ou com print de conversa sem permissão, é pior que destaque nenhum.
 
 Destaque só aparece no perfil se tiver pelo menos um story dentro. Enquanto não houver
 stories próprios, publicar a própria capa como story e adicionar ao destaque.
