@@ -33,14 +33,11 @@ e.renderizar(__dirname, [
   },
   {
     nome: 'slide-4.png',
-    html: e.comFoto({
+    html: e.texto({
       cor: e.AZUL,
       passo: '3',
       titulo: 'Cuidamos do pedido e acompanhamos até o fim.',
       corpo: 'Organizamos os documentos, damos entrada no INSS e acompanhamos <strong>até o pagamento cair</strong>.',
-      foto: 'foto-mae-sorrindo.jpg',
-      posicao: 'center 30%',
-      altura: 580,
       n: 4,
     }),
   },

@@ -43,14 +43,11 @@ e.renderizar(__dirname, [
   },
   {
     nome: 'slide-5.png',
-    html: e.comFoto({
+    html: e.texto({
       cor: e.AZUL,
       kicker: 'Desempregada',
       titulo: 'Parou de trabalhar? Você pode continuar segurada.',
       corpo: 'É o <strong>período de graça</strong>: em geral até 12 meses depois da última contribuição, e em alguns casos até 36.',
-      foto: 'foto-desempregada.jpg',
-      posicao: 'center 25%',
-      altura: 560,
       n: 5,
     }),
   },

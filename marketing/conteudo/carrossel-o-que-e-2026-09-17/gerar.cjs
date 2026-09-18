@@ -24,13 +24,11 @@ e.renderizar(__dirname, [
   },
   {
     nome: 'slide-3.png',
-    html: e.comFoto({
+    html: e.texto({
       cor: e.AZUL,
       kicker: 'Quando vale',
       titulo: 'O apoio para você focar apenas no seu bebê.',
       corpo: 'Com a sua <strong>renda protegida</strong> e a sua rotina mais tranquila nos primeiros meses de vida.',
-      foto: 'foto-mae-bebe.jpg',
-      altura: 660,
       n: 3,
     }),
   },

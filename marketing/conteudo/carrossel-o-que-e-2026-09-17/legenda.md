@@ -49,8 +49,3 @@ https://www.lovemaeauxiliomaternidade.com.br/?utm_source=instagram&utm_medium=po
 | 5 — CTA | `slide-5.png` |
 
 Regerar: `NODE_PATH=../../../identidade/propostas/node_modules node gerar.cjs`
-
-## Fotos
-
-- `foto-mae-bebe.jpg` — a mesma foto do site (`site/public/mae-bebe-sorriso.jpg`), de banco
-  de imagem gratuito. Créditos das fotos do projeto em `marketing/referencias/README.md`.
