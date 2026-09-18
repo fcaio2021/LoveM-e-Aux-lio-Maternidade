@@ -74,8 +74,14 @@ const VARIACOES = {
   topo: 'right:-200px;top:-260px;width:1050px',
 };
 
-// 'direita' foi a variação escolhida em 17/09/2026 (opção D da prévia).
-const config = { marca: 'direita', opacidadeClara: 0.12, opacidadeColorida: 0.13 };
+// Escolhas de 17/09/2026: slides coloridos com o coração à direita (opção D) e
+// slides brancos com ele no topo direito (opção F), que deixa o rodapé limpo.
+const config = {
+  marca: 'direita',
+  marcaClara: 'topo',
+  opacidadeClara: 0.12,
+  opacidadeColorida: 0.13,
+};
 
 /**
  * Coração de fundo: branco no slide colorido, rosa claro no slide branco.
@@ -83,7 +89,8 @@ const config = { marca: 'direita', opacidadeClara: 0.12, opacidadeColorida: 0.13
  * sai chapada — o arquivo original é azul e rosa, e não daria o tom único pedido.
  */
 const marca = (colorido) => {
-  const pos = VARIACOES[config.marca] || VARIACOES.canto;
+  const variacao = colorido ? config.marca : (config.marcaClara || config.marca);
+  const pos = VARIACOES[variacao] || VARIACOES.canto;
   const opacidade = colorido ? config.opacidadeColorida : config.opacidadeClara;
   const arquivo = colorido ? 'simbolo-branco.png' : 'simbolo-rosa.png';
   return `<img class="marca" src="${arquivo}" style="${pos};opacity:${opacidade}">`;
