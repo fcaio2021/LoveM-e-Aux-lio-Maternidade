@@ -96,9 +96,11 @@ const marca = (colorido) => {
   return `<img class="marca" src="${arquivo}" style="${pos};opacity:${opacidade}">`;
 };
 
+// O número fica fora da .caixa, então `.cheio .pagina` não o alcança: no slide
+// colorido a cor vai inline, senão ele sai cinza-escuro e some no rosa.
 const rodape = (n, colorido) =>
   `<img class="logo" src="${colorido ? 'logo-branco.png' : 'logo.png'}">
-   <span class="pagina">${n}</span>`;
+   <span class="pagina"${colorido ? ' style="color:rgba(255,255,255,.9)"' : ''}>${n}</span>`;
 
 /** Slide de abertura, em cor sólida. */
 const capa = ({ cor = ROSA, kicker, titulo, sub }) => `${base}

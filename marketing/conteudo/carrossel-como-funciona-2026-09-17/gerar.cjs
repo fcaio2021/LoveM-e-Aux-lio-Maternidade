@@ -1,4 +1,5 @@
 // Carrossel 3 da trilogia fixada: "Como funciona com a LoveMãe" (17/09/2026)
+// Copy revisada pela empresa em 18/09/2026.
 // Uso: NODE_PATH=../../../identidade/propostas/node_modules node gerar.cjs
 const e = require('../estilo-carrossel.cjs');
 
@@ -8,14 +9,14 @@ e.renderizar(__dirname, [
     html: e.capa({
       kicker: 'Passo a passo',
       titulo: 'Como funciona<br>com a LoveMãe',
-      sub: 'Do primeiro clique<br>até o INSS pagar.',
+      sub: 'Sem complicação,<br>da análise ao pagamento.',
     }),
   },
   {
     nome: 'slide-2.png',
     html: e.texto({
       passo: '1',
-      titulo: 'Você responde 6 perguntas no site.',
+      titulo: 'Você responde um questionário rápido no site.',
       corpo: 'Leva 2 minutos, direto do celular. Só o básico: como você trabalhava e como está a sua gravidez ou o seu bebê.',
       n: 2,
     }),
@@ -24,8 +25,8 @@ e.renderizar(__dirname, [
     nome: 'slide-3.png',
     html: e.texto({
       passo: '2',
-      titulo: 'A gente analisa e te chama no WhatsApp.',
-      corpo: 'Uma pessoa de verdade olha o seu caso e te explica, <strong>sem juridiquês</strong>, se você tem direito e qual o valor.',
+      titulo: 'Nossa equipe faz uma avaliação detalhada do seu caso.',
+      corpo: 'E te envia uma mensagem explicando <strong>cada detalhe do benefício</strong>.',
       n: 3,
     }),
   },
@@ -33,8 +34,8 @@ e.renderizar(__dirname, [
     nome: 'slide-4.png',
     html: e.texto({
       passo: '3',
-      titulo: 'Cuidamos do pedido e acompanhamos até o fim.',
-      corpo: 'Organizamos os documentos, damos entrada no INSS e acompanhamos <strong>até o pagamento cair</strong>.',
+      titulo: 'Organizamos a documentação e fazemos o pedido no INSS.',
+      corpo: 'E acompanhamos <strong>do início ao fim</strong>.',
       n: 4,
     }),
   },
@@ -43,7 +44,7 @@ e.renderizar(__dirname, [
     html: e.texto({
       kicker: 'Segurança',
       titulo: 'Nunca pedimos a sua senha do gov.br.',
-      corpo: 'Nenhuma etapa precisa dela. Seus dados ficam protegidos e você recebe tudo por escrito, <strong>sem letra miúda</strong>.',
+      corpo: 'Em nenhuma fase do atendimento iremos solicitar a sua senha. <strong>Garantimos sigilo total das suas informações.</strong>',
       n: 5,
     }),
   },
@@ -51,8 +52,8 @@ e.renderizar(__dirname, [
     nome: 'slide-6.png',
     html: e.fechamento({
       kicker: 'Análise gratuita',
-      titulo: 'Já são mais de 5 mil mães aprovadas.',
-      corpo: 'A sua análise é gratuita e sem compromisso. <strong style="color:#fff">Descubra hoje se o dinheiro é seu.</strong>',
+      titulo: 'Não perca tempo, mamãe.',
+      corpo: 'Faça sua análise gratuita e sem compromisso. <strong style="color:#fff">Descubra hoje se você tem direito ao auxílio-maternidade.</strong>',
       n: 6,
     }),
   },
