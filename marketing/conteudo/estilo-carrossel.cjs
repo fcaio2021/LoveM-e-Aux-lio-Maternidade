@@ -75,13 +75,17 @@ const VARIACOES = {
 };
 
 // 'direita' foi a variação escolhida em 17/09/2026 (opção D da prévia).
-const config = { marca: 'direita', opacidadeClara: 0.07, opacidadeColorida: 0.13 };
+const config = { marca: 'direita', opacidadeClara: 0.12, opacidadeColorida: 0.13 };
 
-/** Coração de fundo: branco e translúcido no fundo colorido, rosa clarinho no fundo claro. */
+/**
+ * Coração de fundo: branco no slide colorido, rosa claro no slide branco.
+ * O desenho do coração vira máscara (o PNG branco serve de recorte), então a cor
+ * sai chapada — o arquivo original é azul e rosa, e não daria o tom único pedido.
+ */
 const marca = (colorido) => {
   const pos = VARIACOES[config.marca] || VARIACOES.canto;
   const opacidade = colorido ? config.opacidadeColorida : config.opacidadeClara;
-  const arquivo = colorido ? 'simbolo-branco.png' : 'simbolo.png';
+  const arquivo = colorido ? 'simbolo-branco.png' : 'simbolo-rosa.png';
   return `<img class="marca" src="${arquivo}" style="${pos};opacity:${opacidade}">`;
 };
 
@@ -151,6 +155,7 @@ async function renderizar(pasta, slides) {
     ['logo-branco.png', 'logo-branco.png'],
     ['logo-simbolo.png', 'simbolo.png'],
     ['logo-simbolo-branco.png', 'simbolo-branco.png'],
+    ['logo-simbolo-rosa.png', 'simbolo-rosa.png'],
   ]) fs.copyFileSync(path.join(identidade, de), path.join(pasta, para));
 
   const b = await chromium.launch();

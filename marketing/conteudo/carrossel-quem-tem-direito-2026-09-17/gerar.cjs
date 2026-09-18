@@ -14,7 +14,6 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-2.png',
     html: e.texto({
-      cor: e.AZUL,
       kicker: 'Carteira assinada',
       titulo: 'Trabalhou registrada, nem que seja por pouco tempo?',
       corpo: 'Vale também se você <strong>foi demitida</strong> ou <strong>pediu demissão</strong> durante a gravidez.',
@@ -24,7 +23,6 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-3.png',
     html: e.texto({
-      cor: e.AZUL,
       kicker: 'MEI e autônoma',
       titulo: 'Contribuiu por conta própria para o INSS?',
       corpo: 'MEI, autônoma ou contribuinte individual: em geral são necessários <strong>10 meses de contribuição</strong>.',
@@ -34,7 +32,6 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-4.png',
     html: e.texto({
-      cor: e.AZUL,
       kicker: 'Doméstica e rural',
       titulo: 'Empregada doméstica e trabalhadora rural também têm direito.',
       corpo: 'Quem trabalha na roça, para a própria família, é <strong>segurada especial</strong> — e pode pedir mesmo sem nunca ter contribuído.',
@@ -44,7 +41,6 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-5.png',
     html: e.texto({
-      cor: e.AZUL,
       kicker: 'Desempregada',
       titulo: 'Parou de trabalhar? Você pode continuar segurada.',
       corpo: 'É o <strong>período de graça</strong>: em geral até 12 meses depois da última contribuição, e em alguns casos até 36.',
@@ -54,7 +50,6 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-6.png',
     html: e.texto({
-      cor: e.AZUL,
       kicker: 'O bebê já nasceu',
       titulo: 'Não perdeu o prazo só porque o bebê cresceu.',
       extra: `<div class="valor" style="margin-top:44px">

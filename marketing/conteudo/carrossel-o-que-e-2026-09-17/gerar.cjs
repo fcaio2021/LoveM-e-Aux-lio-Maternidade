@@ -15,7 +15,6 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-2.png',
     html: e.texto({
-      cor: e.AZUL,
       kicker: 'O que é',
       titulo: 'É o benefício do INSS feito para apoiar você nos primeiros momentos da maternidade.',
       corpo: 'Garante a <strong>proteção e a estabilidade financeira</strong> que a sua família precisa nesse momento tão especial.',
@@ -25,7 +24,6 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-3.png',
     html: e.texto({
-      cor: e.AZUL,
       kicker: 'Quando vale',
       titulo: 'O apoio para você focar apenas no seu bebê.',
       corpo: 'Com a sua <strong>renda protegida</strong> e a sua rotina mais tranquila nos primeiros meses de vida.',
@@ -35,7 +33,6 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-4.png',
     html: e.texto({
-      cor: e.AZUL,
       kicker: 'Quanto é',
       titulo: 'Um direito de mães biológicas e adotivas.',
       extra: `<div class="valor" style="margin-top:46px">
