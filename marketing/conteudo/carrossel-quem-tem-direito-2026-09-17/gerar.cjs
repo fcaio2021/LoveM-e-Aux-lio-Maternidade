@@ -32,10 +32,23 @@ e.renderizar(__dirname, [
   },
   {
     nome: 'slide-3.png',
-    html: e.texto({
-      kicker: 'Doméstica e rural',
-      titulo: 'Empregada doméstica e trabalhadora rural também têm direito.',
-      corpo: 'Quem trabalha na roça, para a própria família, é <strong>segurada especial</strong> — e pode pedir mesmo sem nunca ter contribuído.',
+    html: e.lista({
+      kicker: 'Também têm direito',
+      titulo: 'Casos que muita gente não imagina:',
+      itens: [
+        {
+          titulo: 'Empregada doméstica e trabalhadora rural',
+          corpo: 'Quem trabalha na roça, para a própria família, é <strong>segurada especial</strong>.',
+        },
+        {
+          titulo: 'Mães adolescentes ou menores de idade',
+          corpo: 'Com análise das regras específicas de cada caso.',
+        },
+        {
+          titulo: 'Mães que passaram por perda gestacional',
+          corpo: 'Inclui natimorto e perda gestacional tardia.',
+        },
+      ],
       n: 3,
     }),
   },

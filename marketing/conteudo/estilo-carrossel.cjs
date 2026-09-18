@@ -145,6 +145,30 @@ const duplo = ({ blocos, n }) => `${base}
     ${rodape(n, false)}
   </body>`;
 
+/** Slide de lista: cada item com o "check" rosa, um título curto e uma explicação. */
+const lista = ({ kicker, titulo, itens, n }) => `${base}
+  <body>${marca(false)}
+    <div class="caixa">
+      ${kicker ? `<p class="kicker">${kicker}</p><div class="regua"></div>` : ''}
+      ${titulo ? `<h2 style="font-size:56px">${titulo}</h2>` : ''}
+      <div style="margin-top:44px;display:flex;flex-direction:column;gap:38px">
+        ${itens.map((i) => `
+          <div style="display:flex;gap:26px;align-items:flex-start">
+            <svg width="50" height="50" viewBox="0 0 24 24" style="flex:none;margin-top:6px">
+              <circle cx="12" cy="12" r="11" fill="${ROSA}"/>
+              <path d="m7 12.4 3.3 3.3L17 9" fill="none" stroke="#fff" stroke-width="2.4"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <p style="font-size:38px;font-weight:700;color:${ESCURO};line-height:1.2">${i.titulo}</p>
+              ${i.corpo ? `<p style="margin-top:8px;font-size:30px">${i.corpo}</p>` : ''}
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+    ${rodape(n, false)}
+  </body>`;
+
 /** Slide com foto sangrando embaixo. */
 const comFoto = ({ kicker, titulo, corpo, foto, posicao = 'center 20%', altura = 620, passo, cor, n }) => `${base}
   <body${cor ? ` style="background:${cor}"` : ''}>
@@ -200,5 +224,5 @@ async function renderizar(pasta, slides) {
 
 module.exports = {
   ROSA, AZUL, ROSA_TEXTO, ESCURO, APOIO, FUNDO,
-  base, capa, texto, duplo, comFoto, fechamento, renderizar, config, VARIACOES,
+  base, capa, texto, duplo, lista, comFoto, fechamento, renderizar, config, VARIACOES,
 };

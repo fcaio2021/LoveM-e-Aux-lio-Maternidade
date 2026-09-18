@@ -17,8 +17,9 @@ Pode ter direito quem:
 ✔️ trabalhou de carteira assinada, nem que tenha sido por pouco tempo
 ✔️ foi demitida ou pediu demissão durante a gravidez
 ✔️ contribui como MEI, autônoma ou contribuinte individual
-✔️ é empregada doméstica
-✔️ é trabalhadora rural (segurada especial)
+✔️ é empregada doméstica ou trabalhadora rural (segurada especial)
+✔️ é mãe adolescente ou menor de idade (com análise das regras do caso)
+✔️ passou por perda gestacional (natimorto ou perda tardia)
 ✔️ parou de contribuir, mas ainda está no período de graça
 
 E tem mais: mesmo que o seu bebê já tenha nascido, dá pra pedir **até ele completar 4 anos e 11 meses**. Depois disso, o direito prescreve.
@@ -48,7 +49,7 @@ https://www.lovemaeauxiliomaternidade.com.br/?utm_source=instagram&utm_medium=po
 |---|---|
 | 1 (capa) | `slide-1.png` |
 | 2 — carteira assinada + MEI/autônoma | `slide-2.png` |
-| 3 — doméstica e rural | `slide-3.png` |
+| 3 — doméstica e rural, mães menores de idade e perda gestacional | `slide-3.png` |
 | 4 — desempregada + prazo de 4 anos e 11 meses | `slide-4.png` |
 | 5 — CTA | `slide-5.png` |
 
