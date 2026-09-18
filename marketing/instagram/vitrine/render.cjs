@@ -11,31 +11,32 @@ const ROSA = '#FF0076';
 const FONTE = '<link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700;800&display=swap" rel="stylesheet">';
 const traco = 'fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"';
 
-// Tons alternados rosa/azul. Todos medidos contra o branco do ícone: o mínimo para
-// símbolo é 3:1, e os pastéis da marca (#FAA9C7, #80BBEF) reprovam — o ícone sumiria.
+// Só as duas cores do logo, alternando (decisão de 18/09/2026: seis tons ficaram
+// poluídos). Ambas passam com folga no mínimo de 3:1 para ícone branco.
+const AZUL = "#0038E5"; // 7,79:1
 const destaques = [
   {
-    nome: '1-o-que-e', rotulo: 'O que é?', cor: '#FF0076', // rosa do logo · 3,81:1
+    nome: "1-o-que-e", rotulo: "O que é?", cor: ROSA,
     svg: `<path d="M60 36c-8-8-20-12-34-12v60c14 0 26 4 34 12 8-8 20-12 34-12V24c-14 0-26 4-34 12Z"/><path d="M60 36v60"/>`,
   },
   {
-    nome: '2-quem-tem-direito', rotulo: 'Quem tem direito', cor: '#0038E5', // azul do logo · 7,79:1
+    nome: "2-quem-tem-direito", rotulo: "Quem tem direito", cor: AZUL,
     svg: `<path d="M60 14 22 28v28c0 26 16 42 38 50 22-8 38-24 38-50V28Z"/><path d="m42 60 13 13 25-27"/>`,
   },
   {
-    nome: '3-qual-valor', rotulo: 'Qual valor?', cor: '#C81B5C', // rosa profundo · 5,57:1
+    nome: "3-qual-valor", rotulo: "Qual valor?", cor: ROSA,
     svg: `<circle cx="60" cy="60" r="44"/><path d="M60 30v60"/><path d="M75 45c0-6-7-10-15-10s-15 4-15 10 7 9 15 11 15 5 15 11-7 10-15 10-15-4-15-10"/>`,
   },
   {
-    nome: '4-como-funciona', rotulo: 'Como funciona', cor: '#0B6FC4', // azul médio · 5,14:1
+    nome: "4-como-funciona", rotulo: "Como funciona", cor: AZUL,
     svg: `<rect x="22" y="16" width="76" height="92" rx="12"/><path d="M40 16v-4h40v4"/><path d="m36 46 7 7 12-13M36 78l7 7 12-13M66 48h18M66 80h18"/>`,
   },
   {
-    nome: '5-duvidas', rotulo: 'Dúvidas', cor: '#FF4D9E', // rosa claro · 3,08:1
+    nome: "5-duvidas", rotulo: "Dúvidas", cor: ROSA,
     svg: `<path d="M16 32a8 8 0 0 1 8-8h72a8 8 0 0 1 8 8v40a8 8 0 0 1-8 8H54L32 98V80h-8a8 8 0 0 1-8-8V32Z"/><path d="M50 44a10 10 0 1 1 14 9c-3 2-4 4-4 7"/><circle cx="60" cy="66" r="2.5" fill="#fff"/>`,
   },
   {
-    nome: '6-depoimentos', rotulo: 'Depoimentos', cor: '#1D5386', // azul institucional · 7,97:1
+    nome: "6-depoimentos", rotulo: "Depoimentos", cor: AZUL,
     svg: `<path d="M16 32a8 8 0 0 1 8-8h72a8 8 0 0 1 8 8v40a8 8 0 0 1-8 8H54L32 98V80h-8a8 8 0 0 1-8-8V32Z"/><path d="m60 34 6 13 14 2-10 10 3 14-13-7-13 7 3-14-10-10 14-2Z"/>`,
   },
 ];

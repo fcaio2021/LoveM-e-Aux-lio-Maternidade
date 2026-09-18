@@ -26,20 +26,21 @@ LoveMãe | Auxílio Maternidade
 
 **Botões de contato:** WhatsApp (11) 96963-9342 · e-mail contato@lovemaeauxiliomaternidade.com.br
 
-**Destaques** (revistos em 18/09/2026 — 6 capas alternando 3 tons de rosa e 3 de azul;
+**Destaques** (revistos em 18/09/2026 — 6 capas alternando as duas cores do logo;
 capas em `destaques/`, prévia em `previa-destaques.png`):
 
 | # | Nome no Instagram | Cor | Arquivo |
 |---|---|---|---|
 | 1 | O que é? | `#FF0076` rosa do logo | `1-o-que-e.png` |
 | 2 | Quem tem direito | `#0038E5` azul do logo | `2-quem-tem-direito.png` |
-| 3 | Qual valor? | `#C81B5C` rosa profundo | `3-qual-valor.png` |
-| 4 | Como funciona | `#0B6FC4` azul médio | `4-como-funciona.png` |
-| 5 | Dúvidas | `#FF4D9E` rosa claro | `5-duvidas.png` |
-| 6 | Depoimentos | `#1D5386` azul institucional | `6-depoimentos.png` |
+| 3 | Qual valor? | `#FF0076` | `3-qual-valor.png` |
+| 4 | Como funciona | `#0038E5` | `4-como-funciona.png` |
+| 5 | Dúvidas | `#FF0076` | `5-duvidas.png` |
+| 6 | Depoimentos | `#0038E5` | `6-depoimentos.png` |
 
-Os tons pastel da marca (`#FAA9C7`, `#80BBEF`) ficaram de fora: com ícone branco dão
-1,8:1 e 2,0:1, abaixo do mínimo de 3:1 para símbolo — o ícone sumiria na miniatura.
+Testadas seis variações de tom em 18/09/2026 e descartadas: com seis cores a linha fica
+poluída. Só as duas do logo. Os pastéis da marca (`#FAA9C7`, `#80BBEF`) também estão
+fora — com ícone branco dão 1,8:1 e 2,0:1, abaixo do mínimo de 3:1 para símbolo.
 
 ⚠️ **Depoimentos** só entra quando houver depoimento com autorização por escrito.
 Destaque vazio, ou com print de conversa sem permissão, é pior que destaque nenhum.
