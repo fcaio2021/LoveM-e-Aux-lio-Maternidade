@@ -36,7 +36,7 @@ const base = `<meta charset="utf-8">
   h2{font-size:68px;line-height:1.08;font-weight:800;letter-spacing:-.02em}
   p{font-size:38px;line-height:1.42;color:${APOIO};font-weight:500}
   p strong{color:${ESCURO};font-weight:700}
-  .logo{height:74px;position:absolute;left:78px;bottom:78px}
+  .logo{height:96px;position:absolute;left:78px;bottom:72px}
   .pagina{position:absolute;right:78px;bottom:84px;font-size:25px;font-weight:600;color:${APOIO}}
   .arraste{position:absolute;right:78px;bottom:84px;background:#fff;font-weight:700;font-size:27px;
            padding:16px 34px;border-radius:999px}
@@ -44,12 +44,18 @@ const base = `<meta charset="utf-8">
   .sombra{position:absolute;left:0;right:0;bottom:0;height:260px;
           background:linear-gradient(to top,rgba(16,34,50,.62),transparent)}
   .valor{background:${ROSA};color:#fff;border-radius:28px;padding:44px 50px;text-align:center}
+  /* Sobre o azul, a caixa de valor vira branca: rosa com azul vibra e cansa a vista */
+  .cheio .valor{background:#fff;color:${ESCURO}}
+  .cheio .valor span{color:${APOIO};opacity:1}
+  .cheio .valor b{color:${ROSA_TEXTO}}
   .valor span{display:block;font-size:33px;font-weight:600;opacity:.92;margin-bottom:8px}
   .valor b{font-size:76px;font-weight:800;letter-spacing:-.02em;line-height:1.05;display:block}
   .passo{width:96px;height:96px;border-radius:50%;background:${ROSA};color:#fff;font-size:50px;
          font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:30px}
   .cheio{color:#fff}
   .cheio p{color:rgba(255,255,255,.92)}
+  /* Sem isto o negrito herda o cinza-escuro do fundo claro e some no azul */
+  .cheio p strong{color:#fff}
   .cheio .kicker{color:rgba(255,255,255,.9)}
   .cheio .regua{background:#fff}
   .cheio .pagina{color:rgba(255,255,255,.9)}
@@ -68,7 +74,8 @@ const VARIACOES = {
   topo: 'right:-200px;top:-260px;width:1050px',
 };
 
-const config = { marca: 'canto', opacidadeClara: 0.07, opacidadeColorida: 0.13 };
+// 'direita' foi a variação escolhida em 17/09/2026 (opção D da prévia).
+const config = { marca: 'direita', opacidadeClara: 0.07, opacidadeColorida: 0.13 };
 
 /** Coração de fundo: branco e translúcido no fundo colorido, rosa clarinho no fundo claro. */
 const marca = (colorido) => {
@@ -94,24 +101,27 @@ const capa = ({ cor = ROSA, kicker, titulo, sub }) => `${base}
     <span class="arraste" style="color:${cor}">arraste →</span>
   </body>`;
 
-/** Slide de conteúdo. `extra` entra abaixo do texto (caixa de valor, por exemplo). */
-const texto = ({ kicker, titulo, corpo, extra = '', passo, n }) => `${base}
-  <body>${marca(false)}
-    <div class="caixa">
-      ${passo ? `<div class="passo">${passo}</div>` : ''}
+/**
+ * Slide de conteúdo. `extra` entra abaixo do texto (caixa de valor, por exemplo).
+ * `cor` pinta o slide inteiro (os slides do meio são azuis desde 17/09/2026).
+ */
+const texto = ({ kicker, titulo, corpo, extra = '', passo, cor, n }) => `${base}
+  <body${cor ? ` style="background:${cor}"` : ''}>${marca(!!cor)}
+    <div class="caixa${cor ? ' cheio' : ''}">
+      ${passo ? `<div class="passo"${cor ? ` style="background:#fff;color:${cor}"` : ''}>${passo}</div>` : ''}
       ${kicker ? `<p class="kicker">${kicker}</p><div class="regua"></div>` : ''}
       <h2>${titulo}</h2>
       ${corpo ? `<p style="margin-top:34px">${corpo}</p>` : ''}
       ${extra}
     </div>
-    ${rodape(n, false)}
+    ${rodape(n, !!cor)}
   </body>`;
 
 /** Slide com foto sangrando embaixo. */
-const comFoto = ({ kicker, titulo, corpo, foto, posicao = 'center 20%', altura = 620, passo, n }) => `${base}
-  <body>
-    <div class="caixa" style="justify-content:flex-start;padding-top:96px">
-      ${passo ? `<div class="passo">${passo}</div>` : ''}
+const comFoto = ({ kicker, titulo, corpo, foto, posicao = 'center 20%', altura = 620, passo, cor, n }) => `${base}
+  <body${cor ? ` style="background:${cor}"` : ''}>
+    <div class="caixa${cor ? ' cheio' : ''}" style="justify-content:flex-start;padding-top:96px">
+      ${passo ? `<div class="passo"${cor ? ` style="background:#fff;color:${cor}"` : ''}>${passo}</div>` : ''}
       ${kicker ? `<p class="kicker">${kicker}</p><div class="regua"></div>` : ''}
       <h2>${titulo}</h2>
       ${corpo ? `<p style="margin-top:30px">${corpo}</p>` : ''}
