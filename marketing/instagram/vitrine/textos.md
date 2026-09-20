@@ -32,12 +32,15 @@ LoveMãe | Auxílio Maternidade
 
 | # | Nome no Instagram | Cor | Ícone | Arquivo |
 |---|---|---|---|---|
-| 1 | Com a LoveMãe | `#FF0076` | coração | `1-com-a-lovemae.png` |
-| 2 | Como Solicitar? | `#0038E5` | prancheta com check | `2-como-solicitar.png` |
-| 3 | Quem tem Direito? | `#FF0076` | escudo com check | `3-quem-tem-direito.png` |
-| 4 | Qual valor? | `#0038E5` | moeda com cifrão | `4-qual-valor.png` |
+| 1 | Quem tem Direito? | `#FF0076` | escudo com check | `1-quem-tem-direito.png` |
+| 2 | Qual valor? | `#0038E5` | moeda com cifrão | `2-qual-valor.png` |
+| 3 | Como Solicitar? | `#FF0076` | prancheta com check | `3-como-solicitar.png` |
+| 4 | Com a LoveMãe | `#0038E5` | coração | `4-com-a-lovemae.png` |
 | 5 | Perguntas? | `#FF0076` | interrogação | `5-perguntas.png` |
 | 6 | Depoimentos | `#0038E5` | balão com estrela | `6-depoimentos.png` |
+
+Ordem definida em 20/09/2026: o que a mãe quer saber (direito → valor → como pedir) vem
+antes do institucional.
 
 Descartado em 18/09/2026: seis tons diferentes (linha poluída) e ícone de traço fino
 (sumia na miniatura). Os pastéis da marca (`#FAA9C7`, `#80BBEF`) também estão fora —

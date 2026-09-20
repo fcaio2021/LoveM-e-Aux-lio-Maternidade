@@ -14,26 +14,29 @@ const FONTE = '<link href="https://fonts.googleapis.com/css2?family=Onest:wght@5
 // poluídos). Ícones sólidos e grandes, quase preenchendo o círculo (18/09/2026) —
 // traço fino sumia na miniatura do perfil.
 const AZUL = "#0038E5"; // 7,79:1 no branco · ROSA #FF0076 dá 3,81:1
+const ESTRELA = "m60 20.5 7.9 19.1 20.6 1.6-15.7 13.5 4.8 20.1-17.6-10.8-17.6 10.8 4.8-20.1-15.7-13.5 20.6-1.6Z";
+const BALAO = "M10 26a14 14 0 0 1 14-14h72a14 14 0 0 1 14 14v46a14 14 0 0 1-14 14H58L30 112V86h-6a14 14 0 0 1-14-14V26Z";
+
 const destaques = [
   {
-    nome: "1-com-a-lovemae", rotulo: "Com a LoveMãe", cor: ROSA,
-    svg: () => `<path d="M60 106S10 76 10 42A26 26 0 0 1 60 27 26 26 0 0 1 110 42c0 34-50 64-50 64Z" fill="#fff"/>`,
+    nome: "1-quem-tem-direito", rotulo: "Quem tem Direito?", cor: ROSA,
+    svg: (c) => `<path d="M60 6 12 24v32c0 32 19 52 48 62 29-10 48-30 48-62V24Z" fill="#fff"/>
+      <path d="m38 60 15 15 31-33" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    nome: "2-como-solicitar", rotulo: "Como Solicitar?", cor: AZUL,
+    nome: "2-qual-valor", rotulo: "Qual valor?", cor: AZUL,
+    svg: (c) => `<circle cx="60" cy="60" r="54" fill="#fff"/>
+      <text x="60" y="92" text-anchor="middle" font-family="Onest,sans-serif" font-size="92" font-weight="800" fill="${c}">$</text>`,
+  },
+  {
+    nome: "3-como-solicitar", rotulo: "Como Solicitar?", cor: ROSA,
     svg: (c) => `<rect x="16" y="18" width="88" height="96" rx="14" fill="#fff"/>
       <rect x="42" y="6" width="36" height="22" rx="11" fill="#fff"/>
       <path d="m36 66 15 15 33-35" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    nome: "3-quem-tem-direito", rotulo: "Quem tem Direito?", cor: ROSA,
-    svg: (c) => `<path d="M60 6 12 24v32c0 32 19 52 48 62 29-10 48-30 48-62V24Z" fill="#fff"/>
-      <path d="m38 60 15 15 31-33" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
-  },
-  {
-    nome: "4-qual-valor", rotulo: "Qual valor?", cor: AZUL,
-    svg: (c) => `<circle cx="60" cy="60" r="54" fill="#fff"/>
-      <text x="60" y="92" text-anchor="middle" font-family="Onest,sans-serif" font-size="92" font-weight="800" fill="${c}">$</text>`,
+    nome: "4-com-a-lovemae", rotulo: "Com a LoveMãe", cor: AZUL,
+    svg: () => `<path d="M60 106S10 76 10 42A26 26 0 0 1 60 27 26 26 0 0 1 110 42c0 34-50 64-50 64Z" fill="#fff"/>`,
   },
   {
     nome: "5-perguntas", rotulo: "Perguntas?", cor: ROSA,
@@ -41,8 +44,7 @@ const destaques = [
   },
   {
     nome: "6-depoimentos", rotulo: "Depoimentos", cor: AZUL,
-    svg: (c) => `<path d="M10 26a14 14 0 0 1 14-14h72a14 14 0 0 1 14 14v46a14 14 0 0 1-14 14H58L30 112V86h-6a14 14 0 0 1-14-14V26Z" fill="#fff"/>
-      <path d="m60 28 9 18 20 3-14 14 3 20-18-10-18 10 3-20-14-14 20-3Z" fill="${c}"/>`,
+    svg: (c) => `<path d="${BALAO}" fill="#fff"/><path d="${ESTRELA}" fill="${c}"/>`,
   },
 ];
 
