@@ -10,9 +10,9 @@ export const empresa = {
   nome: 'LoveMãe Auxílio Maternidade',
   dominio: 'www.lovemaeauxiliomaternidade.com.br',
 
-  // WhatsApp de atendimento: (11) 96963-9342 (definido em 14/09/2026).
+  // WhatsApp de atendimento: (11) 97723-8306 (trocado em 21/09/2026; era 96963-9342).
   // Formato: código do país + DDD + número, só dígitos.
-  whatsapp: '5511969639342',
+  whatsapp: '5511977238306',
   whatsappDefinido: true,
 
   instagram: '@lovemaeauxiliomaternidade',

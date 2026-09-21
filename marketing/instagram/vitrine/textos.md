@@ -24,7 +24,7 @@ LoveMãe | Auxílio Maternidade
 **Link:** `https://www.lovemaeauxiliomaternidade.com.br/?utm_source=instagram&utm_medium=bio`
 (o UTM faz os leads da bio aparecerem na planilha como vindos do Instagram)
 
-**Botões de contato:** WhatsApp (11) 96963-9342 · e-mail contato@lovemaeauxiliomaternidade.com.br
+**Botões de contato:** WhatsApp (11) 97723-8306 · e-mail contato@lovemaeauxiliomaternidade.com.br
 
 **Destaques** (revistos em 18/09/2026 — 6 capas alternando as duas cores do logo,
 ícone sólido ocupando quase todo o círculo; capas em `destaques/`, prévia em
@@ -59,4 +59,4 @@ stories próprios, publicar a própria capa como story e adicionar ao destaque.
   computador mostram)
 - **Bio (intro):** `Te ajudamos a receber o auxílio-maternidade do INSS. Análise gratuita e 100% online. 💗`
 - **Site:** `https://www.lovemaeauxiliomaternidade.com.br/?utm_source=facebook&utm_medium=pagina`
-- **Botão de ação:** "Enviar mensagem pelo WhatsApp" → (11) 96963-9342
+- **Botão de ação:** "Enviar mensagem pelo WhatsApp" → (11) 97723-8306

@@ -29,7 +29,7 @@ planilha, com data e resultado (respondeu / virou cliente / sumiu).
 ## Antes de subir: o que precisa estar pronto
 
 - [ ] **Revisão da operação** nas regras citadas (trava — ver seção de copy)
-- [ ] O número **(11) 96963-9342** no **WhatsApp Business** (o app comum não serve)
+- [ ] O número **(11) 97723-8306** no **WhatsApp Business** (o app comum não serve)
 - [ ] Número conectado ao Portfólio Empresarial e à Página do Facebook
 - [ ] **Mensagem de saudação** configurada (texto pronto abaixo)
 - [ ] **Saldo na conta de anúncios** — R$ 50/dia × 14 dias = R$ 700

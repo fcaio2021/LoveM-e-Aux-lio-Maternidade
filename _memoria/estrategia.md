@@ -41,7 +41,7 @@ produzir posts e stories, roteirizar. Candidata a virar skill própria via `/map
   resumo. Valor oficial comunicado: **R$ 6.900 a R$ 15.900**. Variantes A/B
   (v2–v4) guardadas em `site/variantes/` — a v1 foi a escolhida.
 
-**Decidido em 14/09/2026:** WhatsApp (11) 96963-9342 · rosa do site = rosa do logo `#FF0076` ·
+**Decidido em 14/09/2026:** WhatsApp (11) 97723-8306 · rosa do site = rosa do logo `#FF0076` ·
 botões no verde original `#177E40` · números de prova social confirmados · CNPJ e e-mail na
 Política de Privacidade.
 
