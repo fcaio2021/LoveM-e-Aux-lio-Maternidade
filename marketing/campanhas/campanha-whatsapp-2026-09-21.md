@@ -33,6 +33,8 @@ planilha, com data e resultado (respondeu / virou cliente / sumiu).
 - [ ] Número conectado ao Portfólio Empresarial e à Página do Facebook
 - [ ] **Mensagem de saudação** configurada (texto pronto abaixo)
 - [ ] **Saldo na conta de anúncios** — R$ 50/dia × 14 dias = R$ 700
+- [x] Número vinculado ao portfólio (conferido em 21/09/2026: status Conectado)
+- [x] Criativos dos três anúncios (`criativos-whatsapp-2026-09-21/`, prévia em `previa.png`)
 - [ ] Equipe comercial avisada do dia em que o anúncio sobe
 
 ---
@@ -109,7 +111,7 @@ conversa no WhatsApp, onde a equipe analisa o caso.
 
 ### Anúncio 1 — MEI
 
-**Criativo:** `marketing/conteudo/post-mei-2026-09-20/faixas-branco.png`
+**Criativo:** `marketing/campanhas/criativos-whatsapp-2026-09-21/anuncio-1-mei.png`
 
 **Texto principal**
 ```
@@ -131,7 +133,7 @@ Chame no WhatsApp e descubra em 2 minutos.
 
 ### Anúncio 2 — Valor
 
-**Criativo:** a produzir — arte do post 6 ("Quanto eu vou receber?")
+**Criativo:** `marketing/campanhas/criativos-whatsapp-2026-09-21/anuncio-2-valor.png`
 
 **Texto principal**
 ```
@@ -153,7 +155,7 @@ Fale com a gente no WhatsApp.
 
 ### Anúncio 3 — Segurança
 
-**Criativo:** a produzir — arte do post 7 ("Nunca pedimos sua senha do gov.br")
+**Criativo:** `marketing/campanhas/criativos-whatsapp-2026-09-21/anuncio-3-seguranca.png`
 
 **Texto principal**
 ```
