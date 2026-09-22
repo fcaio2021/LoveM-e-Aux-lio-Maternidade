@@ -7,6 +7,7 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-1.png',
     html: e.capa({
+      cor: e.AZUL, // capa azul (decisão de 22/09/2026)
       kicker: 'Auxílio-maternidade do INSS',
       titulo: 'O que é o<br>auxílio-maternidade?',
       sub: 'O direito que muita mãe<br>descobre tarde demais.',

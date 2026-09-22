@@ -6,6 +6,7 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-1.png',
     html: e.capa({
+      claro: true, // capa branca (decisão de 22/09/2026)
       kicker: 'Quem tem direito',
       titulo: 'Será que eu<br>tenho direito?',
       sub: 'Veja se o seu caso<br>está nesta lista.',

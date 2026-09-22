@@ -102,8 +102,23 @@ const rodape = (n, colorido) =>
   `<img class="logo" src="${colorido ? 'logo-branco.png' : 'logo.png'}">
    <span class="pagina"${colorido ? ' style="color:rgba(255,255,255,.9)"' : ''}>${n}</span>`;
 
-/** Slide de abertura, em cor sólida. */
-const capa = ({ cor = ROSA, kicker, titulo, sub }) => `${base}
+/**
+ * Slide de abertura. `cor` pinta a capa inteira; `claro: true` faz a versão em fundo
+ * branco (decisão de 22/09/2026, para alternar as capas da trilogia no perfil).
+ * Na capa clara a pílula "arraste" vira rosa: branca sobre branco não apareceria.
+ */
+const capa = ({ cor = ROSA, claro = false, kicker, titulo, sub }) => claro
+  ? `${base}
+  <body>${marca(false)}
+    <div class="caixa">
+      <p class="kicker">${kicker}</p><div class="regua"></div>
+      <h1>${titulo}</h1>
+      ${sub ? `<p style="margin-top:34px;font-size:40px">${sub}</p>` : ''}
+    </div>
+    <img class="logo" src="logo.png">
+    <span class="arraste" style="background:${ROSA};color:#fff">arraste →</span>
+  </body>`
+  : `${base}
   <body style="background:${cor}">${marca(true)}
     <div class="caixa cheio">
       <p class="kicker">${kicker}</p><div class="regua"></div>

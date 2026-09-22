@@ -1,7 +1,7 @@
 # Carrossel 1 da trilogia — "O que é o auxílio-maternidade?"
 
 Produzido em 17/09/2026. Post **fixado** no topo do perfil.
-5 slides, 1080×1350. Capa rosa (decisão de 17/09/2026).
+5 slides, 1080×1350. Capa **azul** (decisão de 22/09/2026).
 
 ⚠️ **Antes de publicar:** o time de operação precisa conferir as regras citadas
 (parto, adoção, guarda judicial, perda gestacional e a faixa de valor).

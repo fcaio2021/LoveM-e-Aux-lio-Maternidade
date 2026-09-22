@@ -7,6 +7,7 @@ e.renderizar(__dirname, [
   {
     nome: 'slide-1.png',
     html: e.capa({
+      cor: e.AZUL, // capa azul (decisão de 22/09/2026)
       kicker: 'Passo a passo',
       titulo: 'Como funciona<br>com a LoveMãe',
       sub: 'Sem complicação,<br>da análise ao pagamento.',

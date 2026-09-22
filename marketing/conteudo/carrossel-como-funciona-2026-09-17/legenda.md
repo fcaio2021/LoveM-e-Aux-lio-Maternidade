@@ -2,6 +2,7 @@
 
 Produzido em 17/09/2026. Copy revisada pela empresa em 18/09/2026.
 Post **fixado** no topo do perfil (o terceiro). 6 slides, 1080×1350.
+Capa **azul** (decisão de 22/09/2026).
 
 ⚠️ **Antes de publicar:** o time de operação precisa confirmar que o passo a passo
 descreve o processo real (questionário → avaliação e mensagem → entrada e acompanhamento no INSS).
