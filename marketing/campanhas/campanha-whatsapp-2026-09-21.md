@@ -234,3 +234,79 @@ A campanha para o site entra como fase 2, e aí volta a valer toda a estrutura q
 existe: Pixel, formulário, planilha e aviso no leads@, com otimização pelo evento **Lead**.
 A comparação entre as duas é o que mostra qual caminho converte melhor — por isso o
 registro manual desta primeira campanha importa tanto.
+
+---
+
+# Diagnóstico da parada de veiculação (23 a 25/09/2026)
+
+**Caso de suporte da Meta: `28838325262467894`** — "O anúncio não está em veiculação",
+aberto em 25/09/2026, status Ativo.
+
+## O que aconteceu
+
+| Data | Fato |
+|---|---|
+| 16/09 | Registro interno de bloqueio no perfil pessoal que administra a conta (descoberto só em 25/09) |
+| 23/09 manhã | Campanha do Instagram entrega normal: 936 impressões, 906 de alcance, **4 conversas**, R$ 20,29 |
+| 23/09 10h–13h | Entrega decai: 255 → 163 → 32 → 4 impressões por hora, e para |
+| 24/09 | Zero em todas as campanhas, inclusive criadas do zero |
+| 25/09 | Zero. Suporte identifica a causa |
+
+**Custo real por conversa enquanto a campanha tinha fôlego: R$ 3,55.**
+(O R$ 5,07 calculado antes incluía o gasto da tarde já sufocada.)
+
+## A causa
+
+O perfil pessoal que administrava a conta tinha um **registro de bloqueio de 16/09/2026**
+("Bloqueio de Acesso — conteúdo ou atividade não permitida", Padrões da Comunidade). Isso
+derruba a **confiança do perfil no leilão**, e o sistema aplica uma **trava de segurança
+preventiva** que se apresenta como *"Limite de Gastos da Conta Atingido"*.
+
+Por isso ninguém encontrava o campo para remover: **o limite não existe como
+configuração**. É um bloqueio automático.
+
+Sintomas típicos: campanha, conjunto e anúncio todos "Ativo", zero impressões, zero gasto,
+nenhuma mensagem de erro em lugar nenhum do Gerenciador.
+
+## O que foi descartado (tudo verificado e limpo)
+
+Saldo · formas de pagamento · limite de gastos da conta (inexistente) · limite diário da
+Meta · restrição na conta de anúncios · restrição na Página · anúncios reprovados · conta
+do WhatsApp · Pixel · regras de valor · campanha de outra conta na mesma Página · cache do
+navegador · criativos · estrutura de campanha · posicionamentos · públicos.
+
+## Ações tomadas em 25/09
+
+- **2FA ativado** nos dois perfis (app autenticador) — é o sinal mais forte de autenticidade
+- **Recarga automática ligada**: abaixo de R$ 105, recarrega R$ 105
+- **Segundo administrador com controle total** da conta de anúncios
+- Campanhas reduzidas a **uma ativa**, as demais pausadas
+
+**Prazo de recuperação informado pela Meta:** 2 a 4 semanas de veiculação contínua sem
+novas infrações. O registro de bloqueio não expira sozinho.
+
+## Regra nova de operação
+
+O que alimentou o problema foi o **padrão de uso**, não o conteúdo: criar e apagar contas,
+duplicar campanhas em massa, ligar e desligar, republicar várias vezes ao dia. O sistema de
+integridade lê isso como comportamento automatizado.
+
+| Evitar | Fazer |
+|---|---|
+| Criar e apagar contas | manter as que existem |
+| Duplicar campanhas em massa | poucas campanhas, estáveis |
+| Ligar e desligar o tempo todo | deixar rodar dias seguidos |
+| Editar a cada hora | mexer no máximo a cada 3-4 dias |
+
+## Armadilhas do Gerenciador que custaram tempo
+
+1. **Filtro de data e campanha selecionada** escondem dados reais — sempre limpar o filtro
+   de campanha E colocar o período em "Máximo" na mesma verificação
+2. **"Limites de gastos do conjunto" marcado e vazio** trava a entrega sem avisar
+3. **Permissão de editor financeiro** é separada de "acesso total" — sem ela os campos de
+   cobrança nem aparecem (Pessoas → Gerenciar → Ver opções avançadas → Finanças)
+4. **Anúncio arquivado** não veicula e o painel mostra tudo verde
+5. **Personalizar criativo por posicionamento** quebra quando os posicionamentos mudam
+   depois — fechar posicionamentos primeiro, criativo depois
+6. **O atendimento automático erra e se contradiz** — exigir números exatos é o que faz ele
+   checar de verdade e, no fim, escalar
