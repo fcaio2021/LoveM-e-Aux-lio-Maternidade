@@ -35,8 +35,12 @@ const destaques = [
       <path d="m36 66 15 15 33-35" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    nome: "4-com-a-lovemae", rotulo: "Com a LoveMãe", cor: AZUL,
-    svg: () => `<path d="M60 106S10 76 10 42A26 26 0 0 1 60 27 26 26 0 0 1 110 42c0 34-50 64-50 64Z" fill="#fff"/>`,
+    nome: "4-com-a-lovemae", rotulo: "LoveMãe", cor: "#FDFAFB",
+    imagem: "logo-simbolo.png",
+  },
+  {
+    nome: "4b-com-a-lovemae-azul", rotulo: "LoveMãe (azul)", cor: AZUL,
+    imagem: "logo-simbolo-branco.png",
   },
   {
     nome: "5-perguntas", rotulo: "Perguntas?", cor: ROSA,
@@ -48,9 +52,12 @@ const destaques = [
   },
 ];
 
-const destaqueHtml = ({ svg, cor }) => `<!doctype html><html><head><meta charset="utf-8">${FONTE}<style>
+const destaqueHtml = ({ svg, cor, imagem }) => `<!doctype html><html><head><meta charset="utf-8">${FONTE}<style>
 *{margin:0}body{width:1080px;height:1920px;background:${cor};display:grid;place-items:center}
-svg{width:780px;height:780px}</style></head><body><svg viewBox="0 0 120 120">${svg(cor)}</svg></body></html>`;
+svg{width:780px;height:780px}
+img{width:760px}</style></head><body>${imagem
+  ? `<img src="${imagem}">`
+  : `<svg viewBox="0 0 120 120">${svg(cor)}</svg>`}</body></html>`;
 
 // Prévia: os seis como o Instagram mostra — círculo com anel branco e o nome embaixo.
 const previaHtml = `<!doctype html><html><head><meta charset="utf-8">${FONTE}<style>
@@ -64,7 +71,7 @@ body{width:1400px;height:340px;background:#fff;font-family:Onest,sans-serif;colo
 .rotulo{font-size:25px;font-weight:600}
 </style></head><body>
 ${destaques.map((d) => `<div class="item"><div class="anel"><div class="circulo" style="background:${d.cor}">
-<svg viewBox="0 0 120 120">${d.svg(d.cor)}</svg></div></div>
+${d.imagem ? `<img src="${d.imagem}" style="width:78px">` : `<svg viewBox="0 0 120 120">${d.svg(d.cor)}</svg>`}</div></div>
 <p class="rotulo">${d.rotulo}</p></div>`).join('')}
 </body></html>`;
 
@@ -87,6 +94,10 @@ h1 span{color:${ROSA}}
 </div></body></html>`;
 
 (async () => {
+  const identidade = path.resolve(__dirname, "..", "..", "..", "identidade");
+  for (const f of ["logo-simbolo.png", "logo-simbolo-branco.png"])
+    fs.copyFileSync(path.join(identidade, f), path.join(__dirname, f));
+
   const b = await chromium.launch();
   const tmp = path.join(__dirname, '.tmp.html');
   const render = async (html, w, h, saida) => {
