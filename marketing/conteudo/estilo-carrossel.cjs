@@ -30,15 +30,15 @@ const base = `<meta charset="utf-8">
   .caixa{position:absolute;inset:0;padding:84px 78px;display:flex;flex-direction:column;
          justify-content:center}
   /* Corpos de texto grandes: a mãe lê no celular, quase sempre com pressa (17/09/2026) */
-  .kicker{font-size:29px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:${ROSA_TEXTO}}
+  .kicker{font-size:33px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:${ROSA_TEXTO}}
   .regua{width:72px;height:5px;background:${ROSA};border-radius:99px;margin:22px 0 26px}
-  h1{font-size:80px;line-height:1.03;font-weight:800;letter-spacing:-.025em}
-  h2{font-size:68px;line-height:1.08;font-weight:800;letter-spacing:-.02em}
-  p{font-size:38px;line-height:1.42;color:${APOIO};font-weight:500}
+  h1{font-size:90px;line-height:1.03;font-weight:800;letter-spacing:-.025em}
+  h2{font-size:78px;line-height:1.08;font-weight:800;letter-spacing:-.02em}
+  p{font-size:44px;line-height:1.42;color:${APOIO};font-weight:500}
   p strong{color:${ESCURO};font-weight:700}
   .logo{height:96px;position:absolute;left:78px;bottom:72px}
-  .pagina{position:absolute;right:78px;bottom:84px;font-size:25px;font-weight:600;color:${APOIO}}
-  .arraste{position:absolute;right:78px;bottom:84px;background:#fff;font-weight:700;font-size:27px;
+  .pagina{position:absolute;right:78px;bottom:84px;font-size:28px;font-weight:600;color:${APOIO}}
+  .arraste{position:absolute;right:78px;bottom:84px;background:#fff;font-weight:700;font-size:31px;
            padding:16px 34px;border-radius:999px}
   .foto{position:absolute;left:0;right:0;bottom:0;background-size:cover;border-radius:24px 24px 0 0}
   .sombra{position:absolute;left:0;right:0;bottom:0;height:260px;
@@ -48,8 +48,8 @@ const base = `<meta charset="utf-8">
   .cheio .valor{background:#fff;color:${ESCURO}}
   .cheio .valor span{color:${APOIO};opacity:1}
   .cheio .valor b{color:${ROSA_TEXTO}}
-  .valor span{display:block;font-size:33px;font-weight:600;opacity:.92;margin-bottom:8px}
-  .valor b{font-size:76px;font-weight:800;letter-spacing:-.02em;line-height:1.05;display:block}
+  .valor span{display:block;font-size:37px;font-weight:600;opacity:.92;margin-bottom:8px}
+  .valor b{font-size:86px;font-weight:800;letter-spacing:-.02em;line-height:1.05;display:block}
   .passo{width:96px;height:96px;border-radius:50%;background:${ROSA};color:#fff;font-size:50px;
          font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:30px}
   .cheio{color:#fff}
@@ -59,7 +59,7 @@ const base = `<meta charset="utf-8">
   .cheio .kicker{color:rgba(255,255,255,.9)}
   .cheio .regua{background:#fff}
   .cheio .pagina{color:rgba(255,255,255,.9)}
-  .pill{display:inline-block;background:#fff;color:${ESCURO};font-weight:700;font-size:34px;
+  .pill{display:inline-block;background:#fff;color:${ESCURO};font-weight:700;font-size:39px;
         padding:22px 44px;border-radius:999px}
 </style>`;
 
@@ -113,7 +113,7 @@ const capa = ({ cor = ROSA, claro = false, kicker, titulo, sub }) => claro
     <div class="caixa">
       <p class="kicker">${kicker}</p><div class="regua"></div>
       <h1>${titulo}</h1>
-      ${sub ? `<p style="margin-top:34px;font-size:40px">${sub}</p>` : ''}
+      ${sub ? `<p style="margin-top:34px;font-size:46px">${sub}</p>` : ''}
     </div>
     <img class="logo" src="logo.png">
     <span class="arraste" style="background:${ROSA};color:#fff">arraste →</span>
@@ -123,7 +123,7 @@ const capa = ({ cor = ROSA, claro = false, kicker, titulo, sub }) => claro
     <div class="caixa cheio">
       <p class="kicker">${kicker}</p><div class="regua"></div>
       <h1>${titulo}</h1>
-      ${sub ? `<p style="margin-top:34px;font-size:40px">${sub}</p>` : ''}
+      ${sub ? `<p style="margin-top:34px;font-size:46px">${sub}</p>` : ''}
     </div>
     <img class="logo" src="logo-branco.png">
     <span class="arraste" style="color:${cor}">arraste →</span>
@@ -155,8 +155,8 @@ const duplo = ({ blocos, n }) => `${base}
       ${blocos.map((b) => `
         <div>
           <p class="kicker">${b.kicker}</p><div class="regua" style="margin:18px 0 20px"></div>
-          <h2 style="font-size:54px">${b.titulo}</h2>
-          ${b.corpo ? `<p style="margin-top:22px;font-size:34px">${b.corpo}</p>` : ''}
+          <h2 style="font-size:62px">${b.titulo}</h2>
+          ${b.corpo ? `<p style="margin-top:22px;font-size:39px">${b.corpo}</p>` : ''}
         </div>`).join('')}
     </div>
     ${rodape(n, false)}
@@ -167,7 +167,7 @@ const lista = ({ kicker, titulo, itens, n }) => `${base}
   <body>${marca(false)}
     <div class="caixa">
       ${kicker ? `<p class="kicker">${kicker}</p><div class="regua"></div>` : ''}
-      ${titulo ? `<h2 style="font-size:56px">${titulo}</h2>` : ''}
+      ${titulo ? `<h2 style="font-size:64px">${titulo}</h2>` : ''}
       <div style="margin-top:44px;display:flex;flex-direction:column;gap:38px">
         ${itens.map((i) => `
           <div style="display:flex;gap:26px;align-items:flex-start">
@@ -177,8 +177,8 @@ const lista = ({ kicker, titulo, itens, n }) => `${base}
                     stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <div>
-              <p style="font-size:38px;font-weight:700;color:${ESCURO};line-height:1.2">${i.titulo}</p>
-              ${i.corpo ? `<p style="margin-top:8px;font-size:30px">${i.corpo}</p>` : ''}
+              <p style="font-size:43px;font-weight:700;color:${ESCURO};line-height:1.2">${i.titulo}</p>
+              ${i.corpo ? `<p style="margin-top:8px;font-size:34px">${i.corpo}</p>` : ''}
             </div>
           </div>`).join('')}
       </div>

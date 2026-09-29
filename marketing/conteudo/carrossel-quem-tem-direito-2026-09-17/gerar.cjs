@@ -13,8 +13,17 @@ e.renderizar(__dirname, [
     }),
   },
   {
-    // Carteira assinada e MEI/autônoma juntos, pra encurtar o carrossel (17/09/2026)
     nome: 'slide-2.png',
+    html: e.texto({
+      kicker: 'O que é',
+      titulo: 'Um pagamento do INSS para você cuidar do seu bebê sem perder a renda.',
+      corpo: 'É um <strong>direito seu</strong>, construído pelas contribuições que você já fez. Não é favor nem ajuda.',
+      n: 2,
+    }),
+  },
+  {
+    // Carteira assinada e MEI/autônoma juntos, pra encurtar o carrossel (17/09/2026)
+    nome: 'slide-3.png',
     html: e.duplo({
       blocos: [
         {
@@ -28,11 +37,11 @@ e.renderizar(__dirname, [
           corpo: 'Em geral são necessários <strong>10 meses de contribuição</strong>.',
         },
       ],
-      n: 2,
+      n: 3,
     }),
   },
   {
-    nome: 'slide-3.png',
+    nome: 'slide-4.png',
     html: e.lista({
       kicker: 'Também têm direito',
       titulo: 'Casos que muita gente não imagina:',
@@ -50,12 +59,12 @@ e.renderizar(__dirname, [
           corpo: 'Inclui natimorto e perda gestacional tardia.',
         },
       ],
-      n: 3,
+      n: 4,
     }),
   },
   {
     // Desempregada e prazo juntos, no mesmo formato do slide 2 (17/09/2026)
-    nome: 'slide-4.png',
+    nome: 'slide-5.png',
     html: e.duplo({
       blocos: [
         {
@@ -69,16 +78,16 @@ e.renderizar(__dirname, [
           corpo: 'Dá para pedir até o seu filho completar <strong>4 anos e 11 meses</strong>. Depois disso, o direito prescreve.',
         },
       ],
-      n: 4,
+      n: 5,
     }),
   },
   {
-    nome: 'slide-5.png',
+    nome: 'slide-6.png',
     html: e.fechamento({
       kicker: 'Análise gratuita',
       titulo: 'Ficou na dúvida se tem direito?',
       corpo: 'Veja se você tem direito ao auxílio-maternidade! Clique no link da bio e faça o teste em 2 minutos. <strong style="color:#fff">Análise totalmente gratuita e sem qualquer compromisso.</strong>',
-      n: 5,
+      n: 6,
     }),
   },
 ]);

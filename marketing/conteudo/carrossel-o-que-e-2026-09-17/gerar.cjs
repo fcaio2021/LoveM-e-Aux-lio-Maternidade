@@ -38,7 +38,7 @@ e.renderizar(__dirname, [
       titulo: 'Um direito de mães biológicas e adotivas.',
       extra: `<div class="valor" style="margin-top:46px">
         <span>Você pode receber de</span>
-        <b>R$ 6.900 a R$ 15.900</b></div>
+        <b>R$ 6.900 a<br>R$ 15.900</b></div>
         <p style="margin-top:38px">Se você já contribuiu com o INSS,
         <strong>pode ter esse dinheiro a receber.</strong></p>`,
       n: 4,

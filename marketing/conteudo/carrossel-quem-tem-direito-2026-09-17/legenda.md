@@ -1,11 +1,15 @@
 # Carrossel 2 da trilogia — "Será que eu tenho direito?"
 
 Produzido em 17/09/2026. Post **fixado** no topo do perfil (o do meio).
-5 slides, 1080×1350. Capa **branca** (decisão de 22/09/2026).
+6 slides, 1080×1350. Capa **branca** (decisão de 22/09/2026).
 
 ⚠️ **Antes de publicar:** o time de operação precisa conferir as regras citadas —
 carência de 10 meses para MEI/autônoma, segurada especial rural, período de graça
 (12 e 36 meses) e o prazo de 4 anos e 11 meses.
+
+Slide de abertura sobre "o que é o benefício" acrescentado em 29/09/2026: com o
+carrossel "O que é o auxílio-maternidade?" saindo dos fixados, este passa a carregar
+essa função sozinho.
 
 ## Legenda
 
@@ -53,10 +57,11 @@ Não achou o seu caso? A gente confere pra você, de graça e em 2 minutos 💗
 | Slide | Arquivo |
 |---|---|
 | 1 (capa) | `slide-1.png` |
-| 2 — carteira assinada + MEI/autônoma | `slide-2.png` |
-| 3 — doméstica e rural, mães menores de idade e perda gestacional | `slide-3.png` |
-| 4 — desempregada + prazo de 4 anos e 11 meses | `slide-4.png` |
-| 5 — CTA | `slide-5.png` |
+| 2 — o que é o benefício | `slide-2.png` |
+| 3 — carteira assinada + MEI/autônoma | `slide-3.png` |
+| 4 — doméstica e rural, mães menores de idade e perda gestacional | `slide-4.png` |
+| 5 — desempregada + prazo de 4 anos e 11 meses | `slide-5.png` |
+| 6 — CTA | `slide-6.png` |
 
 Regerar: `NODE_PATH=../../../identidade/propostas/node_modules node gerar.cjs`
 Estilo compartilhado: `../estilo-carrossel.cjs`
