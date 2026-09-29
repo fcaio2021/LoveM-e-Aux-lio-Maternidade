@@ -26,25 +26,25 @@ LoveMãe | Auxílio Maternidade
 
 **Botões de contato:** WhatsApp (11) 97723-8306 · e-mail contato@lovemaeauxiliomaternidade.com.br
 
-**Destaques** (revistos em 18/09/2026 — 6 capas alternando as duas cores do logo,
-ícone sólido ocupando quase todo o círculo; capas em `destaques/`, prévia em
-`previa-destaques.png`):
+**Destaques** (revistos em 29/09/2026 — 4 capas alternando as cores do logo a partir
+do rosa; capas em `destaques/`, prévia em `previa-destaques.png`):
 
 | # | Nome no Instagram | Cor | Ícone | Arquivo |
 |---|---|---|---|---|
-| 1 | Quem tem Direito? | `#FF0076` | escudo com check | `1-quem-tem-direito.png` |
-| 2 | Qual valor? | `#0038E5` | moeda com cifrão | `2-qual-valor.png` |
-| 3 | Como Solicitar? | `#FF0076` | prancheta com check | `3-como-solicitar.png` |
-| 4 | Com a LoveMãe | `#0038E5` | coração | `4-com-a-lovemae.png` |
-| 5 | Perguntas? | `#FF0076` | interrogação | `5-perguntas.png` |
-| 6 | Depoimentos | `#0038E5` | balão com estrela | `6-depoimentos.png` |
+| 1 | Qual valor | `#FF0076` | moeda com cifrão | `1-qual-valor.png` |
+| 2 | Como pedir | `#0038E5` | prancheta com check | `2-como-pedir.png` |
+| 3 | LoveMãe | `#FF0076` | símbolo da marca | `3-lovemae.png` |
+| 4 | Dúvidas | `#0038E5` | interrogação | `4-duvidas.png` |
 
-Ordem definida em 20/09/2026: o que a mãe quer saber (direito → valor → como pedir) vem
-antes do institucional.
+⚠️ **Nomes curtos de propósito.** O Instagram corta por volta de 12 caracteres embaixo do
+círculo — "Quem tem Direito?" virou "Tenho direit…" no teste de 29/09/2026.
 
-Descartado em 18/09/2026: seis tons diferentes (linha poluída) e ícone de traço fino
-(sumia na miniatura). Os pastéis da marca (`#FAA9C7`, `#80BBEF`) também estão fora —
-com ícone branco dão 1,8:1 e 2,0:1, abaixo do mínimo de 3:1 para símbolo.
+⚠️ **Criar na ordem inversa.** O Instagram coloca o destaque mais recente à esquerda, então
+a ordem de criação é Dúvidas → LoveMãe → Como pedir → Qual valor.
+
+Descartados pelo caminho: seis tons diferentes (linha poluída), ícone de traço fino (sumia
+na miniatura), fundo claro no institucional (some contra o fundo do perfil) e os pastéis da
+marca (`#FAA9C7`, `#80BBEF`) — com ícone branco dão 1,8:1 e 2,0:1, abaixo do mínimo de 3:1.
 
 ⚠️ **Depoimentos** só entra quando houver depoimento com autorização por escrito.
 Destaque vazio, ou com print de conversa sem permissão, é pior que destaque nenhum.
