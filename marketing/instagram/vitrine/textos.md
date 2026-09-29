@@ -31,10 +31,18 @@ do rosa; capas em `destaques/`, prévia em `previa-destaques.png`):
 
 | # | Nome no Instagram | Cor | Ícone | Arquivo |
 |---|---|---|---|---|
-| 1 | Qual valor | `#FF0076` | moeda com cifrão | `1-qual-valor.png` |
-| 2 | Como pedir | `#0038E5` | prancheta com check | `2-como-pedir.png` |
-| 3 | LoveMãe | `#FF0076` | símbolo da marca | `3-lovemae.png` |
-| 4 | Dúvidas | `#0038E5` | interrogação | `4-duvidas.png` |
+| 1 | LoveMãe | `#FF0076` | símbolo da marca | `1-lovemae.png` |
+| 2 | Depoimentos | `#0038E5` | balão com estrela | `2-depoimentos.png` |
+| 3 | Qual valor | `#FF0076` | moeda com cifrão | `3-qual-valor.png` |
+| 4 | Como pedir | `#0038E5` | prancheta com check | `4-como-pedir.png` |
+| 5 | Dúvidas | `#FF0076` | interrogação | `5-duvidas.png` |
+
+Ordem definida em 29/09/2026: institucional e prova social primeiro (respondem "vocês
+existem?"), depois as dúvidas práticas.
+
+⚠️ **LoveMãe** é onde entram escritório, equipe e bastidores. **Depoimentos** só entra
+quando houver depoimento com autorização por escrito. Destaque vazio nas duas primeiras
+posições é pior que não ter.
 
 ⚠️ **Nomes curtos de propósito.** O Instagram corta por volta de 12 caracteres embaixo do
 círculo — "Quem tem Direito?" virou "Tenho direit…" no teste de 29/09/2026.

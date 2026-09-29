@@ -19,22 +19,26 @@ const BALAO = "M10 26a14 14 0 0 1 14-14h72a14 14 0 0 1 14 14v46a14 14 0 0 1-14 1
 
 const destaques = [
   {
-    nome: "1-qual-valor", rotulo: "Qual valor", cor: ROSA,
+    nome: "1-lovemae", rotulo: "LoveMãe", cor: ROSA,
+    imagem: "logo-simbolo-branco.png",
+  },
+  {
+    nome: "2-depoimentos", rotulo: "Depoimentos", cor: AZUL,
+    svg: (c) => `<path d="${BALAO}" fill="#fff"/><path d="${ESTRELA}" fill="${c}"/>`,
+  },
+  {
+    nome: "3-qual-valor", rotulo: "Qual valor", cor: ROSA,
     svg: (c) => `<circle cx="60" cy="60" r="54" fill="#fff"/>
       <text x="60" y="92" text-anchor="middle" font-family="Onest,sans-serif" font-size="92" font-weight="800" fill="${c}">$</text>`,
   },
   {
-    nome: "2-como-pedir", rotulo: "Como pedir", cor: AZUL,
+    nome: "4-como-pedir", rotulo: "Como pedir", cor: AZUL,
     svg: (c) => `<rect x="16" y="18" width="88" height="96" rx="14" fill="#fff"/>
       <rect x="42" y="6" width="36" height="22" rx="11" fill="#fff"/>
       <path d="m36 66 15 15 33-35" fill="none" stroke="${c}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    nome: "3-lovemae", rotulo: "LoveMãe", cor: ROSA,
-    imagem: "logo-simbolo-branco.png",
-  },
-  {
-    nome: "4-duvidas", rotulo: "Dúvidas", cor: AZUL,
+    nome: "5-duvidas", rotulo: "Dúvidas", cor: ROSA,
     svg: () => `<text x="60" y="102" text-anchor="middle" font-family="Onest,sans-serif" font-size="126" font-weight="800" fill="#fff">?</text>`,
   },
 ];
