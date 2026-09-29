@@ -1,7 +1,7 @@
 # Carrossel 2 da trilogia — "Será que eu tenho direito?"
 
 Produzido em 17/09/2026. Post **fixado** no topo do perfil (o do meio).
-6 slides, 1080×1350. Capa **branca** (decisão de 22/09/2026).
+6 slides, 1080×1350. Capa **rosa** (decisão de 29/09/2026: com dois fixados, a dupla fica rosa + azul).
 
 ⚠️ **Antes de publicar:** o time de operação precisa conferir as regras citadas —
 carência de 10 meses para MEI/autônoma, segurada especial rural, período de graça
