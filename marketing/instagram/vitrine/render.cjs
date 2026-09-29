@@ -24,7 +24,19 @@ const destaques = [
   },
   {
     nome: "2-depoimentos", rotulo: "Depoimentos", cor: AZUL,
-    svg: (c) => `<path d="${BALAO}" fill="#fff"/><path d="${ESTRELA}" fill="${c}"/>`,
+    svg: (c) => {
+      const CORACAO = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+      const balaoA = "M17 22H47A11 11 0 0 1 58 33V53A11 11 0 0 1 47 64H34L16 80L20 64H17A11 11 0 0 1 6 53V33A11 11 0 0 1 17 22Z";
+      const balaoB = "M73 10H103A11 11 0 0 1 114 21V41A11 11 0 0 1 103 52H88L70 68L74 52H73A11 11 0 0 1 62 41V21A11 11 0 0 1 73 10Z";
+      const balaoC = "M44 52H78A12 12 0 0 1 90 64V86A12 12 0 0 1 78 98H60L42 114L46 98H44A12 12 0 0 1 32 86V64A12 12 0 0 1 44 52Z";
+      return `
+        <path d="${balaoA}" fill="#fff"/>
+        <path transform="translate(21,32) scale(.92)" d="${CORACAO}" fill="${c}"/>
+        <path d="${balaoB}" fill="#fff"/>
+        <path transform="translate(77,20) scale(.92)" d="${CORACAO}" fill="${c}"/>
+        <path d="${balaoC}" fill="#fff" stroke="${c}" stroke-width="7" stroke-linejoin="round"/>
+        <path transform="translate(49,63)" d="${CORACAO}" fill="${c}"/>`;
+    },
   },
   {
     nome: "3-qual-valor", rotulo: "Qual valor", cor: ROSA,

@@ -32,7 +32,7 @@ do rosa; capas em `destaques/`, prévia em `previa-destaques.png`):
 | # | Nome no Instagram | Cor | Ícone | Arquivo |
 |---|---|---|---|---|
 | 1 | LoveMãe | `#FF0076` | símbolo da marca | `1-lovemae.png` |
-| 2 | Depoimentos | `#0038E5` | balão com estrela | `2-depoimentos.png` |
+| 2 | Depoimentos | `#0038E5` | três balões com coração | `2-depoimentos.png` |
 | 3 | Qual valor | `#FF0076` | moeda com cifrão | `3-qual-valor.png` |
 | 4 | Como pedir | `#0038E5` | prancheta com check | `4-como-pedir.png` |
 | 5 | Dúvidas | `#FF0076` | interrogação | `5-duvidas.png` |
